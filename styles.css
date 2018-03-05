@@ -1,0 +1,126 @@
+#game {
+  background-color: black;
+}
+
+.block {
+  height: 16px;
+  width: 16px;
+  float: left;
+}
+
+.field {
+  background-image: url(sprites/blank.png);
+}
+
+.field:hover {
+  background-image: url(sprites/blank-hover.png);
+}
+
+.bomb{
+  background-image: url(sprites/bomb-grey.png);
+}
+
+.bomb-red{
+  background-image: url(sprites/bomb-red.png);
+}
+
+.f0 {
+  background-image: url(sprites/0.png);
+}
+
+.f1 {
+  background-image: url(sprites/1.png);
+}
+
+.f2 {
+  background-image: url(sprites/2.png);
+}
+
+.f3 {
+  background-image: url(sprites/3.png);
+}
+
+.f4 {
+  background-image: url(sprites/4.png);
+}
+
+.f5 {
+  background-image: url(sprites/5.png);
+}
+
+.f6 {
+  background-image: url(sprites/6.png);
+}
+
+.f7 {
+  background-image: url(sprites/7.png);
+}
+
+.f8 {
+  background-image: url(sprites/8.png);
+}
+
+.clicked {
+  pointer-events: none;
+}
+
+.flag {
+  background-image: url(sprites/flag.png);  
+}
+
+.no-bomb {
+  background-image: url(sprites/no-bomb.png);
+}
+
+.digit {
+  float: left;
+  height: 23px;
+  width: 13px;
+}
+
+.d0 {
+  background-image: url(sprites/d0.png);
+}
+
+.d1 {
+  background-image: url(sprites/d1.png);
+}
+
+.d2 {
+  background-image: url(sprites/d2.png);
+}
+
+.d3 {
+  background-image: url(sprites/d3.png);
+}
+
+.d4 {
+  background-image: url(sprites/d4.png);
+}
+
+.d5 {
+  background-image: url(sprites/d5.png);
+}
+
+.d6 {
+  background-image: url(sprites/d6.png);
+}
+
+.d7 {
+  background-image: url(sprites/d7.png);
+}
+
+.d8 {
+  background-image: url(sprites/d8.png);
+}
+
+.d9 {
+  background-image: url(sprites/d9.png);
+}
+
+.timer {
+  width: 39px;
+  height: 23px;
+  background-image: url(sprites/d-blank.png);
+  background-repeat: repeat;
+}
