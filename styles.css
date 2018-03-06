@@ -118,9 +118,21 @@
   background-image: url(sprites/d9.png);
 }
 
-.timer {
+.display {
   width: 39px;
   height: 23px;
   background-image: url(sprites/d-blank.png);
   background-repeat: repeat;
+}
+
+.timer {
+  float: right;
+}
+
+.points {
+  float: left;
+}
+
+.gamebar {
+  height: 40px;
 }

@@ -6,6 +6,7 @@ const columns = 10;
 const bombs = 10;
 let amountFields = rows * columns - bombs;
 let bombArray = [];
+let points = bombs;
 
 class Bomb{
     constructor(row, col) {
@@ -19,6 +20,7 @@ $( document ).ready(function() {
 
     // set width an height of game
     $("#game").css({"height":16*rows, "width":16*rows});
+    $("#gamebar").css("width",16*rows);
 
     //create field
     for(i=1; i<=rows; i++) {
@@ -30,6 +32,7 @@ $( document ).ready(function() {
     }
 
     createBombs();
+    setupPoints();
 
     field = $('.field');
     field.click(function() {
@@ -233,32 +236,57 @@ var setInterval = setInterval(function() {
     stopTimer();
   }
 
-  num = seconds;
-  secondsArray = [];
+  secondsArray = splitNumber(seconds);
 
-  while (num > 0) {
-    secondsArray[secondsArray.length] = num % 10;
-    num = parseInt(num / 10);
-  }
-
-  digitClass(3, secondsArray[0]);
-  digitClass(2, secondsArray[1]);
-  digitClass(1, secondsArray[2]);
+  timerClass(3, secondsArray[0]);
+  timerClass(2, secondsArray[1]);
+  timerClass(1, secondsArray[2]);
 }, 1000);
 
-function digitClass(digit, number) {
+function timerClass(digit, number) {
   number = (number === undefined) ? 0 : number;
-  digitID = "#digit-" + digit
+  timerID = "#timer-" + digit
 
-  currentstate = parseInt($(digitID).attr('class').split('d')[2]);
+  currentstate = parseInt($(timerID).attr('class').split('d')[2]);
   if(currentstate !== number) {
     for(i=0; i<=9; i++) {
-      $(digitID).removeClass("d" + i);
+      $(timerID).removeClass("d" + i);
     }
-    $(digitID).addClass("d" + number);
+    $(timerID).addClass("d" + number);
   }
 }
 
 function stopTimer() {
   clearInterval(setInterval);
+}
+
+//points display
+function setupPoints() {
+  pointsArray = splitNumber(points);
+
+  pointerClass(3, pointsArray[0]);
+  pointerClass(2, pointsArray[1]);
+  pointerClass(1, pointsArray[2]);
+}
+
+function pointerClass(display, number) {
+  number = (number === undefined) ? 0 : number;
+  pointsID = "#points-" + display;
+
+  for(i=0; i<=9; i++) {
+    $(pointsID).removeClass("d" + i);
+  }
+  $(pointsID).addClass("d" + number);
+}
+
+// DisplayFunctions
+function splitNumber(number) {
+  numberArray = []
+
+  while (number > 0) {
+    numberArray[numberArray.length] = number % 10;
+    number = parseInt(number / 10);
+  }
+
+  return numberArray;
 }
