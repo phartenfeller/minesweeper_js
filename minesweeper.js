@@ -128,10 +128,10 @@ function fieldClicked(row, col, field="") {
             if (number === 0) {
                 clickFieldsAround(row, col);
             }
-
+            
+            // win game
             if (amountFields === 0) {
-              $("#game").append("<div>Congratulations! You won in " + seconds + " seconds!</div>")
-              stopTimer();
+              winGame();
             }
         }
     }
@@ -140,6 +140,23 @@ function fieldClicked(row, col, field="") {
 // flags a field on rightclick
 function flagField(field) {
     $(field).toggleClass('field flag');
+}
+
+function winGame() {
+    // show not flagged bombs as flagged
+    for(i=0; i<bombs; i++) {
+        row = bombArray[i].row;
+        col = bombArray[i].col;
+
+        field = getID(row, col);
+
+        if (!$(field).hasClass('flag')) {
+            flagField($(field));
+        }
+    }
+
+    $("#game").append("<div>Congratulations! You won in " + seconds + " seconds!</div>")
+    stopTimer();
 }
 
 // opens fields around a field with 0 bombs around
