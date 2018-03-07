@@ -8,6 +8,10 @@
   float: left;
 }
 
+.img {
+  image-rendering: pixelated;
+}
+
 .field {
   background-image: url(sprites/blank.png);
 }
@@ -118,21 +122,109 @@
   background-image: url(sprites/d9.png);
 }
 
+.d- {
+  background-image: url(sprites/d-minus.png);
+}
+
 .display {
   width: 39px;
   height: 23px;
   background-image: url(sprites/d-blank.png);
   background-repeat: repeat;
+  margin-top: 4px;
+  margin-bottom: 5px;
 }
 
 .timer {
-  float: right;
+  float: left;
+  margin-right: 10px;
 }
 
 .points {
   float: left;
+  margin-left: 10px;
 }
 
 .gamebar {
-  height: 40px;
+  height: 32px;
+}
+
+.border-vertical {
+  height: 16px;
+  width: 10px;
+  background-image: url(sprites/border-vertical.png);
+  float: left;
+}
+
+.border-vertical-32 {
+  height: 32px;
+  width: 10px;
+  background-image: url(sprites/border-vertical.png);
+  background-repeat: repeat;
+  float: left;
+}
+
+.border-horizontal {
+  width: 16px;
+  height: 10px;
+  background-image: url(sprites/border-horizontal.png);
+  float: left;
+}
+
+.border-bl {
+  width: 10px;
+  height: 10px;
+  background-image: url(sprites/border-bl.png);
+  float: left;
+}
+
+.border-br {
+  width: 10px;
+  height: 10px;
+  background-image: url(sprites/border-br.png);
+  float: left;
+}
+
+.border-tl {
+  width: 10px;
+  height: 10px;
+  background-image: url(sprites/border-tl.png);
+  float: left;
+}
+
+.border-tr {
+  width: 10px;
+  height: 10px;
+  background-image: url(sprites/border-tr.png);
+  float: left;
+}
+
+.border-il {
+  width: 10px;
+  height: 10px;
+  background-image: url(sprites/border-il.png);
+  float: left;
+}
+
+.border-ir {
+  width: 10px;
+  height: 10px;
+  background-image: url(sprites/border-ir.png);
+  float: right;
+}
+
+.top-border {
+  height: 10px;
+}
+
+.btn {
+  width: 26px;
+  height: 26px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  float: left;
+}
+
+.btn-smiley {
+  background-image: url(sprites/smiley.png);
 }

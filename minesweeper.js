@@ -19,18 +19,12 @@ class Bomb{
 $( document ).ready(function() {
 
     // set width an height of game
-    $("#game").css({"height":16*rows, "width":16*rows});
-    $("#gamebar").css("width",16*rows);
+    //                       rows * 16xp                2 * border
+    $("#game").css({"height":16*rows + 2*10, "width":16*rows + 2*10});
+    $("#gamebar").css("width",16*rows + 2*10);
 
     //create field
-    for(i=1; i<=rows; i++) {
-        $("#game").append('<div class="row" id="r' + i + '"></div>');
-        rowid = '#r'+i;
-        for(j=1; j<=columns; j++) {
-            $(rowid).append('<div id="'+i+'-'+j+'" class="block field"></div>');
-        }
-    }
-
+    createField();
     createBombs();
     setupPoints();
 
@@ -51,6 +45,60 @@ $( document ).ready(function() {
 });
 
 // Setup Functions
+function createField() {
+  // top border
+  // corner left
+  $(".top-border").append('<div class="border-tl"></div>') 
+  // middle border
+    for(i=1; i<=rows; i++) {
+      $(".top-border").append('<div class="border-horizontal"></div>'); 
+    }
+  // corner right
+  $(".top-border").append('<div class="border-tr"></div>') 
+
+  // gamebar border
+  $("#gamebar").prepend('<div class="border-vertical-32" style="float:left"></div>');
+  $("#gamebar").append('<div class="border-vertical-32" style="float:right"></div>');
+
+    // middle border
+        //bottom border
+    $("#game").append('<div class="middle-border"></div>');
+        // corner left
+    $(".middle-border").append('<div class="border-il"></div>') 
+        // middle border
+    for(i=1; i<=rows; i++) {
+        $(".middle-border").append('<div class="border-horizontal"></div>'); 
+    }
+        // corner right
+    $(".middle-border").append('<div class="border-ir"></div>') 
+
+
+    for(i=1; i<=rows; i++) {
+        // row
+        $("#game").append('<div class="row" id="r' + i + '"></div>');
+        rowid = '#r'+i;
+        //left border
+        $(rowid).append('<div class="border-vertical"></div>');
+        for(j=1; j<=columns; j++) {
+            // block
+            $(rowid).append('<div id="'+i+'-'+j+'" class="block field"></div>');
+        }
+        // right border
+        $(rowid).append('<div class="border-vertical"></div>');
+    }
+
+    //bottom border
+    $("#game").append('<div class="bottom-border"></div>');
+        // corner left
+    $(".bottom-border").append('<div class="border-bl"></div>') 
+        // middle border
+    for(i=1; i<=rows; i++) {
+        $(".bottom-border").append('<div class="border-horizontal"></div>'); 
+    }
+        // corner right
+    $(".bottom-border").append('<div class="border-br"></div>') 
+}
+
 function createBombs() {
     for(i=1; i<bombs; i++) {
         uniqueBomb = false;
@@ -142,24 +190,32 @@ function fieldClicked(row, col, field="") {
 
 // flags a field on rightclick
 function flagField(field) {
-    $(field).toggleClass('field flag');
+  if ($(field).hasClass('flag')) {
+    addPoint();
+  }
+  else {
+    removePoint();
+  }
+
+  $(field).toggleClass('field flag');
+
 }
 
 function winGame() {
-    // show not flagged bombs as flagged
-    for(i=0; i<bombs; i++) {
-        row = bombArray[i].row;
-        col = bombArray[i].col;
+  // show not flagged bombs as flagged
+  for(i=0; i<bombs; i++) {
+    row = bombArray[i].row;
+    col = bombArray[i].col;
 
-        field = getID(row, col);
+    field = getID(row, col);
 
-        if (!$(field).hasClass('flag')) {
-            flagField($(field));
-        }
+    if (!$(field).hasClass('flag')) {
+      flagField($(field));
     }
+  }
 
-    $("#game").append("<div>Congratulations! You won in " + seconds + " seconds!</div>")
-    stopTimer();
+  $("#game").append("<div>Congratulations! You won in " + seconds + " seconds!</div>")
+  stopTimer();
 }
 
 // opens fields around a field with 0 bombs around
@@ -269,19 +325,50 @@ function setupPoints() {
   pointerClass(1, pointsArray[2]);
 }
 
+function addPoint() {
+  points++;
+  pointsArray = splitNumber(points);
+
+  pointerClass(3, pointsArray[0]);
+  pointerClass(2, pointsArray[1]);
+  pointerClass(1, pointsArray[2]);
+
+  if (points < 0) {
+    pointerClass(1, "-");
+  }
+}
+
+function removePoint() {
+  points--;
+  pointsArray = splitNumber(points);
+
+  pointerClass(3, pointsArray[0]);
+  pointerClass(2, pointsArray[1]);
+  pointerClass(1, pointsArray[2]);
+
+  if (points < 0) {
+    pointerClass(1, "-");
+  }
+}
+
 function pointerClass(display, number) {
   number = (number === undefined) ? 0 : number;
   pointsID = "#points-" + display;
 
+  $(pointsID).removeClass("d-");
   for(i=0; i<=9; i++) {
     $(pointsID).removeClass("d" + i);
   }
+  
+  // add new class
   $(pointsID).addClass("d" + number);
 }
 
 // DisplayFunctions
 function splitNumber(number) {
   numberArray = []
+
+  number = Math.abs(number);
 
   while (number > 0) {
     numberArray[numberArray.length] = number % 10;
