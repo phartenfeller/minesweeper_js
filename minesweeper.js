@@ -5,7 +5,6 @@ let rows = 10;
 let columns = 10;
 let bombs = 10;
 
-let amountFields = rows * columns - bombs;
 let bombArray = [];
 let gameWon = false;
 
@@ -28,6 +27,8 @@ function newGame() {
   createBombs();
   setupPoints();
   initFieldFunctions();
+  setAmountFields();
+  gameWon = false;
   resetTimer();
 }
 
@@ -38,11 +39,11 @@ function deleteGame() {
   $(".bottom-border").empty();
 }
 
-function resetGame(newRows = 10, newColumns = 10, newBombs = 10) {
+function resetGame() {
   deleteGame();
-  rows = newRows;
-  columns = newColumns;
-  bombs = newBombs;
+  rows = $("#input-rows").val();
+  columns = $("#input-columns").val();
+  bombs = $("#input-bombs").val();
   newGame();
 }
 
@@ -90,12 +91,18 @@ function initGameButtonFunctions() {
 }
 
 function initSettingsFunctions() {
-  $("#settings").click(function() {
-    $(".input-container").toggleClass("hidden show");
+  $("#newgame-btn").click(function() {
+    resetGame();
   });
+
+  $(".settings-container").css({"margin-left":100% - gameWidth / 2, "margin-right":100% - gameWidth / 2})
 }
 
 // Setup Functions
+function setAmountFields() {
+  amountFields = rows * columns - bombs;
+}
+
 function createBombs() {
   bombArray = [];
 
