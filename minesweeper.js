@@ -90,14 +90,8 @@ function initGameButtonFunctions() {
 }
 
 function initSettingsFunctions() {
-  inputRows = $("#input-rows");
-  inputColumns = $("#input-columns");
-  inputBombs = $("#input-bombs");
-
   $("#settings").click(function() {
-    $(inputRows).toggleClass("hidden show");
-    $(inputColumns).toggleClass("hidden show");
-    $(inputBombs).toggleClass("hidden show");
+    $(".input-container").toggleClass("hidden show");
   });
 }
 

@@ -255,9 +255,19 @@
 }
 
 .hidden {
-  visibility: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease-out;
 }
 
 .show {
-  visibility: visible;
+  max-height: 100%;
+  transition: max-height 0.35s ease-in;
+}
+
+.input-container {
+ overflow: hidden;
+}
+
+input {
+  margin: 5px;
 }

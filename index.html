@@ -30,9 +30,11 @@
     <div class="bottom-border"></div>
     <div class="button-bar">
       <button id="settings" class="settings">Settings</button>
-      <input id="input-rows" type="number" class="hidden" min="8">
-      <input id="input-columns" type="number" class="hidden" min="8">
-      <input id="input-bombs" type="number" class="hidden" min="2">
+      <div class="input-container hidden">
+        <input id="input-rows" type="number" min="8" value="10">
+        <input id="input-columns" type="number" min="8" value="10">
+        <input id="input-bombs" type="number" min="2" value="10">
+      </div>
     </div>
   </div>
 </html>
