@@ -245,3 +245,19 @@
 .btn-click {
   background-image: url(sprites/btn-click.png);
 }
+
+.button-bar {
+  text-align: center;
+}
+
+.settings {
+  margin: 5px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.show {
+  visibility: visible;
+}

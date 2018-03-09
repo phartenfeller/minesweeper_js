@@ -3,22 +3,36 @@
     <title>Minesweeper</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="libraries/jquery-3.3.1.min.js"></script>
+    <script src="js/Field.js"></script>
+    <script src="js/Timer.js"></script>
+    <script src="js/Points.js"></script>
     <script src="minesweeper.js"></script>
   </head>
   <div id="game" class="minesweeper img" oncontextmenu="return false;">
-      <div class="top-border"></div>
-      <div id="gamebar" class="gamebar">
-          <div id="points" class="display points">
-            <div id="points-1" class="digit d0"></div>
-            <div id="points-2" class="digit d0"></div>
-            <div id="points-3" class="digit d0"></div>
-          </div>
-          <div id="game-button" class="btn btn-smiley"></div>
-          <div id="timer" class="display timer">
-            <div id="timer-1" class="digit d0"></div>
-            <div id="timer-2" class="digit d0"></div>
-            <div id="timer-3" class="digit d0"></div>
-          </div>    
-        </div>
+    <div class="top-border"></div>
+    <div id="gamebar" class="gamebar">
+      <div class="border-vertical-32" style="float:left"></div>
+      <div id="points" class="display points">
+        <div id="points-1" class="digit d0"></div>
+        <div id="points-2" class="digit d0"></div>
+        <div id="points-3" class="digit d0"></div>
+      </div>
+      <div id="game-button" class="btn btn-smiley"></div>
+      <div id="timer" class="display timer">
+        <div id="timer-1" class="digit d0"></div>
+        <div id="timer-2" class="digit d0"></div>
+        <div id="timer-3" class="digit d0"></div>
+      </div>
+      <div class="border-vertical-32" style="float:right"></div>
+    </div>
+    <div class="middle-border"></div>
+    <div id="field-container"></div>
+    <div class="bottom-border"></div>
+    <div class="button-bar">
+      <button id="settings" class="settings">Settings</button>
+      <input id="input-rows" type="number" class="hidden" min="8">
+      <input id="input-columns" type="number" class="hidden" min="8">
+      <input id="input-bombs" type="number" class="hidden" min="2">
+    </div>
   </div>
 </html>
