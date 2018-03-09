@@ -147,6 +147,7 @@
 
 .gamebar {
   height: 32px;
+  background-color: #c0c0c0;
 }
 
 .border-vertical {
@@ -226,5 +227,21 @@
 }
 
 .btn-smiley {
-  background-image: url(sprites/smiley.png);
+  background-image: url(sprites/btn-smiley.png);
+}
+
+.btn-wow {
+  background-image: url(sprites/btn-wow.png);
+}
+
+.btn-dead {
+  background-image: url(sprites/btn-dead.png);
+}
+
+.btn-cool {
+  background-image: url(sprites/btn-cool.png);
+}
+
+.btn-click {
+  background-image: url(sprites/btn-click.png);
 }

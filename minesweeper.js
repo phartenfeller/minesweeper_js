@@ -7,6 +7,7 @@ const bombs = 10;
 let amountFields = rows * columns - bombs;
 let bombArray = [];
 let points = bombs;
+let gameWon = false;
 
 class Bomb{
     constructor(row, col) {
@@ -22,6 +23,9 @@ $( document ).ready(function() {
     //                       rows * 16xp                2 * border
     $("#game").css({"height":16*rows + 2*10, "width":16*rows + 2*10});
     $("#gamebar").css("width",16*rows + 2*10);
+
+    // button and timer                 half of the rows - half of button - lenth of first timer
+    $("#game-button").css({"margin-left":16*rows/2 - 13 - 49, "margin-right":16*rows/2 - 13 - 49})
 
     //create field
     createField();
@@ -42,6 +46,25 @@ $( document ).ready(function() {
         col = parseInt(id.split("-")[1]);
         flagField($(this));
     });
+
+    field.mousedown(function() {
+      $("#game-button").toggleClass('btn-smiley btn-wow')
+    });
+
+    $("#game-button").mousedown(function() {
+      $("#game-button").toggleClass('btn-smiley btn-click')
+    })
+
+    $(document).mouseup(function () {
+      if($("#game-button").hasClass("btn-wow")) {
+        $("#game-button").toggleClass('btn-smiley btn-wow');
+      }
+
+      if($("#game-button").hasClass("btn-click")) {
+        $("#game-button").toggleClass('btn-smiley btn-click')
+      }
+
+    })
 });
 
 // Setup Functions
@@ -202,6 +225,10 @@ function flagField(field) {
 }
 
 function winGame() {
+  if (!gameWon) {
+  // show win button
+  $("#game-button").toggleClass("btn-smiley btn-cool")
+
   // show not flagged bombs as flagged
   for(i=0; i<bombs; i++) {
     row = bombArray[i].row;
@@ -216,7 +243,11 @@ function winGame() {
 
   $("#game").append("<div>Congratulations! You won in " + seconds + " seconds!</div>")
   stopTimer();
+  }
+
+  gameWon = true;
 }
+
 
 // opens fields around a field with 0 bombs around
 function clickFieldsAround(row, col) {
@@ -240,26 +271,29 @@ function bombClicked(row, col, field) {
     // stop timer
     stopTimer();
 
+    // dead button
+    $("#game-button").toggleClass("btn-smiley btn-dead");
+
     // show all other bombs
     for(i=0; i<bombs; i++) {
-        console.log(i, bombs);
-        console.log(bombArray[i].row + " : " + row +  "   |   " +  bombArray[i].col + " : " + col);
         if (bombArray[i].row !== row || bombArray[i].col !== col) {
             id = getID(bombArray[i].row, bombArray[i].col);
-            console.log(id);
             $(id).toggleClass('field bomb');
         }
     }
 
     //check if all flagged fields are really bombs
     $(".flag").each(function() {
-        id = "#" + $(this).attr('id');
-        row = parseInt(id.split("-")[0]);
-        col = parseInt(id.split("-")[1]);
+      id = $(this).attr('id');
+      row = parseInt(id.split("-")[0]);
+      col = parseInt(id.split("-")[1]);
 
-        if (checkBomb(row, col)) {
-            $(id).toggleClass('flag no-bomb');
-        }
+      id = "#" + id;
+
+      // if no bomb
+      if (checkBomb(row, col)) {
+        $(id).toggleClass('flag no-bomb');
+      }
     });
 
     // lock all fields
