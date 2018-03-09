@@ -153,6 +153,17 @@ function createBombs() {
 function checkBomb(row, col) {
     amountBombs = bombArray.length;
 
+    // Error handling
+    if(isNaN(row)) {
+      error = new Error("Row is NaN");
+      throw error;
+    } 
+
+    if (isNaN(col)) {
+      error = new Error("Col is NaN");
+      throw error;
+    }
+
     for(i=0; i<amountBombs; i++) {
         if (bombArray[i].row === row && bombArray[i].col === col) {
             return false
