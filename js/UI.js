@@ -1,4 +1,4 @@
-function initGameButtonFunctions() {
+function initUIFunctions() {
   $(gameButton).mousedown(function() {
     $(gameButton).toggleClass('btn-smiley btn-click')
   })
@@ -15,6 +15,11 @@ function initGameButtonFunctions() {
 
   $(gameButton).click(function () {
     resetGame();
+  })
+
+  $("input:radio").click(function() {
+    value = parseInt($(this).val());
+    $("#game").css("zoom", value);
   })
 }
 

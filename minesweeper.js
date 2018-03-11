@@ -17,9 +17,10 @@ class Bomb{
 
 // Function that runs on page load and setups game
 $( document ).ready(function() {
+    $("#game").css("zoom", 3);
     bindJquerys();
     newGame();  
-    initGameButtonFunctions();
+    initUIFunctions();
     initSettingsFunctions();
 });
 
@@ -46,6 +47,22 @@ function resetGame() {
   rows = $("#input-rows").val();
   columns = $("#input-columns").val();
   bombs = $("#input-bombs").val();
+
+  if(rows < 8) {
+    rows = 8;
+    $("#input-rows").val(8);
+  }
+
+  if(columns < 8) {
+    columns = 8;
+    $("#input-columns").val(8);
+  }
+
+  if(bombs < 1) {
+    bombs = 1;
+    $("#input-bombs").val(1);
+  }
+
   newGame();
 }
 

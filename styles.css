@@ -256,7 +256,7 @@
   padding: 10px;
 }
 
-input {
+input[type=number] {
   margin: 5px;
   width: 50px;
 }
@@ -347,4 +347,24 @@ input {
 
 .scores-table tr:hover {
   background-color: rgba(66, 133, 244, 0.3);
+}
+
+.heading {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.zoom-div {
+  text-align: left;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #d6d6d6;
+}
+
+.sub-heading {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #545454;
 }
