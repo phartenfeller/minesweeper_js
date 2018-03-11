@@ -67,6 +67,8 @@ function bindJquerys() {
   bottomBorder = $(".bottom-border");
 
   fieldContainer = $("#field-container");
+
+  scoresTable = $("#scores-table");
 }
 
 // DisplayFunctions
@@ -81,4 +83,14 @@ function splitNumber(number) {
   }
 
   return numberArray;
+}
+
+// Times Table
+function addTime(settings, time) {
+  console.log(settings, time);
+  if($(scores).hasClass('hidden')) {
+    $(scores).toggleClass('hidden visible');
+  }
+
+  $("#scores-table > tbody:last-child").append('<tr><td>' + settings + '</td><td>' + time + '</td></tr>');
 }

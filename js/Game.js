@@ -133,7 +133,7 @@ function winGame() {
     }
   }
 
-  $("#game").append("<div>Congratulations! You won in " + seconds + " seconds!</div>")
+  addTime(rows + "x" + columns + ", " + bombs + " Bombs", seconds);
   stopTimer();
   }
 
