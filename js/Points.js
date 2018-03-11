@@ -40,7 +40,7 @@ function pointerClass(display, number) {
   pointsID = "#points-" + display;
 
   $(pointsID).removeClass("d-");
-  for(i=0; i<=9; i++) {
+  for(let i=0; i<=9; i++) {
     $(pointsID).removeClass("d" + i);
   }
   

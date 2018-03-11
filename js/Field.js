@@ -9,7 +9,7 @@ function createField() {
     $("#gamebar").css("width",blockSize*columns + 2*borderSize);
 
     // button and timer                 half of the columns - half of button - lenth of first timer
-    $("#game-button").css({"margin-left":blockSize*columns/2 - 13 - 49, "margin-right":blockSize*columns/2 - 13 - 49})
+    $(gameButton).css({"margin-left":blockSize*columns/2 - 13 - 49, "margin-right":blockSize*columns/2 - 13 - 49})
 
   createTopBorder();
   createMiddleBorder();
@@ -20,7 +20,7 @@ function createField() {
 function createBlocks() {
   for(i=1; i<=rows; i++) {
     // create row div
-    $("#field-container").append('<div class="row" id="r' + i + '"></div>');
+    $(fieldContainer).append('<div class="row" id="r' + i + '"></div>');
     rowid = '#r'+i;
 
     //left border
@@ -38,8 +38,6 @@ function createBlocks() {
 }
 
 function createTopBorder() {
-  topBorder = $(".top-border");
-
   $(topBorder).append('<div class="border-tl"></div>');
   for(i=1; i<=columns; i++) {
     $(topBorder).append('<div class="border-horizontal"></div>'); 
@@ -47,9 +45,7 @@ function createTopBorder() {
   $(topBorder).append('<div class="border-tr"></div>');
 }
 
-function createMiddleBorder() {
-  middleBorder = $(".middle-border");
-  
+function createMiddleBorder() {  
   $(middleBorder).append('<div class="border-il"></div>');
   for(i=1; i<=columns; i++) {
     $(middleBorder).append('<div class="border-horizontal"></div>'); 
@@ -58,11 +54,10 @@ function createMiddleBorder() {
 }
 
 function createBottomBorder() {
-  bottomBorder = $(".bottom-border");
-
   $(bottomBorder).append('<div class="border-bl"></div>');
   for(i=1; i<=columns; i++) {
     $(bottomBorder).append('<div class="border-horizontal"></div>'); 
   }
   $(bottomBorder).append('<div class="border-br"></div>');
 }
+

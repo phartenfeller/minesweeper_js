@@ -4,14 +4,7 @@
   // Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-    {
-      "type": "chrome",
-      "request": "launch",
-      "name": "Chrome gegen localhost starten",
-      "url": "${workspaceFolder}/index.html",
-      "webRoot": "${workspaceFolder}"
-    },
-    {
+  {
       "name": "Launch index.html (disable sourcemaps)",
       "type": "chrome",
       "request": "launch",

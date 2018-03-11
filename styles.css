@@ -1,6 +1,5 @@
 #game {
   background-color: #c0c0c0;
-  border-radius: 15px;
   float: left;
 }
 
@@ -259,6 +258,7 @@
 
 input {
   margin: 5px;
+  width: 50px;
 }
 
 .material-btn {

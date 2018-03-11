@@ -29,7 +29,7 @@ function timerClass(digit, number) {
 
   currentstate = parseInt($(timerID).attr('class').split('d')[2]);
   if(currentstate !== number) {
-    for(i=0; i<=9; i++) {
+    for(let i=0; i<=9; i++) {
       $(timerID).removeClass("d" + i);
     }
     $(timerID).addClass("d" + number);
