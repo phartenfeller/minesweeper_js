@@ -5,10 +5,9 @@
   "version": "0.2.0",
   "configurations": [
   {
-      "name": "Launch index.html (disable sourcemaps)",
+      "name": "Launch index.html",
       "type": "chrome",
       "request": "launch",
-      "sourceMaps": false,
       "file": "${workspaceFolder}/index.html"
   },
   ]

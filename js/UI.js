@@ -19,7 +19,7 @@ function initUIFunctions() {
 
   $("input:radio").click(function() {
     value = parseInt($(this).val());
-    $("#game").css("zoom", value);
+    $(game).css("zoom", value);
   })
 }
 
@@ -45,11 +45,11 @@ function initFieldFunctions() {
 }
 
 function initSettingsFunctions() {
-  $("#newgame-btn").click(function() {
+  $(newGameButton).click(function() {
     resetGame();
   });
 
-  $(".settings-container").css({"margin-left":100% - gameWidth / 2, "margin-right":100% - gameWidth / 2})
+  $(settingsContainer).css({"margin-left":100% - gameWidth / 2, "margin-right":100% - gameWidth / 2})
 }
 
 function resetButton() {
@@ -65,6 +65,9 @@ function resetButton() {
 }
 
 function bindJquerys() {
+  game = $("#game");
+
+  newGameButton = $("#newgame-btn");
   gameButton = $("#game-button");
 
   topBorder = $(".top-border");
@@ -72,8 +75,13 @@ function bindJquerys() {
   bottomBorder = $(".bottom-border");
 
   fieldContainer = $("#field-container");
+  settingsContainer = $("#settings-container");
 
-  scoresTable = $("#scores-table");
+  inputRows = $("#input-rows");
+  inputColumns = $("#input-columns");
+  inputBombs = $("#input-bombs");
+
+  scores = $("#scores");
 }
 
 // DisplayFunctions
@@ -92,10 +100,9 @@ function splitNumber(number) {
 
 // Times Table
 function addTime(settings, time) {
-  console.log(settings, time);
   if($(scores).hasClass('hidden')) {
     $(scores).toggleClass('hidden visible');
   }
 
-  $("#scores-table > tbody:last-child").append('<tr><td>' + settings + '</td><td>' + time + '</td></tr>');
+  $(scores).find("tbody:last-child").append('<tr><td>' + settings + '</td><td>' + time + '</td></tr>');
 }
