@@ -3,17 +3,11 @@ const borderSize = 10
 
 function createField() {
     // set width an height of game
-    documentWidth = $( document ).width();
     gameHeight = blockSize*rows + 3*borderSize + 32;
     gameWidth = blockSize*columns + 2*borderSize;
     $("#game").css({"height": gameHeight, "width": gameWidth});
     $("#gamebar").css("width",blockSize*columns + 2*borderSize);
-
-    zoom = (documentWidth - 16) / gameWidth;
-    if (zoom > 3) {
-      zoom = 3;
-    }
-    $("#game").css({"zoom":zoom});
+    $(fieldContainer).css("height", blockSize*rows);
 
     // button and timer                 half of the columns - half of button - lenth of first timer
     $(gameButton).css({"margin-left":blockSize*columns/2 - 13 - 49, "margin-right":blockSize*columns/2 - 13 - 49})
@@ -67,4 +61,3 @@ function createBottomBorder() {
   }
   $(bottomBorder).append('<div class="border-br"></div>');
 }
-

@@ -84,6 +84,21 @@ function bindJquerys() {
   scores = $("#scores");
 }
 
+function setZoom() {
+  documentHeight = $( document ).height();
+  documentWidth = $( document ).width();
+  zoom = (documentWidth - 16) / gameWidth;
+  console.log(documentWidth + "-16 / " + gameWidth);
+
+  if (documentWidth > documentHeight) {
+    if (zoom > 3) {
+      zoom = 3;
+    }
+  }
+
+  $("#game").css({"zoom":zoom});
+}
+
 // DisplayFunctions
 function splitNumber(number) {
   numberArray = []

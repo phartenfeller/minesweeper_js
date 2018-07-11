@@ -26,6 +26,7 @@ $( document ).ready(function() {
 
 function newGame() {
   createField();
+  setZoom();
   createBombs();
   setupPoints();
   initFieldFunctions();

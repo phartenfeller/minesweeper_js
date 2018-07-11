@@ -1,6 +1,8 @@
 #game {
   background-color: #c0c0c0;
   float: left;
+  width: 180px;
+  height: 222px;
 }
 
 .block {
@@ -367,4 +369,9 @@ hr {
   margin-top: 5px;
   margin-bottom: 10px;
   color: #545454;
+}
+
+.dialog {
+  position: absolute;
+  z-index: 10;
 }

@@ -75,6 +75,7 @@ function fieldClicked(row, col, field="") {
       amountFields--;
       number = checkSurroundings(row, col);
       $(field).toggleClass('field f' + number + ' clicked');
+      $(field).attr('data-value', number);
 
       // if zero bombs around reveal the fields around
       if (number === 0) {
