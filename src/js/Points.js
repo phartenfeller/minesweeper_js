@@ -47,3 +47,5 @@ function pointerClass(display, number) {
   // add new class
   $(pointsID).addClass('d' + number);
 }
+
+export {setupPoints, addPoint, removePoint, pointerClass};

@@ -5,59 +5,55 @@
     <script src="libraries/jquery-3.3.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <div id="game" class="minesweeper img" oncontextmenu="return false;">
-    <div class="top-border"></div>
-    <div id="gamebar" class="gamebar">
-      <div class="border-vertical-32" style="float:left"></div>
-      <div id="points" class="display points">
-        <div id="points-1" class="digit d0"></div>
-        <div id="points-2" class="digit d0"></div>
-        <div id="points-3" class="digit d0"></div>
+  <body>
+    <div id="game" class="minesweeper img" oncontextmenu="return false;">
+      <div class="top-border"></div>
+      <div id="gamebar" class="gamebar">
+        <div class="border-vertical-32" style="float:left"></div>
+        <div id="points" class="display points">
+          <div id="points-1" class="digit d0"></div>
+          <div id="points-2" class="digit d0"></div>
+          <div id="points-3" class="digit d0"></div>
+        </div>
+        <div id="game-button" class="btn btn-smiley"></div>
+        <div id="timer" class="display timer">
+          <div id="timer-1" class="digit d0"></div>
+          <div id="timer-2" class="digit d0"></div>
+          <div id="timer-3" class="digit d0"></div>
+        </div>
+        <div class="border-vertical-32" style="float:right"></div>
       </div>
-      <div id="game-button" class="btn btn-smiley"></div>
-      <div id="timer" class="display timer">
-        <div id="timer-1" class="digit d0"></div>
-        <div id="timer-2" class="digit d0"></div>
-        <div id="timer-3" class="digit d0"></div>
+      <div class="middle-border" style="height:10px"></div>
+      <div id="field-container"></div>
+      <div class="bottom-border" style="height:10px"></div>
+      <div>
+        <button><span>Settings</span></button>
+        <button onclick="startAI()"><span>AI</span></button>
       </div>
-      <div class="border-vertical-32" style="float:right"></div>
     </div>
-    <div class="middle-border" style="height:10px"></div>
-    <div id="field-container"></div>
-    <div class="bottom-border" style="height:10px"></div>
-    <div>
-      <button><span>Settings</span></button>
-      <button onclick="startAI()"><span>AI</span></button>
+    <div id="settings-container" class="settings-container">
+      <h2 class="heading">Settings</h2>
+      <hr>
+      <h4 class="sub-heading">Zoom</h4>
+      <div class="zoom-div">
+        <input type="radio" name="zoom" value="1"> 100%<br>
+        <input type="radio" name="zoom" value="2"> 200%<br>
+        <input type="radio" name="zoom" value="3" checked> 300%
+      </div>
+      <hr>
+      <h4 class="sub-heading">Game Settings</h4>
+      <div>Rows:<input id="input-rows" type="number" min="8" value="10"></div>
+      <div>Columns:<input id="input-columns" type="number" min="8" value="10"></div>
+      <div>Bombs:<input id="input-bombs" type="number" min="2" value="10"></div>
+      <button id="newgame-btn" class="material-btn"><span>New Game</span></button>
     </div>
-  </div>
-  <div id="settings-container" class="settings-container">
-    <h2 class="heading">Settings</h2>
-    <hr>
-    <h4 class="sub-heading">Zoom</h4>
-    <div class="zoom-div">
-      <input type="radio" name="zoom" value="1"> 100%<br>
-      <input type="radio" name="zoom" value="2"> 200%<br>
-      <input type="radio" name="zoom" value="3" checked> 300%
+      <table id="scores" class="scores hidden">
+        <tr>
+          <th>Settings</th>
+          <th>Seconds</th>
+        </tr>
+      </table>
     </div>
-    <hr>
-    <h4 class="sub-heading">Game Settings</h4>
-    <div>Rows:<input id="input-rows" type="number" min="8" value="10"></div>
-    <div>Columns:<input id="input-columns" type="number" min="8" value="10"></div>
-    <div>Bombs:<input id="input-bombs" type="number" min="2" value="10"></div>
-    <button id="newgame-btn" class="material-btn"><span>New Game</span></button>
-  </div>
-    <table id="scores" class="scores hidden">
-      <tr>
-        <th>Settings</th>
-        <th>Seconds</th>
-      </tr>
-    </table>
-  </div>
-  <script src="js/UI.js"></script>
-  <script src="js/Game.js"></script>
-  <script src="js/Field.js"></script>
-  <script src="js/Timer.js"></script>
-  <script src="js/Points.js"></script>
-  <script src="js/AI.js"></script>
-  <script src="minesweeper.js"></script>
+    <script src="dist/bundle.js"></script>
+  </body>
 </html>

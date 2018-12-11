@@ -1,3 +1,9 @@
+import {resetTimer, startTimer, timerClass, stopTimer, setTimerToZero} from './src/js/Timer.js';
+import {initUIFunctions, initFieldFunctions, initSettingsFunctions, resetButton, bindJquerys, setZoom, splitNumber, addTime} from './src/js/UI.js';
+import {setupPoints} from './src/js/Points.js';
+import {setAmountFields, createBombs, checkBomb, fieldClicked, flagField, checkSurroundings, winGame, clickFieldsAround, bombClicked, getID} from './src/js/Game.js';
+import {createField} from './src/js/Field.js';
+
 const debug = true;
 const showBombs = false;
 
@@ -8,12 +14,6 @@ let bombs = 10;
 let bombArray = [];
 let gameWon = false;
 
-class Bomb {
-  constructor(row, col) {
-    this.row = row;
-    this.col = col;
-  }
-}
 
 // Function that runs on page load and setups game
 $( document ).ready(function() {

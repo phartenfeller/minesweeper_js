@@ -1,3 +1,6 @@
+import {addPoint, removePoint} from './Points.js';
+import {Bomb} from './Bomb.js';
+
 function setAmountFields() {
   amountFields = rows * columns - bombs;
 }
@@ -5,7 +8,7 @@ function setAmountFields() {
 function createBombs() {
   bombArray = [];
 
-  for (let i = 1; i<=bombs; i++) {
+  for (let i = 1; i <= bombs; i++) {
     uniqueBomb = false;
     // Generate random Bombs and check if they are unique
     while (!uniqueBomb) {
@@ -197,3 +200,5 @@ function bombClicked(row, col, field) {
 function getID(row, col) {
   return '#' + row + '-' + col;
 }
+
+export {setAmountFields, createBombs, checkBomb, fieldClicked, flagField, checkSurroundings, winGame, clickFieldsAround, bombClicked, getID};

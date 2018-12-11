@@ -63,23 +63,23 @@ function resetButton() {
 }
 
 function bindJquerys() {
-  game = $('#game');
+  const game = $('#game');
 
-  newGameButton = $('#newgame-btn');
-  gameButton = $('#game-button');
+  const newGameButton = $('#newgame-btn');
+  const gameButton = $('#game-button');
 
-  topBorder = $('.top-border');
-  middleBorder = $('.middle-border');
-  bottomBorder = $('.bottom-border');
+  const topBorder = $('.top-border');
+  const middleBorder = $('.middle-border');
+  const bottomBorder = $('.bottom-border');
 
-  fieldContainer = $('#field-container');
-  settingsContainer = $('#settings-container');
+  const fieldContainer = $('#field-container');
+  const settingsContainer = $('#settings-container');
 
-  inputRows = $('#input-rows');
-  inputColumns = $('#input-columns');
-  inputBombs = $('#input-bombs');
+  const inputRows = $('#input-rows');
+  const inputColumns = $('#input-columns');
+  const inputBombs = $('#input-bombs');
 
-  scores = $('#scores');
+  const scores = $('#scores');
 }
 
 function setZoom() {
@@ -99,7 +99,7 @@ function setZoom() {
 
 // DisplayFunctions
 function splitNumber(number) {
-  numberArray = [];
+  const numberArray = [];
 
   number = Math.abs(number);
 
@@ -119,3 +119,5 @@ function addTime(settings, time) {
 
   $(scores).find('tbody:last-child').append('<tr><td>' + settings + '</td><td>' + time + '</td></tr>');
 }
+
+export {initUIFunctions, initFieldFunctions, initSettingsFunctions, resetButton, bindJquerys, setZoom, splitNumber, addTime};

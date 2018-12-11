@@ -3,11 +3,11 @@ const borderSize = 10;
 
 function createField() {
   // set width an height of game
-  gameHeight = blockSize*rows + 3*borderSize + 32;
-  gameWidth = blockSize*columns + 2*borderSize;
+  const gameHeight = blockSize * rows + 3 * borderSize + 32;
+  const gameWidth = blockSize * columns + 2 * borderSize;
   $('#game').css({'height': gameHeight, 'width': gameWidth});
   $('#gamebar').css('width', blockSize*columns + 2*borderSize);
-  $(fieldContainer).css('height', blockSize*rows);
+  $(fieldContainer).css('height', blockSize * rows);
 
   // button and timer               half of the columns - half of button - lenth of first timer
   $(gameButton).css({'margin-left': blockSize * columns / 2 - 13 - 49, 'margin-right': blockSize * columns / 2 - 13 - 49});
@@ -22,7 +22,7 @@ function createBlocks() {
   for (let i = 1; i <= rows; i++) {
     // create row div
     $(fieldContainer).append('<div class="row" id="r' + i + '"></div>');
-    rowid = '#r' + i;
+    const rowid = '#r' + i;
 
     // left border
     $(rowid).append('<div class="border-vertical"></div>');
@@ -61,3 +61,5 @@ function createBottomBorder() {
   }
   $(bottomBorder).append('<div class="border-br"></div>');
 }
+
+export {createField};

@@ -46,4 +46,4 @@ function setTimerToZero() {
   timerClass(1, 0);
 }
 
-export default {resetTimer, startTimer, timerClass, stopTimer, setTimerToZero};
+export {resetTimer, startTimer, timerClass, stopTimer, setTimerToZero};
