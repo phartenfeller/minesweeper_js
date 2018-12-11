@@ -18,7 +18,7 @@ function addPoint() {
   pointerClass(1, pointsArray[2]);
 
   if (points < 0) {
-    pointerClass(1, "-");
+    pointerClass(1, '-');
   }
 }
 
@@ -31,19 +31,19 @@ function removePoint() {
   pointerClass(1, pointsArray[2]);
 
   if (points < 0) {
-    pointerClass(1, "-");
+    pointerClass(1, '-');
   }
 }
 
 function pointerClass(display, number) {
   number = (number === undefined) ? 0 : number;
-  pointsID = "#points-" + display;
+  pointsID = '#points-' + display;
 
-  $(pointsID).removeClass("d-");
-  for(let i=0; i<=9; i++) {
-    $(pointsID).removeClass("d" + i);
+  $(pointsID).removeClass('d-');
+  for (let i=0; i<=9; i++) {
+    $(pointsID).removeClass('d' + i);
   }
-  
+
   // add new class
-  $(pointsID).addClass("d" + number);
+  $(pointsID).addClass('d' + number);
 }

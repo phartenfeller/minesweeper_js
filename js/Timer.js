@@ -14,9 +14,9 @@ function startTimer() {
     if (seconds === 999) {
       stopTimer();
     }
-  
+
     secondsArray = splitNumber(seconds);
-  
+
     timerClass(3, secondsArray[0]);
     timerClass(2, secondsArray[1]);
     timerClass(1, secondsArray[2]);
@@ -25,14 +25,14 @@ function startTimer() {
 
 function timerClass(digit, number) {
   number = (number === undefined) ? 0 : number;
-  timerID = "#timer-" + digit
+  timerID = '#timer-' + digit;
 
   currentstate = parseInt($(timerID).attr('class').split('d')[2]);
-  if(currentstate !== number) {
-    for(let i=0; i<=9; i++) {
-      $(timerID).removeClass("d" + i);
+  if (currentstate !== number) {
+    for (let i=0; i<=9; i++) {
+      $(timerID).removeClass('d' + i);
     }
-    $(timerID).addClass("d" + number);
+    $(timerID).addClass('d' + number);
   }
 }
 
