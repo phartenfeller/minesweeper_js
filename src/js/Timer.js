@@ -45,3 +45,5 @@ function setTimerToZero() {
   timerClass(2, 0);
   timerClass(1, 0);
 }
+
+export default {resetTimer, startTimer, timerClass, stopTimer, setTimerToZero};
