@@ -8,20 +8,20 @@ let bombs = 10;
 let bombArray = [];
 let gameWon = false;
 
-class Bomb{
-    constructor(row, col) {
-        this.row = row;
-        this.col = col;
-    }
+class Bomb {
+  constructor(row, col) {
+    this.row = row;
+    this.col = col;
+  }
 }
 
 // Function that runs on page load and setups game
 $( document ).ready(function() {
-    $(game).css("zoom", 3);
-    bindJquerys();
-    newGame();  
-    initUIFunctions();
-    initSettingsFunctions();
+  $(game).css('zoom', 3);
+  bindJquerys();
+  newGame();
+  initUIFunctions();
+  initSettingsFunctions();
 });
 
 function newGame() {
@@ -49,17 +49,17 @@ function resetGame() {
   columns = parseInt($(inputColumns).val());
   bombs = parseInt($(inputBombs).val());
 
-  if(rows < 8) {
+  if (rows < 8) {
     rows = 8;
     $(inputRows).val(8);
   }
 
-  if(columns < 8) {
+  if (columns < 8) {
     columns = 8;
     $(inputColumns).val(8);
   }
 
-  if(bombs < 1) {
+  if (bombs < 1) {
     bombs = 1;
     $(inputBombs).val(1);
   }
@@ -69,7 +69,7 @@ function resetGame() {
 
 // Debug Log
 function debugLog(message) {
-  if(debug) {
+  if (debug) {
     console.log(message);
   }
 }

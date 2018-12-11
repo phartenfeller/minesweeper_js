@@ -1,46 +1,46 @@
 function initUIFunctions() {
   $(gameButton).mousedown(function() {
-    $(gameButton).toggleClass('btn-smiley btn-click')
-  })
+    $(gameButton).toggleClass('btn-smiley btn-click');
+  });
 
-  $(document).mouseup(function () {
-    if($(gameButton).hasClass("btn-wow")) {
+  $(document).mouseup(function() {
+    if ($(gameButton).hasClass('btn-wow')) {
       $(gameButton).toggleClass('btn-smiley btn-wow');
     }
 
-    if($(gameButton).hasClass("btn-click")) {
-      $(gameButton).toggleClass('btn-smiley btn-click')
+    if ($(gameButton).hasClass('btn-click')) {
+      $(gameButton).toggleClass('btn-smiley btn-click');
     }
-  })
+  });
 
-  $(gameButton).click(function () {
+  $(gameButton).click(function() {
     resetGame();
-  })
+  });
 
-  $("input:radio").click(function() {
+  $('input:radio').click(function() {
     value = parseInt($(this).val());
-    $(game).css("zoom", value);
-  })
+    $(game).css('zoom', value);
+  });
 }
 
 function initFieldFunctions() {
   field = $('.field');
   field.click(function() {
-      id = $(this).attr('id');
-      row = parseInt(id.split("-")[0]);
-      col = parseInt(id.split("-")[1]);
-      fieldClicked(row, col, $(this));
+    id = $(this).attr('id');
+    row = parseInt(id.split('-')[0]);
+    col = parseInt(id.split('-')[1]);
+    fieldClicked(row, col, $(this));
   });
 
-  field.on("contextmenu", function() {
-      id = $(this).attr('id');
-      row = parseInt(id.split("-")[0]);
-      col = parseInt(id.split("-")[1]);
-      flagField($(this));
+  field.on('contextmenu', function() {
+    id = $(this).attr('id');
+    row = parseInt(id.split('-')[0]);
+    col = parseInt(id.split('-')[1]);
+    flagField($(this));
   });
 
   field.mousedown(function() {
-    $(gameButton).toggleClass('btn-smiley btn-wow')
+    $(gameButton).toggleClass('btn-smiley btn-wow');
   });
 }
 
@@ -49,46 +49,44 @@ function initSettingsFunctions() {
     resetGame();
   });
 
-  $(settingsContainer).css({"margin-left":100% - gameWidth / 2, "margin-right":100% - gameWidth / 2})
+  $(settingsContainer).css({'margin-left': 100% - gameWidth / 2, 'margin-right': 100% - gameWidth / 2});
 }
 
 function resetButton() {
   if ($(gameButton).hasClass('btn-smiley')) {
     return;
-  }
-  else if ($(gameButton).hasClass('btn-dead')) {
+  } else if ($(gameButton).hasClass('btn-dead')) {
     $(gameButton).toggleClass('btn-dead btn-smiley');
-  }
-  else if ($(gameButton).hasClass('btn-cool')) {
+  } else if ($(gameButton).hasClass('btn-cool')) {
     $(gameButton).toggleClass('btn-cool btn-smiley');
   }
 }
 
 function bindJquerys() {
-  game = $("#game");
+  game = $('#game');
 
-  newGameButton = $("#newgame-btn");
-  gameButton = $("#game-button");
+  newGameButton = $('#newgame-btn');
+  gameButton = $('#game-button');
 
-  topBorder = $(".top-border");
-  middleBorder = $(".middle-border");
-  bottomBorder = $(".bottom-border");
+  topBorder = $('.top-border');
+  middleBorder = $('.middle-border');
+  bottomBorder = $('.bottom-border');
 
-  fieldContainer = $("#field-container");
-  settingsContainer = $("#settings-container");
+  fieldContainer = $('#field-container');
+  settingsContainer = $('#settings-container');
 
-  inputRows = $("#input-rows");
-  inputColumns = $("#input-columns");
-  inputBombs = $("#input-bombs");
+  inputRows = $('#input-rows');
+  inputColumns = $('#input-columns');
+  inputBombs = $('#input-bombs');
 
-  scores = $("#scores");
+  scores = $('#scores');
 }
 
 function setZoom() {
   documentHeight = $( document ).height();
   documentWidth = $( document ).width();
   zoom = (documentWidth - 16) / gameWidth;
-  console.log(documentWidth + "-16 / " + gameWidth);
+  console.log(documentWidth + '-16 / ' + gameWidth);
 
   if (documentWidth > documentHeight) {
     if (zoom > 3) {
@@ -96,12 +94,12 @@ function setZoom() {
     }
   }
 
-  $("#game").css({"zoom":zoom});
+  $('#game').css({'zoom': zoom});
 }
 
 // DisplayFunctions
 function splitNumber(number) {
-  numberArray = []
+  numberArray = [];
 
   number = Math.abs(number);
 
@@ -115,9 +113,9 @@ function splitNumber(number) {
 
 // Times Table
 function addTime(settings, time) {
-  if($(scores).hasClass('hidden')) {
+  if ($(scores).hasClass('hidden')) {
     $(scores).toggleClass('hidden visible');
   }
 
-  $(scores).find("tbody:last-child").append('<tr><td>' + settings + '</td><td>' + time + '</td></tr>');
+  $(scores).find('tbody:last-child').append('<tr><td>' + settings + '</td><td>' + time + '</td></tr>');
 }

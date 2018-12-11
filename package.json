@@ -1,0 +1,25 @@
+{
+  "name": "minesweeper_js",
+  "version": "1.0.0",
+  "description": "In this Project I am trying to rebuild the original MS Minesweeper game with JavaScript, CSS and HTML. The only libary used is JQuery.",
+  "main": "minesweeper.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "eslint-config-google": "^0.11.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phartenfeller/minesweeper_js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phartenfeller/minesweeper_js/issues"
+  },
+  "homepage": "https://github.com/phartenfeller/minesweeper_js#readme"
+}
