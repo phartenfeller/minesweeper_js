@@ -36,8 +36,8 @@ class Game {
       let uniqueBomb = false;
       // Generate random Bombs and check if they are unique
       while (!uniqueBomb) {
-        randRow = Math.floor(Math.random() * columns) + 1;
-        randCol = Math.floor(Math.random() * rows) + 1;
+        const randRow = Math.floor(Math.random() * columns) + 1;
+        const randCol = Math.floor(Math.random() * rows) + 1;
 
         if (this.checkNoBomb(randRow, randCol)) {
           uniqueBomb = true;
@@ -49,7 +49,7 @@ class Game {
 
       // Debug
       if (showBombs) {
-        block = '#' + randRow + '-' + randCol;
+        const block = '#' + randRow + '-' + randCol;
         $(block).toggleClass('field bomb');
       }
     }
@@ -68,12 +68,12 @@ class Game {
 
     // Error handling
     if (isNaN(row)) {
-      error = new Error('Row is NaN');
+      const error = new Error('Row is NaN');
       throw error;
     }
 
     if (isNaN(col)) {
-      error = new Error('Col is NaN');
+      const error = new Error('Col is NaN');
       throw error;
     }
 
@@ -91,10 +91,9 @@ class Game {
    * @param {number} col
    * @param {id}     field
    */
-  fieldClicked(row, col, field='') {
+  fieldClicked(row, col, field = '') {
     if (field === '') {
-      id = getID(row, col);
-      field = $(id);
+      field = getID(row, col);
     }
 
     // returns if field is not on gamefield
@@ -109,18 +108,18 @@ class Game {
       if (!checkNoBomb(row, col)) {
         bombClicked(row, col, field);
       } else {
-        amountFields--;
-        number = checkSurroundings(row, col);
+        this.amountFields--;
+        const number = this.checkSurroundings(row, col);
         $(field).toggleClass('field f' + number + ' clicked');
         $(field).attr('data-value', number);
 
         // if zero bombs around reveal the fields around
         if (number === 0) {
-          clickFieldsAround(row, col);
+          this.clickFieldsAround(row, col);
         }
 
         // win game when all fields which are not bombs are clicked
-        if (amountFields === 0) {
+        if (this.amountFields === 0) {
           winGame();
         }
       }
@@ -133,9 +132,9 @@ class Game {
    */
   flagField(field) {
     if ($(field).hasClass('flag')) {
-      addPoint();
+      addPoint(); // todo
     } else {
-      removePoint();
+      removePoint(); // todo
     }
 
     $(field).toggleClass('field flag');
@@ -164,16 +163,16 @@ class Game {
    * procedure which sets the game to won
    */
   winGame() {
-    if (!gameWon) {
+    if (!this.gameWon) {
       // show win button
       $(gameButton).toggleClass('btn-smiley btn-cool');
 
       // show not flagged bombs as flagged
       for (let i=0; i < bombs; i++) {
-        row = bombArray[i].row;
-        col = bombArray[i].col;
+        const row = bombArray[i].row;
+        const col = bombArray[i].col;
 
-        field = getID(row, col);
+        const field = getID(row, col);
 
         if (!$(field).hasClass('flag')) {
           flagField($(field));
@@ -181,10 +180,10 @@ class Game {
       }
 
       addTime(this.rows + 'x' + this.columns + ', ' + this.bombs + ' Bombs', this.seconds);
-      stopTimer();
+      stopTimer(); // todo
     }
 
-    gameWon = true;
+    this.gameWon = true;
   }
 
   /**
@@ -216,37 +215,37 @@ class Game {
     $(field).toggleClass('field bomb-red clicked');
 
     // stop timer
-    stopTimer();
+    stopTimer(); // todo
 
     // dead button
     $(gameButton).toggleClass('btn-smiley btn-dead');
 
     // show all other bombs
-    for (let i=0; i<bombs; i++) {
+    for (let i = 0; i < bombs; i++) {
       if (bombArray[i].row !== row || bombArray[i].col !== col) {
-        id = getID(bombArray[i].row, bombArray[i].col);
+        const id = getID(bombArray[i].row, bombArray[i].col);
         $(id).toggleClass('field bomb');
       }
     }
 
     // check if all flagged fields are really bombs
     $('.flag').each(function() {
-      id = $(this).attr('id');
-      row = parseInt(id.split('-')[0]);
-      col = parseInt(id.split('-')[1]);
+      let id = $(this).attr('id');
+      const row = parseInt(id.split('-')[0]);
+      const col = parseInt(id.split('-')[1]);
 
       id = '#' + id;
 
       // if no bomb
-      if (checkNoBomb(row, col)) {
+      if (this.checkNoBomb(row, col)) {
         $(id).toggleClass('flag no-bomb');
       }
     });
 
     // lock all fields
-    for (let r=1; r<= rows; r++) {
-      for (let c=1; c<= columns; c++) {
-        id = getID(r, c);
+    for (let r = 1; r <= rows; r++) {
+      for (let c = 1; c <= columns; c++) {
+        const id = getID(r, c);
         $(id).addClass('clicked');
       }
     }
