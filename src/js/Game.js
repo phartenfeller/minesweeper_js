@@ -13,13 +13,12 @@ class Game {
     // Game Board
     this.rows = rows;
     this.columns = columns;
-    this.amountBombs = amountBombs;
-    this.amountFields = this.rows * this.columns - this.amountBombs;
-    this.bombArray = this.createBombs();
-
-    // Settings
     this.debug = debug;
     this.showBombs = debug;
+    this.amountBombs = amountBombs;
+
+    this.amountFields = this.rows * this.columns - this.amountBombs;
+    this.bombArray = this.createBombs();
 
     this.gameWon = false;
     this.seconds = 0;
@@ -57,6 +56,8 @@ class Game {
         $(block).toggleClass('field bomb');
       }
     }
+
+    this.debugLog(bombArray);
 
     return bombArray;
   }
@@ -258,12 +259,22 @@ class Game {
 
   /**
    * returns the id corresponding to row and col
-   * @param  {*} row
-   * @param  {*} col
+   * @param  {number} row
+   * @param  {number} col
    * @return {id}
    */
   getID(row, col) {
     return '#' + row + '-' + col;
+  }
+
+  /**
+   * Logs if debug is on
+   * @param {string} message
+   */
+  debugLog(message) {
+    if (this.debug) {
+      console.log(message);
+    }
   }
 }
 
