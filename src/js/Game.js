@@ -1,6 +1,6 @@
 import {addPoint, removePoint} from './Points.js';
 import {Bomb} from './Bomb.js';
-
+import {Board} from './Board.js';
 class Game {
   /**
    * Setups a Game
@@ -15,7 +15,7 @@ class Game {
     this.columns = columns;
     this.amountBombs = amountBombs;
     this.amountFields = this.rows * this.columns - this.amountBombs;
-    this.bombArray = createBombs();
+    this.bombArray = this.createBombs();
 
     // Settings
     this.debug = debug;
@@ -23,6 +23,8 @@ class Game {
 
     this.gameWon = false;
     this.seconds = 0;
+
+    this.board = new Board(this);
   }
 
   /**
@@ -34,12 +36,14 @@ class Game {
 
     for (let i = 1; i <= this.amountBombs; i++) {
       let uniqueBomb = false;
+      let randRow;
+      let randCol;
       // Generate random Bombs and check if they are unique
       while (!uniqueBomb) {
-        const randRow = Math.floor(Math.random() * columns) + 1;
-        const randCol = Math.floor(Math.random() * rows) + 1;
+        randRow = Math.floor(Math.random() * this.rows) + 1;
+        randCol = Math.floor(Math.random() * this.columns) + 1;
 
-        if (this.checkNoBomb(randRow, randCol)) {
+        if (this.checkNoBomb(randRow, randCol, bombArray)) {
           uniqueBomb = true;
         }
       }
@@ -48,7 +52,7 @@ class Game {
       bombArray.push(new Bomb(randRow, randCol));
 
       // Debug
-      if (showBombs) {
+      if (this.showBombs) {
         const block = '#' + randRow + '-' + randCol;
         $(block).toggleClass('field bomb');
       }
@@ -61,10 +65,11 @@ class Game {
    * Returns true if field is no bomb
    * @param  {number}  row
    * @param  {number}  col
+   * @param  {array}   bombArray
    * @return {boolean} true = no bomb, false = bomb
    */
-  checkNoBomb(row, col) {
-    amountBombs = bombArray.length;
+  checkNoBomb(row, col, bombArray = this.bombArray) {
+    const amountBombs = bombArray.length;
 
     // Error handling
     if (isNaN(row)) {
@@ -77,7 +82,7 @@ class Game {
       throw error;
     }
 
-    for (let i=0; i<amountBombs; i++) {
+    for (let i = 0; i < amountBombs; i++) {
       if (bombArray[i].row === row && bombArray[i].col === col) {
         return false;
       }
@@ -93,7 +98,7 @@ class Game {
    */
   fieldClicked(row, col, field = '') {
     if (field === '') {
-      field = getID(row, col);
+      field = this.getID(row, col);
     }
 
     // returns if field is not on gamefield
