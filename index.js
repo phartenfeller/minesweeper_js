@@ -2,9 +2,9 @@ import {Game} from './src/js/Game.js';
 
 const debug = true;
 
-let rows = 10;
-let columns = 10;
-let bombs = 10;
+const rows = 10;
+const columns = 10;
+const bombs = 10;
 
 // Function that runs on page load and setups game
 $( document ).ready(function() {

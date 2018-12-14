@@ -1,6 +1,6 @@
 import {addPoint, removePoint} from './Points.js';
 import {Bomb} from './Bomb.js';
-import {Board} from './Board.js';
+import {setupBorad} from './Board.js';
 class Game {
   /**
    * Setups a Game
@@ -10,6 +10,8 @@ class Game {
    * @param {boolean} debug
    */
   constructor(rows, columns, amountBombs, debug) {
+    this.debugLog('Setting up Game');
+
     // Game Board
     this.rows = rows;
     this.columns = columns;
@@ -23,7 +25,7 @@ class Game {
     this.gameWon = false;
     this.seconds = 0;
 
-    this.board = new Board(this);
+    setupBorad(this.rows, this.columns);
   }
 
   /**
@@ -103,7 +105,7 @@ class Game {
     }
 
     // returns if field is not on gamefield
-    // needed because function cluckFieldsAround() could process fields that are not on gamefield
+    // skip fields that are not on gamefield
     if (row < 1 || row > rows || col < 1 || col > columns) {
       return;
     }
@@ -185,7 +187,10 @@ class Game {
         }
       }
 
-      addTime(this.rows + 'x' + this.columns + ', ' + this.bombs + ' Bombs', this.seconds);
+      const msg = this.rows + 'x' + this.columns
+                + ', ' + this.bombs + ' Bombs ' + this.seconds;
+
+      addTime(msg);
       stopTimer(); // todo
     }
 
