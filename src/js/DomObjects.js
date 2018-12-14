@@ -1,24 +1,24 @@
-class DomObjects {
-  constructor() {
-    this.game = $('#game');
+const game = $('#game');
 
-    this.newGameButton = $('#newgame-btn');
-    this.gameButton = $('#game-button');
-    this.gameBar = $('#gamebar');
+const newGameButton = $('#newgame-btn');
+const gameButton = $('#game-button');
+const gameBar = $('#gamebar');
 
-    this.topBorder = $('.top-border');
-    this.middleBorder = $('.middle-border');
-    this.bottomBorder = $('.bottom-border');
+const topBorder = $('.top-border');
+const middleBorder = $('.middle-border');
+const bottomBorder = $('.bottom-border');
 
-    this.fieldContainer = $('#field-container');
-    this.settingsContainer = $('#settings-container');
+const fieldContainer = $('#field-container');
+const settingsContainer = $('#settings-container');
 
-    this.inputRows = $('#input-rows');
-    this.inputColumns = $('#input-columns');
-    this.inputBombs = $('#input-bombs');
+/*
+const inputRows = $('#input-rows');
+const inputColumns = $('#input-columns');
+const inputBombs = $('#input-bombs');
+*/
 
-    this.scores = $('#scores');
-  }
-}
+const scores = $('#scores');
 
-export {DomObjects};
+
+export {game, newGameButton, gameButton, gameBar, topBorder, middleBorder,
+  bottomBorder, fieldContainer, settingsContainer, scores};
