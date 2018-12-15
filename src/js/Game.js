@@ -2,37 +2,50 @@ import {Bomb} from './Bomb.js';
 import {setupBorad} from './Board.js';
 import {Timer} from './Timer.js';
 import {Points} from './Points.js';
-import {gameButton} from './DomObjects.js';
+import {gameButton, topBorder, middleBorder,
+  fieldContainer, bottomBorder} from './DomObjects.js';
 class Game {
   /**
    * Setups a Game
-   * @param {number}  rows
-   * @param {number}  columns
-   * @param {number}  bombs
    * @param {boolean} debug
    */
-  constructor(rows, columns, bombs, debug) {
+  constructor(debug = false) {
     this.debugLog('Setting up Game');
 
-    // Game Board
-    this.rows = rows;
-    this.columns = columns;
     this.debug = debug;
     this.showBombs = debug;
-    this.bombs = bombs;
+
+    this.rows;
+    this.columns;
+    this.bombs;
+
+    this.setupGame();
+  }
+
+  setupGame() {
+    $(topBorder).empty();
+    $(middleBorder).empty();
+    $(fieldContainer).empty();
+    $(bottomBorder).empty();
+
+    const inputRows = parseInt($('#input-rows').val());
+    const inputCols = parseInt($('#input-columns').val());
+    const inputBombs = parseInt($('#input-bombs').val());
+
+    this.rows = inputRows < 8 ? 8 : inputRows;
+    this.columns = inputCols < 8 ? 8 : inputCols;
+    this.bombs = inputBombs < 1 ? 1 : inputBombs;
 
     this.amountFields = this.rows * this.columns - this.bombs;
     this.bombArray = this.createBombs();
-
     this.gameWon = false;
-
-    this.seconds = 0;
 
     setupBorad(this.rows, this.columns);
 
     this.points = new Points(this.bombs);
     this.timer = new Timer();
   }
+
 
   /**
    * Randomly creates the Bombs
@@ -105,10 +118,8 @@ class Game {
    * @param {number} col
    * @param {id}     field
    */
-  fieldClicked(row, col, field = '') {
-    if (field === '') {
-      field = this.getID(row, col);
-    }
+  blockClicked(row, col, field = '') {
+    field === '' ? field = this.getID(row, col) : field;
 
     // skip if field is not on gamefield
     if (row < 1 || row > this.rows || col < 1 || col > this.columns) {
@@ -121,21 +132,25 @@ class Game {
       if (!this.checkNoBomb(row, col)) {
         this.bombClicked(row, col, field);
       } else {
-        this.amountFields--;
-        const number = this.checkSurroundings(row, col);
-        $(field).toggleClass(`field f${number} clicked`);
-        $(field).attr('data-value', number);
-
-        // if zero bombs around reveal the fields around
-        if (number === 0) {
-          this.clickFieldsAround(row, col);
-        }
-
-        // win game when all fields which are not bombs are clicked
-        if (this.amountFields === 0) {
-          this.winGame();
-        }
+        this.fieldClicked(row, col, field);
       }
+    }
+  }
+
+  fieldClicked(row, col, field) {
+    this.amountFields--;
+    const number = this.checkSurroundings(row, col);
+    $(field).toggleClass(`field f${number} clicked`);
+    $(field).attr('data-value', number);
+
+    // if zero bombs around reveal the fields around
+    if (number === 0) {
+      this.clickFieldsAround(row, col);
+    }
+
+    // win game when all fields which are not bombs are clicked
+    if (this.amountFields === 0) {
+      this.winGame();
     }
   }
 
@@ -146,11 +161,15 @@ class Game {
   flagField(field) {
     if ($(field).hasClass('flag')) {
       this.points.addPoint();
+
+      $(field).removeClass('flag');
+      $(field).addClass('field');
     } else {
       this.points.removePoint();
-    }
 
-    $(field).toggleClass('field flag');
+      $(field).removeClass('field');
+      $(field).addClass('flag');
+    }
   }
 
   /**
@@ -211,16 +230,16 @@ class Game {
    * @param {number} col
    */
   clickFieldsAround(row, col) {
-    this.fieldClicked(row - 1, col - 1);
-    this.fieldClicked(row - 1, col);
-    this.fieldClicked(row - 1, col + 1);
+    this.blockClicked(row - 1, col - 1);
+    this.blockClicked(row - 1, col);
+    this.blockClicked(row - 1, col + 1);
 
-    this.fieldClicked(row + 1, col - 1);
-    this.fieldClicked(row + 1, col);
-    this.fieldClicked(row + 1, col + 1);
+    this.blockClicked(row + 1, col - 1);
+    this.blockClicked(row + 1, col);
+    this.blockClicked(row + 1, col + 1);
 
-    this.fieldClicked(row, col - 1);
-    this.fieldClicked(row, col + 1);
+    this.blockClicked(row, col - 1);
+    this.blockClicked(row, col + 1);
   }
 
   /**
@@ -237,7 +256,8 @@ class Game {
     this.timer.stopTimer(); // todo
 
     // dead button
-    $(gameButton).toggleClass('btn-smiley btn-dead');
+    $(gameButton).removeClass('btn-smiley');
+    $(gameButton).addClass('btn-dead');
 
     // show all other bombs
     for (let i = 0; i < this.bombs; i++) {

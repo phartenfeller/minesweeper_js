@@ -19,7 +19,8 @@ const inputBombs = $('#input-bombs');
 
 const scores = $('#scores');
 const field = '.field';
+const block = '.block';
 
 
 export {doc, game, newGameButton, gameButton, gameBar, topBorder, middleBorder,
-  bottomBorder, fieldContainer, settingsContainer, scores, field};
+  bottomBorder, fieldContainer, settingsContainer, scores, field, block};

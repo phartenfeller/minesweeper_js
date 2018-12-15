@@ -1,14 +1,10 @@
-import {topBorder, middleBorder, fieldContainer, bottomBorder} from './src/js/DomObjects.js';
 import {Game} from './src/js/Game.js';
 import {DomListener} from './src/js/DomListener.js';
 
 const debug = true;
 
-const rows = 10;
-const columns = 10;
-const bombs = 10;
-
 let game;
+let domListener;
 
 // Function that runs on page load and setups game
 $( document ).ready(function() {
@@ -22,16 +18,11 @@ $( document ).ready(function() {
 function newGame() {
   if (typeof game !== 'undefined') {
     game.clearGame();
-    delete game.instance;
-    game = null;
-    console.log(game);
+    game.setupGame();
+  } else {
+    game = new Game(debug);
+    domListener = new DomListener(game);
   }
-  $(topBorder).empty();
-  $(middleBorder).empty();
-  $(fieldContainer).empty();
-  $(bottomBorder).empty();
-  game = new Game(rows, columns, bombs, debug);
-  let domListener = new DomListener(game);
 }
 
 /*

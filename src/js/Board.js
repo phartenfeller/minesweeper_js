@@ -34,7 +34,8 @@ function setBoardProperties(rows, cols) {
   $(game).css({'height': gameHeight, 'width': gameWidth});
   $(gameBar).css('width', gameBarWidth);
   $(fieldContainer).css('height', cBlockSize * rows);
-  $('#game-button').css({'margin-left': marginL, 'margin-right': marginR});
+  $(gameButton).css({'margin-left': marginL, 'margin-right': marginR});
+  $(gameButton).removeClass('btn-dead');
 }
 
 /**

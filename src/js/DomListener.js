@@ -1,4 +1,4 @@
-import {gameButton, field} from './DomObjects.js';
+import {gameButton, field, block} from './DomObjects.js';
 import {newGame} from '../../index.js';
 
 const btnSmiley = 'btn-smiley';
@@ -43,21 +43,19 @@ class DomListener {
       $(game).css('zoom', value);
     });
 
-    $(field).click(function() {
+    $(game).on('click', field, function() {
       const id = $(this).attr('id');
       const row = parseInt(id.split('-')[0]);
       const col = parseInt(id.split('-')[1]);
-      Game.fieldClicked(row, col, `#${id}`);
+      Game.blockClicked(row, col, `#${id}`);
     });
 
-    $(field).on('contextmenu', function() {
+    $(game).on('contextmenu', block, function() {
       const id = $(this).attr('id');
-      const row = parseInt(id.split('-')[0]);
-      const col = parseInt(id.split('-')[1]);
       Game.flagField(`#${id}`);
     });
 
-    $(field).mousedown(function() {
+    $(game).on('mousedown', field, function() {
       $(gameButton).removeClass(btnSmiley);
       $(gameButton).addClass(btnWow);
     });
