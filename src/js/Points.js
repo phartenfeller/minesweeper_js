@@ -13,7 +13,7 @@ class Points {
 
   addPoint() {
     this.points++;
-    const pointsArray = splitNumber(points);
+    const pointsArray = splitNumber(this.points);
 
     this.pointerClass(3, pointsArray[0]);
     this.pointerClass(2, pointsArray[1]);
@@ -26,7 +26,7 @@ class Points {
 
   removePoint() {
     this.points--;
-    const pointsArray = splitNumber(points);
+    const pointsArray = splitNumber(this.points);
 
     this.pointerClass(3, pointsArray[0]);
     this.pointerClass(2, pointsArray[1]);
