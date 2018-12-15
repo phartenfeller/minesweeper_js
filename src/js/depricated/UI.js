@@ -62,25 +62,6 @@ function resetButton() {
   }
 }
 
-function bindJquerys() {
-  const game = $('#game');
-
-  const newGameButton = $('#newgame-btn');
-  const gameButton = $('#game-button');
-
-  const topBorder = $('.top-border');
-  const middleBorder = $('.middle-border');
-  const bottomBorder = $('.bottom-border');
-
-  const fieldContainer = $('#field-container');
-  const settingsContainer = $('#settings-container');
-
-  const inputRows = $('#input-rows');
-  const inputColumns = $('#input-columns');
-  const inputBombs = $('#input-bombs');
-
-  const scores = $('#scores');
-}
 
 function setZoom() {
   documentHeight = $( document ).height();
@@ -97,7 +78,7 @@ function setZoom() {
   $('#game').css({'zoom': zoom});
 }
 
-// DisplayFunctions
+/* DisplayFunctions
 function splitNumber(number) {
   const numberArray = [];
 
@@ -110,6 +91,7 @@ function splitNumber(number) {
 
   return numberArray;
 }
+*/
 
 // Times Table
 function addTime(settings, time) {

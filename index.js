@@ -1,3 +1,4 @@
+import {topBorder, middleBorder, fieldContainer, bottomBorder} from './src/js/DomObjects.js';
 import {Game} from './src/js/Game.js';
 
 const debug = true;
@@ -6,13 +7,30 @@ const rows = 10;
 const columns = 10;
 const bombs = 10;
 
+let game;
+
 // Function that runs on page load and setups game
 $( document ).ready(function() {
   // bindJquerys();
-  const game = new Game(rows, columns, bombs, debug);
+  newGame();
   // initUIFunctions();
   // initSettingsFunctions();
 });
+
+
+function newGame() {
+  if (typeof game !== 'undefined') {
+    game.clearGame();
+    delete game.instance;
+    game = null;
+    console.log(game);
+  }
+  $(topBorder).empty();
+  $(middleBorder).empty();
+  $(fieldContainer).empty();
+  $(bottomBorder).empty();
+  game = new Game(rows, columns, bombs, debug);
+}
 
 /*
 function newGame() {
@@ -66,3 +84,4 @@ function debugLog(message) {
 }
 */
 
+export {newGame};

@@ -1,6 +1,8 @@
 import {addPoint, removePoint} from './Points.js';
 import {Bomb} from './Bomb.js';
 import {setupBorad} from './Board.js';
+import {Timer} from './Timer.js';
+import {initDomListener} from './DomListener.js';
 class Game {
   /**
    * Setups a Game
@@ -23,9 +25,13 @@ class Game {
     this.bombArray = this.createBombs();
 
     this.gameWon = false;
+
     this.seconds = 0;
 
     setupBorad(this.rows, this.columns);
+    initDomListener();
+
+    this.timer = new Timer();
   }
 
   /**
@@ -118,7 +124,7 @@ class Game {
       } else {
         this.amountFields--;
         const number = this.checkSurroundings(row, col);
-        $(field).toggleClass('field f' + number + ' clicked');
+        $(field).toggleClass(`field f${number} clicked`);
         $(field).attr('data-value', number);
 
         // if zero bombs around reveal the fields around
@@ -280,6 +286,11 @@ class Game {
     if (this.debug) {
       console.log(message);
     }
+  }
+
+  clearGame() {
+    this.timer.stopTimer();
+    this.timer.setTimerToZero();
   }
 }
 

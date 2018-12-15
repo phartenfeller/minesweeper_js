@@ -1,49 +1,73 @@
-let interval;
+class Timer {
+  constructor() {
+    this.seconds = 0;
+    this.secondsArray = [];
 
-function resetTimer() {
-  seconds = 0;
-  stopTimer();
-  setTimerToZero();
-  startTimer();
-}
+    this.interval = setInterval(() => {
+      this.seconds++;
 
-function startTimer() {
-  interval = setInterval(function() {
-    seconds++;
+      if (this.seconds === 999) {
+        this.stopTimer();
+      }
 
-    if (seconds === 999) {
-      stopTimer();
+      const secondsArray = this.splitNumber(this.seconds);
+
+      this.timerClass(3, secondsArray[0]);
+      this.timerClass(2, secondsArray[1]);
+      this.timerClass(1, secondsArray[2]);
+    }, 1000);
+
+    this.startInterval = new Date();
+  }
+
+  /**
+   * Sets one digit of the ingame Timer to a value
+   * @param {number} digit
+   * @param {number} number
+   */
+  timerClass(digit, number) {
+    number = (number === undefined) ? 0 : number;
+    const timerID = `#timer-${digit}`;
+    const currentstate = parseInt($(timerID).attr('class').split('d')[2]);
+
+    if (currentstate !== number) {
+      for (let i=0; i<=9; i++) {
+        $(timerID).removeClass(`d${i}`);
+      }
+      $(timerID).addClass(`d${number}`);
+    }
+  }
+
+  setTimerToZero() {
+    this.timerClass(3, 0);
+    this.timerClass(2, 0);
+    this.timerClass(1, 0);
+  }
+
+  /**
+   * Stops the interval
+   */
+  stopTimer() {
+    clearInterval(this.interval);
+  }
+
+  /**
+   * Splits each digit of a number to an array
+   * @param  {number} number
+   * @return {array}
+   */
+  splitNumber(number) {
+    const numberArray = [];
+
+    number = Math.abs(number);
+
+    while (number > 0) {
+      numberArray[numberArray.length] = number % 10;
+      number = parseInt(number / 10);
     }
 
-    secondsArray = splitNumber(seconds);
-
-    timerClass(3, secondsArray[0]);
-    timerClass(2, secondsArray[1]);
-    timerClass(1, secondsArray[2]);
-  }, 1000);
-}
-
-function timerClass(digit, number) {
-  number = (number === undefined) ? 0 : number;
-  timerID = '#timer-' + digit;
-
-  currentstate = parseInt($(timerID).attr('class').split('d')[2]);
-  if (currentstate !== number) {
-    for (let i=0; i<=9; i++) {
-      $(timerID).removeClass('d' + i);
-    }
-    $(timerID).addClass('d' + number);
+    return numberArray;
   }
 }
 
-function stopTimer() {
-  clearInterval(interval);
-}
-
-function setTimerToZero() {
-  timerClass(3, 0);
-  timerClass(2, 0);
-  timerClass(1, 0);
-}
-
-export {resetTimer, startTimer, timerClass, stopTimer, setTimerToZero};
+export {Timer};
