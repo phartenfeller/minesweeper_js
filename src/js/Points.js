@@ -1,51 +1,54 @@
+import {splitNumber} from './Util.js';
 
-function setupPoints() {
-  points = bombs;
+class Points {
+  constructor(bombs) {
+    this.points = bombs;
 
-  pointsArray = splitNumber(points);
+    const pointsArray = splitNumber(this.points);
 
-  pointerClass(3, pointsArray[0]);
-  pointerClass(2, pointsArray[1]);
-  pointerClass(1, pointsArray[2]);
-}
+    this.pointerClass(3, pointsArray[0]);
+    this.pointerClass(2, pointsArray[1]);
+    this.pointerClass(1, pointsArray[2]);
+  }
 
-function addPoint() {
-  points++;
-  pointsArray = splitNumber(points);
+  addPoint() {
+    this.points++;
+    const pointsArray = splitNumber(points);
 
-  pointerClass(3, pointsArray[0]);
-  pointerClass(2, pointsArray[1]);
-  pointerClass(1, pointsArray[2]);
+    this.pointerClass(3, pointsArray[0]);
+    this.pointerClass(2, pointsArray[1]);
+    this.pointerClass(1, pointsArray[2]);
 
-  if (points < 0) {
-    pointerClass(1, '-');
+    if (this.points < 0) {
+      this.pointerClass(1, '-');
+    }
+  }
+
+  removePoint() {
+    this.points--;
+    const pointsArray = splitNumber(points);
+
+    this.pointerClass(3, pointsArray[0]);
+    this.pointerClass(2, pointsArray[1]);
+    this.pointerClass(1, pointsArray[2]);
+
+    if (this.points < 0) {
+      this.pointerClass(1, '-');
+    }
+  }
+
+  pointerClass(display, number) {
+    number = (number === undefined) ? 0 : number;
+    const pointsID = `#points-${display}`;
+
+    $(pointsID).removeClass('d-');
+    for (let i = 0; i <= 9; i++) {
+      $(pointsID).removeClass(`d${i}`);
+    }
+
+    // add new class
+    $(pointsID).addClass(`d${number}`);
   }
 }
 
-function removePoint() {
-  points--;
-  pointsArray = splitNumber(points);
-
-  pointerClass(3, pointsArray[0]);
-  pointerClass(2, pointsArray[1]);
-  pointerClass(1, pointsArray[2]);
-
-  if (points < 0) {
-    pointerClass(1, '-');
-  }
-}
-
-function pointerClass(display, number) {
-  number = (number === undefined) ? 0 : number;
-  pointsID = '#points-' + display;
-
-  $(pointsID).removeClass('d-');
-  for (let i=0; i<=9; i++) {
-    $(pointsID).removeClass('d' + i);
-  }
-
-  // add new class
-  $(pointsID).addClass('d' + number);
-}
-
-export {setupPoints, addPoint, removePoint, pointerClass};
+export {Points};

@@ -1,7 +1,7 @@
-import {addPoint, removePoint} from './Points.js';
 import {Bomb} from './Bomb.js';
 import {setupBorad} from './Board.js';
 import {Timer} from './Timer.js';
+import {Points} from './Points.js';
 import {initDomListener} from './DomListener.js';
 class Game {
   /**
@@ -31,6 +31,7 @@ class Game {
     setupBorad(this.rows, this.columns);
     initDomListener();
 
+    this.pointes = new Points(this.amountBombs);
     this.timer = new Timer();
   }
 
