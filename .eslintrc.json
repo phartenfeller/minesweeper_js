@@ -14,7 +14,7 @@
     "no-invalid-this": 0,
     "max-statements": [2, 16],
     "max-depth": [2, 5],
-    "complexity": [2, 7],
+    "complexity": [2, 8],
     "max-params": [2, 4]
   }
 }
