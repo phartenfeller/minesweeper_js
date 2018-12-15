@@ -1,3 +1,5 @@
+import {splitNumber} from './Util.js';
+
 class Timer {
   constructor() {
     this.seconds = 0;
@@ -10,7 +12,7 @@ class Timer {
         this.stopTimer();
       }
 
-      const secondsArray = this.splitNumber(this.seconds);
+      const secondsArray = splitNumber(this.seconds);
 
       this.timerClass(3, secondsArray[0]);
       this.timerClass(2, secondsArray[1]);
@@ -49,24 +51,6 @@ class Timer {
    */
   stopTimer() {
     clearInterval(this.interval);
-  }
-
-  /**
-   * Splits each digit of a number to an array
-   * @param  {number} number
-   * @return {array}
-   */
-  splitNumber(number) {
-    const numberArray = [];
-
-    number = Math.abs(number);
-
-    while (number > 0) {
-      numberArray[numberArray.length] = number % 10;
-      number = parseInt(number / 10);
-    }
-
-    return numberArray;
   }
 }
 
