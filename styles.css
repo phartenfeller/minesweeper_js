@@ -5,6 +5,10 @@
   height: 222px;
 }
 
+.row {
+  display: inline-block;
+}
+
 .block {
   height: 16px;
   width: 16px;
