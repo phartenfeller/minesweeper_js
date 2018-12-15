@@ -1,5 +1,6 @@
 import {topBorder, middleBorder, fieldContainer, bottomBorder} from './src/js/DomObjects.js';
 import {Game} from './src/js/Game.js';
+import {DomListener} from './src/js/DomListener.js';
 
 const debug = true;
 
@@ -30,6 +31,7 @@ function newGame() {
   $(fieldContainer).empty();
   $(bottomBorder).empty();
   game = new Game(rows, columns, bombs, debug);
+  let domListener = new DomListener(game);
 }
 
 /*
