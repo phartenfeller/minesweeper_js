@@ -177,13 +177,16 @@ class Game {
    */
   winGame() {
     if (!this.gameWon) {
+      const time = this.timer.getTime();
+      console.log('time =>', time);
+
       // show win button
       $(gameButton).toggleClass('btn-smiley btn-cool');
 
       // show not flagged bombs as flagged
       for (let i=0; i < this.bombs; i++) {
-        const row = bombArray[i].row;
-        const col = bombArray[i].col;
+        const row = this.bombArray[i].row;
+        const col = this.bombArray[i].col;
 
         const field = this.getID(row, col);
 

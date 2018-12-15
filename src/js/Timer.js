@@ -19,7 +19,7 @@ class Timer {
       this.timerClass(1, secondsArray[2]);
     }, 1000);
 
-    this.startInterval = new Date();
+    this.startTs = new Date();
   }
 
   /**
@@ -33,7 +33,7 @@ class Timer {
     const currentstate = parseInt($(timerID).attr('class').split('d')[2]);
 
     if (currentstate !== number) {
-      for (let i=0; i<=9; i++) {
+      for (let i = 0; i <= 9; i++) {
         $(timerID).removeClass(`d${i}`);
       }
       $(timerID).addClass(`d${number}`);
@@ -51,6 +51,13 @@ class Timer {
    */
   stopTimer() {
     clearInterval(this.interval);
+  }
+
+  getTime() {
+    const currTs = new Date();
+    const diff = (currTs - this.startTs) / 1000;
+
+    return diff;
   }
 }
 
