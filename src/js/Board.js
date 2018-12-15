@@ -1,4 +1,4 @@
-import {game, gameBar, fieldContainer,
+import {game, gameBar, fieldContainer, gameButton,
   topBorder, middleBorder, bottomBorder} from './DomObjects';
 
 const cBlockSize = 16;
@@ -9,7 +9,7 @@ const cBorderSize = 10;
  * @param {number} cols
  */
 function setupBorad(rows, cols) {
-  setBoardProperties();
+  setBoardProperties(rows, cols);
 
   createBorder(cols, topBorder, 't');
   setupBlocks(rows, cols);
@@ -27,11 +27,14 @@ function setBoardProperties(rows, cols) {
   const gameHeight = cBlockSize * rows + 3 * cBorderSize + 32;
   const gameWidth = cBlockSize * cols + 2 * cBorderSize;
   const gameBarWidth = cBlockSize * cols + 2 *cBorderSize;
+  const marginL = cBlockSize * cols / 2 - 13 - 49;
+  const marginR = cBlockSize * cols / 2 - 13 - 49;
 
   $(game).css('zoom', 3);
   $(game).css({'height': gameHeight, 'width': gameWidth});
   $(gameBar).css('width', gameBarWidth);
   $(fieldContainer).css('height', cBlockSize * rows);
+  $('#game-button').css({'margin-left': marginL, 'margin-right': marginR});
 }
 
 /**
@@ -75,30 +78,5 @@ function createBorder(cols, id, letter) {
   }
   $(id).append(`<div class="border-${letter}r"></div>`);
 }
-
-/*
-function createTopBorder() {
-  $(topBorder).append('<div class="border-tl"></div>');
-  for (i = 1; i <= columns; i++) {
-    $(topBorder).append('<div class="border-horizontal"></div>');
-  }
-  $(topBorder).append('<div class="border-tr"></div>');
-}
-
-function createMiddleBorder() {
-  $(middleBorder).append('<div class="border-il"></div>');
-  for (i = 1; i <= columns; i++) {
-    $(middleBorder).append('<div class="border-horizontal"></div>');
-  }
-  $(middleBorder).append('<div class="border-ir"></div>');
-}
-
-function createBottomBorder() {
-  $(bottomBorder).append('<div class="border-bl"></div>');
-  for (i = 1; i <= columns; i++) {
-    $(bottomBorder).append('<div class="border-horizontal"></div>');
-  }
-  $(bottomBorder).append('<div class="border-br"></div>');
-*/
 
 export {setupBorad};
