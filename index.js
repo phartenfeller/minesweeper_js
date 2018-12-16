@@ -14,7 +14,9 @@ $( document ).ready(function() {
   // initSettingsFunctions();
 });
 
-
+/**
+ * Function to start a new Game
+ */
 function newGame() {
   if (typeof game !== 'undefined') {
     game.clearGame();

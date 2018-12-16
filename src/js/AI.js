@@ -1,24 +1,30 @@
 import {getID} from './Util.js';
 
-let flags = 0;
-let surroundIDs = [];
 let changes = 0;
 let iterations = 0;
 
 class AI {
+  /**
+   * AI construnctor
+   * @param {Game} Game
+   */
   constructor(Game) {
     this.Game = Game;
   }
 
+  /**
+   * Function which starts the AI Process
+   */
   startAI() {
     iterations = 0;
     changes = 0;
 
     console.log('start AI');
 
-    while (!this.Game.gameWon && iterations < this.Game.rows * this.Game.columns) {
+    while ( !this.Game.gameWon
+            && iterations < this.Game.rows * this.Game.columns) {
       if (points === 0) {
-        this.clickAllTiles();
+        this.clickAllBlocks();
       } else if (changes === 0) {
         this.randomClick();
       } else {
@@ -30,12 +36,18 @@ class AI {
     }
   }
 
-  clickAllTiles() {
+  /**
+   * Clicks all Blocks
+   */
+  clickAllBlocks() {
     $('.field').each(function() {
       $(this).click();
     });
   }
 
+  /**
+   * Clicks a random Block
+   */
   randomClick() {
     const unclickedIDs = [];
 
@@ -43,7 +55,8 @@ class AI {
       unclickedIDs.push('#' + $(this).attr('id'));
     });
 
-    const randomElement = unclickedIDs[Math.floor(Math.random()*unclickedIDs.length)];
+    const randomID = Math.floor(Math.random() * unclickedIDs.length);
+    const randomElement = unclickedIDs[randomID];
 
     console.log('random click: ', randomElement);
 
@@ -56,15 +69,15 @@ class AI {
     const AI = this;
 
     $('.clicked').each(function() {
-      const number = parseInt($(this).attr('data-value'));
+      const number = parseInt($(this).data('value'));
 
       if (number > 0) {
         const id = $(this).attr('id');
         const row = parseInt(id.split('-')[0]);
         const col = parseInt(id.split('-')[1]);
 
-        AI.countUnclickedFieldsAround(row, col);
-        AI.countFlagsAround(row, col);
+        const surroundIDs = AI.countUnclickedBlocksAround(row, col);
+        const flags = AI.countFlagsAround(row, col);
 
         if (surroundIDs.length === number && surroundIDs.length > 0) {
           flagArray(surroundIDs);
@@ -77,8 +90,14 @@ class AI {
     });
   }
 
-  countUnclickedFieldsAround(row, col) {
-    surroundIDs = [];
+  /**
+   * Counts how many Blocks around a speficic Block are unclicked
+   * @param  {number} row
+   * @param  {number} col
+   * @return {array}
+   */
+  countUnclickedBlocksAround(row, col) {
+    const surroundIDs = [];
 
     this.checkClicked(row-1, col-1);
     this.checkClicked(row-1, col);
@@ -90,38 +109,63 @@ class AI {
 
     this.checkClicked(row, col-1);
     this.checkClicked(row, col+1);
+
+    return surroundIDs;
   }
 
+  /**
+   * Counts how many Flags are around a specific Block
+   * @param  {number} row
+   * @param  {number} col
+   * @return {number} flags
+   */
   countFlagsAround(row, col) {
-    flags = 0;
+    let flags = 0;
 
-    this.checkFlag(row-1, col-1);
-    this.checkFlag(row-1, col);
-    this.checkFlag(row-1, col+1);
+    flags = this.checkFlag(row-1, col-1, flags);
+    flags = this.checkFlag(row-1, col, flags);
+    flags = this.checkFlag(row-1, col+1, flags);
 
-    this.checkFlag(row+1, col-1);
-    this.checkFlag(row+1, col);
-    this.checkFlag(row+1, col+1);
+    flags = this.checkFlag(row+1, col-1, flags);
+    flags = this.checkFlag(row+1, col, flags);
+    flags = this.checkFlag(row+1, col+1, flags);
 
-    this.checkFlag(row, col-1);
-    this.checkFlag(row, col+1);
+    flags =this.checkFlag(row, col-1, flags);
+    flags =this.checkFlag(row, col+1, flags);
+
+    return flags;
   }
 
-  checkClicked(row, col) {
+  /**
+   * Returns 
+   * @param  {number} row
+   * @param  {number} col
+   * @return {id}
+   */
+  checkClicked(row, col, surroundIDs) {
     const id = getID(row, col);
 
     if ($(id).hasClass('tile')) {
-      surroundIDs.push(getID(row, col));
+      surroundIDs.pu
     }
   }
 
-  checkFlag(row, col) {
+  /**
+   * Adds flag counter if blokc has a flag
+   * @param  {number} row 
+   * @param  {number} col 
+   * @param  {number} flags
+   * @return {number}
+   */
+  checkFlag(row, col, flags) {
     const id = getID(row, col);
 
     if ($(id).hasClass('block') &&
         $(id).hasClass('flag')) {
       flags++;
     }
+
+    return flags;
   }
 
   flagArray(surroundIDs) {
