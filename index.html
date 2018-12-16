@@ -1,7 +1,8 @@
 <html>
   <head>
     <title>Minesweeper</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="src\css\minesweeper.css">
+    <link rel="stylesheet" type="text/css" href="src\css\ui.css">
     <script src="libraries/jquery-3.3.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
@@ -26,10 +27,6 @@
       <div class="middle-border" style="height:10px"></div>
       <div id="field-container"></div>
       <div class="bottom-border" style="height:10px"></div>
-      <div>
-        <button><span>Settings</span></button>
-        <button onclick="startAI()"><span>AI</span></button>
-      </div>
     </div>
     <div id="settings-container" class="settings-container">
       <h2 class="heading">Settings</h2>
@@ -42,10 +39,16 @@
       </div>
       <hr>
       <h4 class="sub-heading">Game Settings</h4>
-      <div>Rows:<input id="input-rows" type="number" min="8" value="10"></div>
-      <div>Columns:<input id="input-columns" type="number" min="8" value="10"></div>
-      <div>Bombs:<input id="input-bombs" type="number" min="2" value="10"></div>
-      <button id="newgame-btn" class="material-btn"><span>New Game</span></button>
+      <div>
+        <div>Rows:<input id="input-rows" type="number" min="8" value="10"></div>
+        <div>Columns:<input id="input-columns" type="number" min="8" value="10"></div>
+        <div>Bombs:<input id="input-bombs" type="number" min="2" value="10"></div>
+      </div>
+      <hr>
+      <div style="text-align:center;">
+        <button id="AI" class="round-btn btn-white">AI</button>
+        <button id="newgame-btn" class="round-btn btn-blue">New Game</button>
+      </div>
     </div>
       <table id="scores" class="scores hidden">
         <tr>
