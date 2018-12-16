@@ -8,7 +8,15 @@
     "es6": true
   },
   "rules": {
-    "require-jsdoc" : 0,
+    "require-jsdoc": ["error", {
+      "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": false,
+          "ArrowFunctionExpression": false,
+          "FunctionExpression": false
+      }
+    }],
     "arrow-parens": 0,
     "linebreak-style": 0,
     "no-invalid-this": 0,
