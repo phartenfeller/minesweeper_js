@@ -4,6 +4,7 @@ import {Timer} from './Timer.js';
 import {Points} from './Points.js';
 import {gameButton, topBorder, middleBorder,
   fieldContainer, bottomBorder} from './DomObjects.js';
+import {getID} from './Util.js';
 class Game {
   /**
    * Setups a Game
@@ -119,7 +120,7 @@ class Game {
    * @param {id}     field
    */
   blockClicked(row, col, field = '') {
-    field === '' ? field = this.getID(row, col) : field;
+    field === '' ? field = getID(row, col) : field;
 
     // skip if field is not on gamefield
     if (row < 1 || row > this.rows || col < 1 || col > this.columns) {
@@ -207,7 +208,7 @@ class Game {
         const row = this.bombArray[i].row;
         const col = this.bombArray[i].col;
 
-        const field = this.getID(row, col);
+        const field = getID(row, col);
 
         if (!$(field).hasClass('flag')) {
           this.flagField($(field));
@@ -262,19 +263,24 @@ class Game {
     // show all other bombs
     for (let i = 0; i < this.bombs; i++) {
       if (this.bombArray[i].row !== row || this.bombArray[i].col !== col) {
-        const id = this.getID(this.bombArray[i].row, this.bombArray[i].col);
+        const id = getID(this.bombArray[i].row, this.bombArray[i].col);
         $(id).toggleClass('field bomb');
       }
     }
 
+    // set context for each function below
+    const game = this;
+
     // check if all flagged fields are really bombs
     $('.flag').each(function() {
-      const id = '#' + $(this).attr('id');
+      let id = $(this).attr('id');
+      console.log('id =>', id);
       const row = parseInt(id.split('-')[0]);
       const col = parseInt(id.split('-')[1]);
+      id = '#' + id;
 
       // if no bomb
-      if (this.checkNoBomb(row, col)) {
+      if (game.checkNoBomb(row, col)) {
         $(id).toggleClass('flag no-bomb');
       }
     });
@@ -282,20 +288,10 @@ class Game {
     // lock all fields
     for (let r = 1; r <= this.rows; r++) {
       for (let c = 1; c <= this.columns; c++) {
-        const id = this.getID(r, c);
+        const id = getID(r, c);
         $(id).addClass('clicked');
       }
     }
-  }
-
-  /**
-   * returns the id corresponding to row and col
-   * @param  {number} row
-   * @param  {number} col
-   * @return {id}
-   */
-  getID(row, col) {
-    return '#' + row + '-' + col;
   }
 
   /**

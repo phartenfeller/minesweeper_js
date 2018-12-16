@@ -1,10 +1,10 @@
 import {Game} from './src/js/Game.js';
 import {DomListener} from './src/js/DomListener.js';
+import {AI} from './src/js/AI.js';
 
 const debug = true;
 
 let game;
-let domListener;
 
 // Function that runs on page load and setups game
 $( document ).ready(function() {
@@ -21,60 +21,19 @@ function newGame() {
     game.setupGame();
   } else {
     game = new Game(debug);
-    domListener = new DomListener(game);
+    new DomListener(game);
+
+    /* AI Specific Code */
+    const ai = new AI(game);
+
+    $('#AI').click(function() {
+      ai.startAI();
+    });
   }
 }
 
-/*
-function newGame() {
-  createField();
-  setZoom();
-  createBombs();
-  setupPoints();
-  initFieldFunctions();
-  setAmountFields();
-  resetButton();
-  gameWon = false;
-  resetTimer();
-}
-
-function deleteGame() {
-  $(topBorder).empty();
-  $(middleBorder).empty();
-  $(fieldContainer).empty();
-  $(bottomBorder).empty();
-}
-
-function resetGame() {
-  deleteGame();
-  rows = parseInt($(inputRows).val());
-  columns = parseInt($(inputColumns).val());
-  bombs = parseInt($(inputBombs).val());
-
-  if (rows < 8) {
-    rows = 8;
-    $(inputRows).val(8);
-  }
-
-  if (columns < 8) {
-    columns = 8;
-    $(inputColumns).val(8);
-  }
-
-  if (bombs < 1) {
-    bombs = 1;
-    $(inputBombs).val(1);
-  }
-
+$('#newgame-btn').click(function() {
   newGame();
-}
-
-// Debug Log
-function debugLog(message) {
-  if (debug) {
-    console.log(message);
-  }
-}
-*/
+});
 
 export {newGame};

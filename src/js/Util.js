@@ -16,4 +16,14 @@ function splitNumber(number) {
   return numberArray;
 }
 
-export {splitNumber};
+/**
+ * returns the id corresponding to row and col
+ * @param  {number} row
+ * @param  {number} col
+ * @return {id}
+ */
+function getID(row, col) {
+  return '#' + row + '-' + col;
+}
+
+export {splitNumber, getID};
