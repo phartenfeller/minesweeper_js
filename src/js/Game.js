@@ -1,9 +1,8 @@
 import {Bomb} from './Bomb.js';
-import {setupBorad} from './Board.js';
+import {setupBorad, createBoardArray, clearBorad} from './Board.js';
 import {Timer} from './Timer.js';
 import {Points} from './Points.js';
-import {gameButton, topBorder, middleBorder,
-  fieldContainer, bottomBorder} from './DomObjects.js';
+import {gameButton} from './DomObjects.js';
 import {getID} from './Util.js';
 class Game {
   /**
@@ -23,11 +22,11 @@ class Game {
     this.setupGame();
   }
 
+  /**
+   * Setups the game
+   */
   setupGame() {
-    $(topBorder).empty();
-    $(middleBorder).empty();
-    $(fieldContainer).empty();
-    $(bottomBorder).empty();
+    clearBorad();
 
     const inputRows = parseInt($('#input-rows').val());
     const inputCols = parseInt($('#input-columns').val());
@@ -39,6 +38,8 @@ class Game {
 
     this.amountFields = this.rows * this.columns - this.bombs;
     this.bombArray = this.createBombs();
+    this.boardArray = createBoardArray(this.rows, this.columns, this.bombArray);
+    console.log('boardArray =>', this.boardArray);
     this.gameWon = false;
 
     setupBorad(this.rows, this.columns);
@@ -61,8 +62,8 @@ class Game {
       let randCol;
       // Generate random Bombs and check if they are unique
       while (!uniqueBomb) {
-        randRow = Math.floor(Math.random() * this.rows) + 1;
-        randCol = Math.floor(Math.random() * this.columns) + 1;
+        randRow = Math.floor(Math.random() * this.rows);
+        randCol = Math.floor(Math.random() * this.columns);
 
         if (this.checkNoBomb(randRow, randCol, bombArray)) {
           uniqueBomb = true;

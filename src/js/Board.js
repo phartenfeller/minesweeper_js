@@ -1,6 +1,10 @@
 import {game, gameBar, fieldContainer, gameButton,
   topBorder, middleBorder, bottomBorder} from './DomObjects';
 
+const cBlock = 0;
+const cBomb = 'b';
+const cFlag = 'f';
+
 const cBlockSize = 16;
 const cBorderSize = 10;
 /**
@@ -52,7 +56,7 @@ function resetGameButton() {
 function setupBlocks(rows, cols) {
   console.log(cols);
 
-  for (let i = 1; i <= rows; i++) {
+  for (let i = 0; i < rows; i++) {
     // create row div
     $(fieldContainer).append(`<div class="row" id="r${i}"></div>`);
     const rowid = '#r' + i;
@@ -61,9 +65,9 @@ function setupBlocks(rows, cols) {
     $(rowid).append('<div class="border-vertical"></div>');
 
     // blocks loop
-    for (let j = 1; j <= cols; j++) {
+    for (let j = 0; j < cols; j++) {
       // block
-      const div = '<div id="' + i + '-' + j +'" class="block field"></div>';
+      const div = `<div id="${i}-${j}" class="block field"></div>`;
       $(rowid).append(div);
     }
 
@@ -86,4 +90,45 @@ function createBorder(cols, id, letter) {
   $(id).append(`<div class="border-${letter}r"></div>`);
 }
 
-export {setupBorad};
+/**
+ * Creates a two dimensional array of the board
+ * @param  {number} rows
+ * @param  {number} cols
+ * @param  {array}  bombsArray
+ * @return {array}  board array
+ */
+function createBoardArray(rows, cols, bombsArray) {
+  const boardArray = [];
+
+  console.log(cols);
+
+  for (let r = 0; r < rows; r++) {
+    boardArray[r] = [];
+    for (let c = 0; c < cols; c++) {
+      boardArray[r][c] = cBlock;
+    }
+  }
+
+  console.log(boardArray);
+
+  for (let i = 0; i < bombsArray.length; i++) {
+    const row = bombsArray[i].row;
+    const col = bombsArray[i].col;
+    boardArray[row][col] = cBomb;
+  }
+
+  return boardArray;
+}
+
+/**
+ * Clears all Dom elements which are dependet of board size
+ * to generate them again on a new game
+ */
+function clearBorad() {
+  $(topBorder).empty();
+  $(middleBorder).empty();
+  $(fieldContainer).empty();
+  $(bottomBorder).empty();
+}
+
+export {cBlock, cBomb, cFlag, setupBorad, createBoardArray, clearBorad};
