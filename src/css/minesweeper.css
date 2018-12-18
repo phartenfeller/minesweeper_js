@@ -1,0 +1,254 @@
+#game {
+  background-color: #c0c0c0;
+  float: left;
+  width: 180px;
+  height: 222px;
+}
+
+.row {
+  display: inline-block;
+}
+
+.block {
+  height: 16px;
+  width: 16px;
+  float: left;
+}
+
+.img {
+  image-rendering: pixelated;
+}
+
+.field {
+  background-image:  url(../../sprites/blank.png);
+}
+
+.field:hover {
+  background-image:  url(../../sprites/blank-hover.png);
+}
+
+.bomb{
+  background-image:  url(../../sprites/bomb-grey.png);
+}
+
+.bomb-red{
+  background-image:  url(../../sprites/bomb-red.png);
+}
+
+.f0 {
+  background-image:  url(../../sprites/0.png);
+}
+
+.f1 {
+  background-image:  url(../../sprites/1.png);
+}
+
+.f2 {
+  background-image:  url(../../sprites/2.png);
+}
+
+.f3 {
+  background-image:  url(../../sprites/3.png);
+}
+
+.f4 {
+  background-image:  url(../../sprites/4.png);
+}
+
+.f5 {
+  background-image:  url(../../sprites/5.png);
+}
+
+.f6 {
+  background-image:  url(../../sprites/6.png);
+}
+
+.f7 {
+  background-image:  url(../../sprites/7.png);
+}
+
+.f8 {
+  background-image:  url(../../sprites/8.png);
+}
+
+.clicked {
+  pointer-events: none;
+}
+
+.flag {
+  background-image:  url(../../sprites/flag.png);  
+}
+
+.no-bomb {
+  background-image:  url(../../sprites/no-bomb.png);
+}
+
+.digit {
+  float: left;
+  height: 23px;
+  width: 13px;
+}
+
+.d0 {
+  background-image:  url(../../sprites/d0.png);
+}
+
+.d1 {
+  background-image:  url(../../sprites/d1.png);
+}
+
+.d2 {
+  background-image:  url(../../sprites/d2.png);
+}
+
+.d3 {
+  background-image:  url(../../sprites/d3.png);
+}
+
+.d4 {
+  background-image:  url(../../sprites/d4.png);
+}
+
+.d5 {
+  background-image:  url(../../sprites/d5.png);
+}
+
+.d6 {
+  background-image:  url(../../sprites/d6.png);
+}
+
+.d7 {
+  background-image:  url(../../sprites/d7.png);
+}
+
+.d8 {
+  background-image:  url(../../sprites/d8.png);
+}
+
+.d9 {
+  background-image:  url(../../sprites/d9.png);
+}
+
+.d- {
+  background-image:  url(../../sprites/d-minus.png);
+}
+
+.display {
+  width: 39px;
+  height: 23px;
+  background-image:  url(../../sprites/d-blank.png);
+  background-repeat: repeat;
+  margin-top: 4px;
+  margin-bottom: 5px;
+}
+
+.timer {
+  float: left;
+  margin-right: 10px;
+}
+
+.points {
+  float: left;
+  margin-left: 10px;
+}
+
+.gamebar {
+  height: 32px;
+  background-color: #c0c0c0;
+}
+
+.border-vertical {
+  height: 16px;
+  width: 10px;
+  background-image:  url(../../sprites/border-vertical.png);
+  float: left;
+}
+
+.border-vertical-32 {
+  height: 32px;
+  width: 10px;
+  background-image:  url(../../sprites/border-vertical.png);
+  background-repeat: repeat;
+  float: left;
+}
+
+.border-horizontal {
+  width: 16px;
+  height: 10px;
+  background-image:  url(../../sprites/border-horizontal.png);
+  float: left;
+}
+
+.border-bl {
+  width: 10px;
+  height: 10px;
+  background-image:  url(../../sprites/border-bl.png);
+  float: left;
+}
+
+.border-br {
+  width: 10px;
+  height: 10px;
+  background-image:  url(../../sprites/border-br.png);
+  float: left;
+}
+
+.border-tl {
+  width: 10px;
+  height: 10px;
+  background-image:  url(../../sprites/border-tl.png);
+  float: left;
+}
+
+.border-tr {
+  width: 10px;
+  height: 10px;
+  background-image:  url(../../sprites/border-tr.png);
+  float: left;
+}
+
+.border-il {
+  width: 10px;
+  height: 10px;
+  background-image:  url(../../sprites/border-il.png);
+  float: left;
+}
+
+.border-ir {
+  width: 10px;
+  height: 10px;
+  background-image:  url(../../sprites/border-ir.png);
+  float: right;
+}
+
+.top-border {
+  height: 10px;
+}
+
+.btn {
+  width: 26px;
+  height: 26px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  float: left;
+}
+
+.btn-smiley {
+  background-image:  url(../../sprites/btn-smiley.png);
+}
+
+.btn-wow {
+  background-image:  url(../../sprites/btn-wow.png);
+}
+
+.btn-dead {
+  background-image:  url(../../sprites/btn-dead.png);
+}
+
+.btn-cool {
+  background-image:  url(../../sprites/btn-cool.png);
+}
+
+.btn-click {
+  background-image:  url(../../sprites/btn-click.png);
+}
