@@ -65,6 +65,9 @@ class AI {
     changes++;
   }
 
+  /**
+   * Loop through all clicked blocks
+   */
   goThroughClicked() {
     const AI = this;
 
@@ -84,7 +87,7 @@ class AI {
           console.log('flag array:', surroundIDs.length, number);
           changes++;
         } else if (flags === number && flags !== 0) {
-          clickTilesAround(row, col);
+          clickBlocksAround(row, col);
         }
       }
     });
@@ -146,7 +149,7 @@ class AI {
     const id = getID(row, col);
 
     if ($(id).hasClass('tile')) {
-      surroundIDs.pu;
+      surroundIDs.push(getID(row, col));
     }
   }
 
@@ -168,19 +171,32 @@ class AI {
     return flags;
   }
 
+  /**
+   * Flags each id in array
+   * @param {array} surroundIDs
+   */
   flagArray(surroundIDs) {
     surroundIDs.forEach(element => {
       flag(element);
     });
   }
 
+  /**
+   * Flags a block
+   * @param {id} id
+   */
   flag(id) {
     if (!$(id).hasClass('flag')) {
       flagField($(id));
     }
   }
 
-  clickTile(row, col) {
+  /**
+   * Clicks a field
+   * @param {number} row
+   * @param {number} col
+   */
+  clickBlock(row, col) {
     const id = getID(row, col);
 
     if ($(id).hasClass('block')
@@ -192,17 +208,22 @@ class AI {
     }
   }
 
-  clickTilesAround(row, col) {
-    clickTile(row-1, col-1);
-    clickTile(row-1, col);
-    clickTile(row-1, col+1);
+  /**
+   * Clicks all blocks around a block
+   * @param {number} row
+   * @param {number} col
+   */
+  clickBlocksAround(row, col) {
+    clickBlock(row-1, col-1);
+    clickBlock(row-1, col);
+    clickBlock(row-1, col+1);
 
-    clickTile(row+1, col-1);
-    clickTile(row+1, col);
-    clickTile(row+1, col+1);
+    clickBlock(row+1, col-1);
+    clickBlock(row+1, col);
+    clickBlock(row+1, col+1);
 
-    clickTile(row, col-1);
-    clickTile(row, col+1);
+    clickBlock(row, col-1);
+    clickBlock(row, col+1);
   }
 }
 
