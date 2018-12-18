@@ -69,7 +69,7 @@ class Game {
         randRow = Math.floor(Math.random() * this.rows);
         randCol = Math.floor(Math.random() * this.columns);
 
-        if (this.checkNoBomb(randRow, randCol, bombsArray)) {
+        if (!bombsArray.some(bomb => bomb.row === randRow && bomb.col === randCol)) {
           uniqueBomb = true;
         }
       }
@@ -158,12 +158,9 @@ class Game {
    * Returns true if field is no bomb
    * @param  {number}  row
    * @param  {number}  col
-   * @param  {array}   bombsArray
    * @return {boolean} true = no bomb, false = bomb
    */
-  checkNoBomb(row, col, bombsArray = this.bombsArray) {
-    const bombs = bombsArray.length;
-
+  checkNoBomb(row, col) {
     // Error handling
     if (isNaN(row)) {
       const error = new Error('Row is NaN');
@@ -175,12 +172,11 @@ class Game {
       throw error;
     }
 
-    for (let i = 0; i < bombs; i++) {
-      if (bombsArray[i].row === row && bombsArray[i].col === col) {
-        return false;
-      }
+    if (this.boardArray[row][col] === cBomb) {
+      return false;
+    } else {
+      return true;
     }
-    return true;
   }
 
   /**
