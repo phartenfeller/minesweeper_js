@@ -139,11 +139,12 @@ class AI {
     return flags;
   }
 
+
   /**
-   * Returns
-   * @param  {number} row
-   * @param  {number} col
-   * @return {id}
+   * I dont know actually
+   * @param {number} row
+   * @param {number} col
+   * @param {array} surroundIDs
    */
   checkClicked(row, col, surroundIDs) {
     const id = getID(row, col);
