@@ -137,7 +137,7 @@ class AI {
   }
 
   /**
-   * Returns 
+   * Returns
    * @param  {number} row
    * @param  {number} col
    * @return {id}
@@ -146,14 +146,14 @@ class AI {
     const id = getID(row, col);
 
     if ($(id).hasClass('tile')) {
-      surroundIDs.pu
+      surroundIDs.pu;
     }
   }
 
   /**
    * Adds flag counter if blokc has a flag
-   * @param  {number} row 
-   * @param  {number} col 
+   * @param  {number} row
+   * @param  {number} col
    * @param  {number} flags
    * @return {number}
    */

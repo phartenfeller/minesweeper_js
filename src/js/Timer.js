@@ -1,6 +1,9 @@
 import {splitNumber} from './Util.js';
 
 class Timer {
+  /**
+   * Constructor
+   */
   constructor() {
     this.seconds = 0;
     this.secondsArray = [];
@@ -40,6 +43,9 @@ class Timer {
     }
   }
 
+  /**
+   * Resets the timer
+   */
   setTimerToZero() {
     this.timerClass(3, 0);
     this.timerClass(2, 0);
@@ -53,7 +59,11 @@ class Timer {
     clearInterval(this.interval);
   }
 
-  getTime() {
+  /**
+   * Gets the time needed to finish for a win
+   * @return {number}
+   */
+  getFinishTime() {
     const currTs = new Date();
     const diff = (currTs - this.startTs) / 1000;
 

@@ -8,6 +8,10 @@ const btnWow = 'btn-wow';
 let Game;
 
 class DomListener {
+  /**
+   * Constructor
+   * @param {Game} game
+   */
   constructor(game) {
     Game = game;
 
@@ -15,6 +19,9 @@ class DomListener {
     this.initDomListener();
   }
 
+  /**
+   * Initialistion Function
+   */
   initDomListener() {
     console.log('init');
 

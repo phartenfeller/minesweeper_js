@@ -5,9 +5,7 @@ import {Points} from './Points.js';
 import {gameButton} from './DomObjects.js';
 import {getID} from './Util.js';
 
-const cBlock = 0;
 const cBomb = 'b';
-const cFlag = 'f';
 class Game {
   /**
    * Setups a Game
@@ -100,7 +98,7 @@ class Game {
     for (let r = 0; r < this.rows; r++) {
       boardArray[r] = [];
       for (let c = 0; c < this.columns; c++) {
-        boardArray[r][c] = cBlock;
+        boardArray[r][c] = 0;
       }
     }
 
@@ -205,6 +203,13 @@ class Game {
     }
   }
 
+
+  /**
+   * Clicked on a field
+   * @param {number} row
+   * @param {number} col
+   * @param {id}     field
+   */
   fieldClicked(row, col, field) {
     this.amountFields--;
     const number = this.boardArray[row][col];
@@ -264,7 +269,7 @@ class Game {
    */
   winGame() {
     if (!this.gameWon) {
-      const time = this.timer.getTime();
+      const time = this.timer.getFinishTime();
       console.log('time =>', time);
 
       // show win button
@@ -371,6 +376,9 @@ class Game {
     }
   }
 
+  /**
+   * clears old Game data
+   */
   clearGame() {
     this.timer.stopTimer();
     this.timer.setTimerToZero();

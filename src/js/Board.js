@@ -40,6 +40,9 @@ function setBoardProperties(rows, cols) {
   resetGameButton();
 }
 
+/**
+ * Resets state of Game button from old game
+ */
 function resetGameButton() {
   $(gameButton).removeClass('btn-dead');
   $(gameButton).removeClass('btn-cool');
