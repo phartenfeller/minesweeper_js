@@ -98,7 +98,7 @@ function createBorder(cols, id, letter) {
  * @return {array}  board array
  */
 function createBoardArray(rows, cols, bombsArray) {
-  const boardArray = [];
+  let boardArray = [];
 
   console.log(cols);
 
@@ -109,12 +109,55 @@ function createBoardArray(rows, cols, bombsArray) {
     }
   }
 
-  console.log(boardArray);
 
   for (let i = 0; i < bombsArray.length; i++) {
     const row = bombsArray[i].row;
     const col = bombsArray[i].col;
     boardArray[row][col] = cBomb;
+    boardArray = counterUpAround(rows, cols, row, col, boardArray);
+  }
+
+  return boardArray;
+}
+
+/**
+ * Calls to count up all fields around a block
+ * @param  {number} boardRows
+ * @param  {number} boardCols
+ * @param  {number} row
+ * @param  {number} col
+ * @param  {array}  boardArray
+ * @return {array}  boardArray
+ */
+function counterUpAround(boardRows, boardCols, row, col, boardArray) {
+  boardArray = counterUp(boardRows, boardCols, row+1, col-1, boardArray);
+  boardArray = counterUp(boardRows, boardCols, row+1, col, boardArray);
+  boardArray = counterUp(boardRows, boardCols, row+1, col+1, boardArray);
+
+  boardArray = counterUp(boardRows, boardCols, row, col-1, boardArray);
+  boardArray = counterUp(boardRows, boardCols, row, col+1, boardArray);
+
+  boardArray = counterUp(boardRows, boardCols, row-1, col-1, boardArray);
+  boardArray = counterUp(boardRows, boardCols, row-1, col, boardArray);
+  boardArray = counterUp(boardRows, boardCols, row-1, col+1, boardArray);
+
+  return boardArray;
+}
+
+/**
+ * Counts up a value in the bomb Array
+ * @param  {number} boardRows
+ * @param  {number} boardCols
+ * @param  {number} row
+ * @param  {number} col
+ * @param  {array}  boardArray
+ * @return {array}  boardArray
+ */
+function counterUp(boardRows, boardCols, row, col, boardArray) {
+  if ( row >= 0 && row < boardRows &&
+       col >= 0 && col < boardCols &&
+       typeof boardArray[row][col] === 'number') {
+    boardArray[row][col] = boardArray[row][col] + 1;
   }
 
   return boardArray;
