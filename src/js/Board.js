@@ -1,12 +1,9 @@
 import {game, gameBar, fieldContainer, gameButton,
   topBorder, middleBorder, bottomBorder} from './DomObjects';
 
-const cBlock = 0;
-const cBomb = 'b';
-const cFlag = 'f';
-
 const cBlockSize = 16;
 const cBorderSize = 10;
+
 /**
  * setups the board
  * @param {number} rows
@@ -54,8 +51,6 @@ function resetGameButton() {
  * @param {number} cols
  */
 function setupBlocks(rows, cols) {
-  console.log(cols);
-
   for (let i = 0; i < rows; i++) {
     // create row div
     $(fieldContainer).append(`<div class="row" id="r${i}"></div>`);
@@ -90,78 +85,6 @@ function createBorder(cols, id, letter) {
   $(id).append(`<div class="border-${letter}r"></div>`);
 }
 
-/**
- * Creates a two dimensional array of the board
- * @param  {number} rows
- * @param  {number} cols
- * @param  {array}  bombsArray
- * @return {array}  board array
- */
-function createBoardArray(rows, cols, bombsArray) {
-  let boardArray = [];
-
-  console.log(cols);
-
-  for (let r = 0; r < rows; r++) {
-    boardArray[r] = [];
-    for (let c = 0; c < cols; c++) {
-      boardArray[r][c] = cBlock;
-    }
-  }
-
-
-  for (let i = 0; i < bombsArray.length; i++) {
-    const row = bombsArray[i].row;
-    const col = bombsArray[i].col;
-    boardArray[row][col] = cBomb;
-    boardArray = counterUpAround(rows, cols, row, col, boardArray);
-  }
-
-  return boardArray;
-}
-
-/**
- * Calls to count up all fields around a block
- * @param  {number} boardRows
- * @param  {number} boardCols
- * @param  {number} row
- * @param  {number} col
- * @param  {array}  boardArray
- * @return {array}  boardArray
- */
-function counterUpAround(boardRows, boardCols, row, col, boardArray) {
-  boardArray = counterUp(boardRows, boardCols, row+1, col-1, boardArray);
-  boardArray = counterUp(boardRows, boardCols, row+1, col, boardArray);
-  boardArray = counterUp(boardRows, boardCols, row+1, col+1, boardArray);
-
-  boardArray = counterUp(boardRows, boardCols, row, col-1, boardArray);
-  boardArray = counterUp(boardRows, boardCols, row, col+1, boardArray);
-
-  boardArray = counterUp(boardRows, boardCols, row-1, col-1, boardArray);
-  boardArray = counterUp(boardRows, boardCols, row-1, col, boardArray);
-  boardArray = counterUp(boardRows, boardCols, row-1, col+1, boardArray);
-
-  return boardArray;
-}
-
-/**
- * Counts up a value in the bomb Array
- * @param  {number} boardRows
- * @param  {number} boardCols
- * @param  {number} row
- * @param  {number} col
- * @param  {array}  boardArray
- * @return {array}  boardArray
- */
-function counterUp(boardRows, boardCols, row, col, boardArray) {
-  if ( row >= 0 && row < boardRows &&
-       col >= 0 && col < boardCols &&
-       typeof boardArray[row][col] === 'number') {
-    boardArray[row][col] = boardArray[row][col] + 1;
-  }
-
-  return boardArray;
-}
 
 /**
  * Clears all Dom elements which are dependet of board size
@@ -174,4 +97,4 @@ function clearBorad() {
   $(bottomBorder).empty();
 }
 
-export {cBlock, cBomb, cFlag, setupBorad, createBoardArray, clearBorad};
+export {cBlock, cBomb, cFlag, setupBorad, clearBorad};
