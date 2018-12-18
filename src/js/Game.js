@@ -4,6 +4,7 @@ import {Timer} from './Timer.js';
 import {Points} from './Points.js';
 import {gameButton} from './DomObjects.js';
 import {getID} from './Util.js';
+import {showTime} from './UI.js';
 
 const cBomb = 'b';
 class Game {
@@ -287,10 +288,10 @@ class Game {
         }
       }
 
-      const msg = this.rows + 'x' + this.columns
+      const settings = this.rows + 'x' + this.columns
                 + ', ' + this.bombs + ' Bombs ' + this.seconds;
 
-      // addTime(msg);
+      showTime(settings, time);
       this.timer.stopTimer();
     }
 
