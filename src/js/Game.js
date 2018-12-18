@@ -69,7 +69,8 @@ class Game {
         randRow = Math.floor(Math.random() * this.rows);
         randCol = Math.floor(Math.random() * this.columns);
 
-        if (!bombsArray.some(bomb => bomb.row === randRow && bomb.col === randCol)) {
+        if (!bombsArray.some(bomb => bomb.row === randRow &&
+                                     bomb.col === randCol)) {
           uniqueBomb = true;
         }
       }
@@ -189,7 +190,7 @@ class Game {
     field === '' ? field = getID(row, col) : field;
 
     // skip if field is not on gamefield
-    if (row < 1 || row > this.rows || col < 1 || col > this.columns) {
+    if (row < 0 || row >= this.rows || col < 0 || col >= this.columns) {
       return;
     }
 
@@ -206,7 +207,7 @@ class Game {
 
   fieldClicked(row, col, field) {
     this.amountFields--;
-    const number = this.checkSurroundings(row, col);
+    const number = this.boardArray[row][col];
     $(field).toggleClass(`field f${number} clicked`);
     $(field).attr('data-value', number);
 
