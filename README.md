@@ -8,9 +8,9 @@ You can play this project here: https://phartenfeller.github.io/minesweeper_js/
 
 ## Browser problems
 
-- IE: Currently not supported. I'm planning to use babel in the future to add support.
-- Edge: Doesn't support style `image-rendering: pixelated`. But with Edge changing the engine to Chromium this should be supported in the future.  Can I use Link: [https://caniuse.com/#feat=css-crisp-edges](https://caniuse.com/#feat=css-crisp-edges)
-- Firefox doesn't support css zoom. Style `transform: scale()` could be the solution. Can I use Link: [https://caniuse.com/#feat=css-zoom](https://caniuse.com/#feat=css-zoom)
+- **IE**: Currently not supported. I'm planning to use babel in the future to add support.
+- **Edge**: Doesn't support style `image-rendering: pixelated`. But with Edge changing the engine to Chromium this should be supported in the future.  Can I use Link: [https://caniuse.com/#feat=css-crisp-edges](https://caniuse.com/#feat=css-crisp-edges)
+- **Firefox** doesn't support css zoom. Style `transform: scale()` could be the solution. Can I use Link: [https://caniuse.com/#feat=css-zoom](https://caniuse.com/#feat=css-zoom)
 
 
 ## AI Concept
