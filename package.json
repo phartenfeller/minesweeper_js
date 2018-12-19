@@ -16,7 +16,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
     "build-dev": "webpack --mode=development --output-filename ./dist/bundle.js",
-    "start-dev": "webpack-dev-server --mode=development"
+    "start-dev": "webpack-dev-server --mode=development --output-filename ./dist/bundle.js"
   },
   "repository": {
     "type": "git",
