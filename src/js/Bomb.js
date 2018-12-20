@@ -10,4 +10,4 @@ class Bomb {
   }
 }
 
-export {Bomb};
+export { Bomb };

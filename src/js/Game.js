@@ -1,10 +1,10 @@
-import {Bomb} from './Bomb.js';
-import {setupBorad, clearBorad} from './Board.js';
-import {Timer} from './Timer.js';
-import {Points} from './Points.js';
-import {gameButton} from './DomObjects.js';
-import {getID} from './Util.js';
-import {showTime} from './UI.js';
+import { Bomb } from './Bomb.js';
+import { setupBorad, clearBorad } from './Board.js';
+import { Timer } from './Timer.js';
+import { Points } from './Points.js';
+import { gameButton } from './DomObjects.js';
+import { getID } from './Util.js';
+import { showTime } from './UI.js';
 
 const cBomb = 'b';
 class Game {
@@ -51,7 +51,6 @@ class Game {
     this.timer = new Timer();
   }
 
-
   /**
    * Randomly creates the Bombs
    * @return {array} Bomb Objects.
@@ -68,8 +67,9 @@ class Game {
         randRow = Math.floor(Math.random() * this.rows);
         randCol = Math.floor(Math.random() * this.columns);
 
-        if (!bombsArray.some(bomb => bomb.row === randRow &&
-                                     bomb.col === randCol)) {
+        if (
+          !bombsArray.some(bomb => bomb.row === randRow && bomb.col === randCol)
+        ) {
           uniqueBomb = true;
         }
       }
@@ -103,7 +103,6 @@ class Game {
       }
     }
 
-
     for (let i = 0; i < this.bombsArray.length; i++) {
       const row = this.bombsArray[i].row;
       const col = this.bombsArray[i].col;
@@ -122,16 +121,16 @@ class Game {
    * @return {array}  boardArray
    */
   counterUpAround(row, col, boardArray) {
-    boardArray = this.counterUp(row+1, col-1, boardArray);
-    boardArray = this.counterUp(row+1, col, boardArray);
-    boardArray = this.counterUp(row+1, col+1, boardArray);
+    boardArray = this.counterUp(row + 1, col - 1, boardArray);
+    boardArray = this.counterUp(row + 1, col, boardArray);
+    boardArray = this.counterUp(row + 1, col + 1, boardArray);
 
-    boardArray = this.counterUp(row, col-1, boardArray);
-    boardArray = this.counterUp(row, col+1, boardArray);
+    boardArray = this.counterUp(row, col - 1, boardArray);
+    boardArray = this.counterUp(row, col + 1, boardArray);
 
-    boardArray = this.counterUp(row-1, col-1, boardArray);
-    boardArray = this.counterUp(row-1, col, boardArray);
-    boardArray = this.counterUp(row-1, col+1, boardArray);
+    boardArray = this.counterUp(row - 1, col - 1, boardArray);
+    boardArray = this.counterUp(row - 1, col, boardArray);
+    boardArray = this.counterUp(row - 1, col + 1, boardArray);
 
     return boardArray;
   }
@@ -145,9 +144,13 @@ class Game {
    * @return {array}  boardArray
    */
   counterUp(row, col, boardArray) {
-    if ( row >= 0 && row < this.rows &&
-         col >= 0 && col < this.columns &&
-         typeof boardArray[row][col] === 'number') {
+    if (
+      row >= 0 &&
+      row < this.rows &&
+      col >= 0 &&
+      col < this.columns &&
+      typeof boardArray[row][col] === 'number'
+    ) {
       boardArray[row][col] = boardArray[row][col] + 1;
     }
 
@@ -186,7 +189,7 @@ class Game {
    * @param {id}     field
    */
   blockClicked(row, col, field = '') {
-    field === '' ? field = getID(row, col) : field;
+    field === '' ? (field = getID(row, col)) : field;
 
     // skip if field is not on gamefield
     if (row < 0 || row >= this.rows || col < 0 || col >= this.columns) {
@@ -203,7 +206,6 @@ class Game {
       }
     }
   }
-
 
   /**
    * Clicked on a field
@@ -256,8 +258,8 @@ class Game {
     let amount = 0;
     // row
     for (let r = -1; r <= 1; r++) {
-      for (let c =- 1; c <= 1; c++) {
-        if (!this.checkNoBomb(row+r, col+c)) {
+      for (let c = -1; c <= 1; c++) {
+        if (!this.checkNoBomb(row + r, col + c)) {
           amount++;
         }
       }
@@ -277,7 +279,7 @@ class Game {
       $(gameButton).toggleClass('btn-smiley btn-cool');
 
       // show not flagged bombs as flagged
-      for (let i=0; i < this.bombs; i++) {
+      for (let i = 0; i < this.bombs; i++) {
         const row = this.bombsArray[i].row;
         const col = this.bombsArray[i].col;
 
@@ -288,8 +290,14 @@ class Game {
         }
       }
 
-      const settings = this.rows + 'x' + this.columns
-                + ', ' + this.bombs + ' Bombs ' + this.seconds;
+      const settings =
+        this.rows +
+        'x' +
+        this.columns +
+        ', ' +
+        this.bombs +
+        ' Bombs ' +
+        this.seconds;
 
       showTime(settings, time);
       this.timer.stopTimer();
@@ -386,5 +394,4 @@ class Game {
   }
 }
 
-
-export {Game};
+export { Game };

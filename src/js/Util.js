@@ -26,4 +26,4 @@ function getID(row, col) {
   return '#' + row + '-' + col;
 }
 
-export {splitNumber, getID};
+export { splitNumber, getID };

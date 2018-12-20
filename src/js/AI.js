@@ -1,4 +1,4 @@
-import {getID} from './Util.js';
+import { getID } from './Util.js';
 
 let changes = 0;
 let iterations = 0;
@@ -21,8 +21,10 @@ class AI {
 
     console.log('start AI');
 
-    while ( !this.Game.gameWon
-            && iterations < this.Game.rows * this.Game.columns) {
+    while (
+      !this.Game.gameWon &&
+      iterations < this.Game.rows * this.Game.columns
+    ) {
       if (points === 0) {
         this.clickAllBlocks();
       } else if (changes === 0) {
@@ -102,16 +104,16 @@ class AI {
   countUnclickedBlocksAround(row, col) {
     const surroundIDs = [];
 
-    this.checkClicked(row-1, col-1);
-    this.checkClicked(row-1, col);
-    this.checkClicked(row-1, col+1);
+    this.checkClicked(row - 1, col - 1);
+    this.checkClicked(row - 1, col);
+    this.checkClicked(row - 1, col + 1);
 
-    this.checkClicked(row+1, col-1);
-    this.checkClicked(row+1, col);
-    this.checkClicked(row+1, col+1);
+    this.checkClicked(row + 1, col - 1);
+    this.checkClicked(row + 1, col);
+    this.checkClicked(row + 1, col + 1);
 
-    this.checkClicked(row, col-1);
-    this.checkClicked(row, col+1);
+    this.checkClicked(row, col - 1);
+    this.checkClicked(row, col + 1);
 
     return surroundIDs;
   }
@@ -125,20 +127,19 @@ class AI {
   countFlagsAround(row, col) {
     let flags = 0;
 
-    flags = this.checkFlag(row-1, col-1, flags);
-    flags = this.checkFlag(row-1, col, flags);
-    flags = this.checkFlag(row-1, col+1, flags);
+    flags = this.checkFlag(row - 1, col - 1, flags);
+    flags = this.checkFlag(row - 1, col, flags);
+    flags = this.checkFlag(row - 1, col + 1, flags);
 
-    flags = this.checkFlag(row+1, col-1, flags);
-    flags = this.checkFlag(row+1, col, flags);
-    flags = this.checkFlag(row+1, col+1, flags);
+    flags = this.checkFlag(row + 1, col - 1, flags);
+    flags = this.checkFlag(row + 1, col, flags);
+    flags = this.checkFlag(row + 1, col + 1, flags);
 
-    flags =this.checkFlag(row, col-1, flags);
-    flags =this.checkFlag(row, col+1, flags);
+    flags = this.checkFlag(row, col - 1, flags);
+    flags = this.checkFlag(row, col + 1, flags);
 
     return flags;
   }
-
 
   /**
    * I dont know actually
@@ -164,8 +165,7 @@ class AI {
   checkFlag(row, col, flags) {
     const id = getID(row, col);
 
-    if ($(id).hasClass('block') &&
-        $(id).hasClass('flag')) {
+    if ($(id).hasClass('block') && $(id).hasClass('flag')) {
       flags++;
     }
 
@@ -200,9 +200,11 @@ class AI {
   clickBlock(row, col) {
     const id = getID(row, col);
 
-    if ($(id).hasClass('block')
-        && !$(id).hasClass('clicked')
-        && !$(id).hasClass('flag')) {
+    if (
+      $(id).hasClass('block') &&
+      !$(id).hasClass('clicked') &&
+      !$(id).hasClass('flag')
+    ) {
       $(id).click();
       console.log('click:', id);
       changes++;
@@ -215,18 +217,17 @@ class AI {
    * @param {number} col
    */
   clickBlocksAround(row, col) {
-    clickBlock(row-1, col-1);
-    clickBlock(row-1, col);
-    clickBlock(row-1, col+1);
+    clickBlock(row - 1, col - 1);
+    clickBlock(row - 1, col);
+    clickBlock(row - 1, col + 1);
 
-    clickBlock(row+1, col-1);
-    clickBlock(row+1, col);
-    clickBlock(row+1, col+1);
+    clickBlock(row + 1, col - 1);
+    clickBlock(row + 1, col);
+    clickBlock(row + 1, col + 1);
 
-    clickBlock(row, col-1);
-    clickBlock(row, col+1);
+    clickBlock(row, col - 1);
+    clickBlock(row, col + 1);
   }
 }
 
-
-export {AI};
+export { AI };

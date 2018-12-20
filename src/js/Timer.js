@@ -1,4 +1,4 @@
-import {splitNumber} from './Util.js';
+import { splitNumber } from './Util.js';
 
 class Timer {
   /**
@@ -31,9 +31,13 @@ class Timer {
    * @param {number} number
    */
   timerClass(digit, number) {
-    number = (number === undefined) ? 0 : number;
+    number = number === undefined ? 0 : number;
     const timerID = `#timer-${digit}`;
-    const currentstate = parseInt($(timerID).attr('class').split('d')[2]);
+    const currentstate = parseInt(
+      $(timerID)
+        .attr('class')
+        .split('d')[2]
+    );
 
     if (currentstate !== number) {
       for (let i = 0; i <= 9; i++) {
@@ -71,4 +75,4 @@ class Timer {
   }
 }
 
-export {Timer};
+export { Timer };

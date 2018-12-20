@@ -1,4 +1,4 @@
-import {splitNumber} from './Util.js';
+import { splitNumber } from './Util.js';
 
 class Points {
   /**
@@ -53,7 +53,7 @@ class Points {
    * @param {number} number  number to display
    */
   scoreClass(display, number) {
-    number = (number === undefined) ? 0 : number;
+    number = number === undefined ? 0 : number;
     const pointsID = `#points-${display}`;
 
     $(pointsID).removeClass('d-');
@@ -66,4 +66,4 @@ class Points {
   }
 }
 
-export {Points};
+export { Points };

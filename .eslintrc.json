@@ -1,28 +1,57 @@
 {
-  "extends": "google",
+  "extends": [
+    "google",
+    "prettier"
+  ],
   "parserOptions": {
     "ecmaVersion": 2017,
     "sourceType": "module"
-    },
+  },
   "env": {
     "es6": true
   },
   "rules": {
-    "require-jsdoc": ["error", {
-      "require": {
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
           "FunctionDeclaration": true,
           "MethodDefinition": true,
           "ClassDeclaration": false,
           "ArrowFunctionExpression": false,
           "FunctionExpression": false
+        }
       }
-    }],
+    ],
     "arrow-parens": 0,
     "linebreak-style": 0,
     "no-invalid-this": 0,
-    "max-statements": [2, 16],
-    "max-depth": [2, 5],
-    "complexity": [2, 8],
-    "max-params": [2, 4]
-  }
+    "max-statements": [
+      2,
+      16
+    ],
+    "max-depth": [
+      2,
+      5
+    ],
+    "complexity": [
+      2,
+      8
+    ],
+    "max-params": [
+      2,
+      4
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "es5"
+      }
+    ]
+  },
+  "plugins": [
+    "prettier"
+  ]
 }

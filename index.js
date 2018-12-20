@@ -1,13 +1,13 @@
-import {Game} from './src/js/Game.js';
-import {DomListener} from './src/js/DomListener.js';
-import {AI} from './src/js/AI.js';
+import { Game } from './src/js/Game.js';
+import { DomListener } from './src/js/DomListener.js';
+import { AI } from './src/js/AI.js';
 
 const debug = true;
 
 let game;
 
 // Function that runs on page load and setups game
-$( document ).ready(function() {
+$(document).ready(function() {
   // bindJquerys();
   newGame();
   // initUIFunctions();
@@ -38,4 +38,4 @@ $('#newgame-btn').click(function() {
   newGame();
 });
 
-export {newGame};
+export { newGame };

@@ -1,5 +1,12 @@
-import {game, gameBar, fieldContainer, gameButton,
-  topBorder, middleBorder, bottomBorder} from './DomObjects';
+import {
+  game,
+  gameBar,
+  fieldContainer,
+  gameButton,
+  topBorder,
+  middleBorder,
+  bottomBorder,
+} from './DomObjects';
 
 const cBlockSize = 16;
 const cBorderSize = 10;
@@ -18,7 +25,6 @@ function setupBorad(rows, cols) {
   createBorder(cols, bottomBorder, 'b');
 }
 
-
 /**
  * Sets the widths and heights of the board
  * @param {number} rows
@@ -27,15 +33,15 @@ function setupBorad(rows, cols) {
 function setBoardProperties(rows, cols) {
   const gameHeight = cBlockSize * rows + 3 * cBorderSize + 32;
   const gameWidth = cBlockSize * cols + 2 * cBorderSize;
-  const gameBarWidth = cBlockSize * cols + 2 *cBorderSize;
-  const marginL = cBlockSize * cols / 2 - 13 - 49;
-  const marginR = cBlockSize * cols / 2 - 13 - 49;
+  const gameBarWidth = cBlockSize * cols + 2 * cBorderSize;
+  const marginL = (cBlockSize * cols) / 2 - 13 - 49;
+  const marginR = (cBlockSize * cols) / 2 - 13 - 49;
 
   $(game).css('zoom', 3);
-  $(game).css({'height': gameHeight, 'width': gameWidth});
+  $(game).css({ height: gameHeight, width: gameWidth });
   $(gameBar).css('width', gameBarWidth);
   $(fieldContainer).css('height', cBlockSize * rows);
-  $(gameButton).css({'margin-left': marginL, 'margin-right': marginR});
+  $(gameButton).css({ 'margin-left': marginL, 'margin-right': marginR });
 
   resetGameButton();
 }
@@ -88,7 +94,6 @@ function createBorder(cols, id, letter) {
   $(id).append(`<div class="border-${letter}r"></div>`);
 }
 
-
 /**
  * Clears all Dom elements which are dependet of board size
  * to generate them again on a new game
@@ -100,4 +105,4 @@ function clearBorad() {
   $(bottomBorder).empty();
 }
 
-export {cBlock, cBomb, cFlag, setupBorad, clearBorad};
+export { cBlock, cBomb, cFlag, setupBorad, clearBorad };

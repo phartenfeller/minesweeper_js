@@ -9,8 +9,9 @@ function showTime(settings, time) {
     $(scores).addClass('visible');
   }
 
-  $(scores).find('tbody:last-child')
-      .append(`<tr><td>${settings}</td><td>${time}</td></tr>`);
+  $(scores)
+    .find('tbody:last-child')
+    .append(`<tr><td>${settings}</td><td>${time}</td></tr>`);
 }
 
-export {showTime};
+export { showTime };

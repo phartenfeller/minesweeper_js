@@ -1,5 +1,5 @@
-import {gameButton, field, block} from './DomObjects.js';
-import {newGame} from '../../index.js';
+import { gameButton, field, block } from './DomObjects.js';
+import { newGame } from '../../index.js';
 
 const btnSmiley = 'btn-smiley';
 const btnClick = 'btn-click';
@@ -69,5 +69,4 @@ class DomListener {
   }
 }
 
-
-export {DomListener};
+export { DomListener };
