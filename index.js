@@ -1,9 +1,9 @@
 import { Game } from './src/js/Game.js';
 import { DomListener } from './src/js/DomListener.js';
 import { AI } from './src/js/AI.js';
+import { checkDebug } from './src/js/Util.js';
 
-const debug = true;
-
+const debug = checkDebug();
 let game;
 
 // Function that runs on page load and setups game
@@ -38,4 +38,4 @@ $('#newgame-btn').click(function() {
   newGame();
 });
 
-export { newGame };
+export { newGame, debug };

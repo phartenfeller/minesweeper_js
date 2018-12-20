@@ -1,4 +1,5 @@
 import { getID } from './Util.js';
+import { debugLog } from './Util.js';
 
 let changes = 0;
 let iterations = 0;
@@ -19,7 +20,7 @@ class AI {
     iterations = 0;
     changes = 0;
 
-    console.log('start AI');
+    debugLog('start AI');
 
     while (
       !this.Game.gameWon &&
@@ -60,7 +61,7 @@ class AI {
     const randomID = Math.floor(Math.random() * unclickedIDs.length);
     const randomElement = unclickedIDs[randomID];
 
-    console.log('random click: ', randomElement);
+    debugLog('random click => ', randomElement);
 
     $(randomElement).click();
 
@@ -86,7 +87,7 @@ class AI {
 
         if (surroundIDs.length === number && surroundIDs.length > 0) {
           flagArray(surroundIDs);
-          console.log('flag array:', surroundIDs.length, number);
+          debugLog('flag array =>', surroundIDs.length, number);
           changes++;
         } else if (flags === number && flags !== 0) {
           clickBlocksAround(row, col);
@@ -206,7 +207,7 @@ class AI {
       !$(id).hasClass('flag')
     ) {
       $(id).click();
-      console.log('click:', id);
+      debugLog('click =>', id);
       changes++;
     }
   }

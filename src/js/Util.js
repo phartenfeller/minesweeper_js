@@ -1,3 +1,5 @@
+import { debug } from '../../index.js';
+
 /**
  * Splits each digit of a number to an array
  * @param  {number} number
@@ -26,4 +28,29 @@ function getID(row, col) {
   return '#' + row + '-' + col;
 }
 
-export { splitNumber, getID };
+/**
+ * Returns true if you play locallay
+ * @return {boolean}
+ */
+function checkDebug() {
+  if (window.location.href.includes('localhost')) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+/**
+ * Logs if debug is on
+ * @param {string} msg1
+ * @param {string} msg2
+ * @param {string} msg3
+ * @param {string} msg4
+ */
+function debugLog(msg1, msg2 = '', msg3 = '', msg4 = '') {
+  if (debug) {
+    console.log(msg1, msg2, msg3, msg4);
+  }
+}
+
+export { splitNumber, getID, checkDebug, debugLog };

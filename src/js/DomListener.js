@@ -15,7 +15,6 @@ class DomListener {
   constructor(game) {
     Game = game;
 
-    console.log('DOMListener');
     this.initDomListener();
   }
 
@@ -23,8 +22,6 @@ class DomListener {
    * Initialistion Function
    */
   initDomListener() {
-    console.log('init');
-
     $(gameButton).mousedown(function() {
       $(gameButton).removeClass(btnSmiley);
       $(gameButton).addClass(btnClick);
@@ -46,7 +43,6 @@ class DomListener {
 
     $('input:radio').click(function() {
       const value = parseInt($(this).val());
-      console.log(value);
       $(game).css('zoom', value);
     });
 

@@ -3,7 +3,7 @@ import { setupBorad, clearBorad } from './Board.js';
 import { Timer } from './Timer.js';
 import { Points } from './Points.js';
 import { gameButton } from './DomObjects.js';
-import { getID } from './Util.js';
+import { getID, debugLog } from './Util.js';
 import { showTime } from './UI.js';
 
 const cBomb = 'b';
@@ -13,7 +13,7 @@ class Game {
    * @param {boolean} debug
    */
   constructor(debug = false) {
-    this.debugLog('Setting up Game');
+    debugLog('Setting up Game...');
 
     this.debug = debug;
     this.showBombs = debug;
@@ -39,10 +39,15 @@ class Game {
     this.columns = inputCols < 8 ? 8 : inputCols;
     this.bombs = inputBombs < 1 ? 1 : inputBombs;
 
+    debugLog(
+      this.rows + ' rows, ',
+      this.columns + ' cols, ',
+      this.bombs + ' bombs'
+    );
+
     this.amountFields = this.rows * this.columns - this.bombs;
     this.bombsArray = this.createBombs();
     this.boardArray = this.createBoardArray();
-    console.log('boardArray =>', this.boardArray);
     this.gameWon = false;
 
     setupBorad(this.rows, this.columns);
@@ -73,18 +78,16 @@ class Game {
           uniqueBomb = true;
         }
       }
-
       // Add Bomb to the bombsArray
       bombsArray.push(new Bomb(randRow, randCol));
-
       // Debug
       if (this.showBombs) {
-        const block = '#' + randRow + '-' + randCol;
+        const block = `#${randRow}-${randCol}`;
         $(block).toggleClass('field bomb');
       }
     }
 
-    this.debugLog(bombsArray);
+    debugLog('bombsArray =>', bombsArray);
 
     return bombsArray;
   }
@@ -109,6 +112,8 @@ class Game {
       boardArray[row][col] = cBomb;
       boardArray = this.counterUpAround(row, col, boardArray);
     }
+
+    debugLog('boardArray =>', boardArray);
 
     return boardArray;
   }
@@ -191,6 +196,8 @@ class Game {
   blockClicked(row, col, field = '') {
     field === '' ? (field = getID(row, col)) : field;
 
+    debugLog('block clicked =>', field);
+
     // skip if field is not on gamefield
     if (row < 0 || row >= this.rows || col < 0 || col >= this.columns) {
       return;
@@ -235,6 +242,8 @@ class Game {
    * @param {id} field
    */
   flagField(field) {
+    debugLog('Flag field =>', field);
+
     if ($(field).hasClass('flag')) {
       this.points.addPoint();
 
@@ -331,11 +340,13 @@ class Game {
    * @param {field} field
    */
   bombClicked(row, col, field) {
+    debugLog('bomb clicked =>', field);
+
     // mark clicked bomb red
     $(field).toggleClass('field bomb-red clicked');
 
     // stop timer
-    this.timer.stopTimer(); // todo
+    this.timer.stopTimer();
 
     // dead button
     $(gameButton).removeClass('btn-smiley');
@@ -355,7 +366,6 @@ class Game {
     // check if all flagged fields are really bombs
     $('.flag').each(function() {
       let id = $(this).attr('id');
-      console.log('id =>', id);
       const row = parseInt(id.split('-')[0]);
       const col = parseInt(id.split('-')[1]);
       id = '#' + id;
@@ -372,16 +382,6 @@ class Game {
         const id = getID(r, c);
         $(id).addClass('clicked');
       }
-    }
-  }
-
-  /**
-   * Logs if debug is on
-   * @param {string} message
-   */
-  debugLog(message) {
-    if (this.debug) {
-      console.log(message);
     }
   }
 
