@@ -33,7 +33,7 @@ function getID(row, col) {
  * @return {boolean}
  */
 function checkDebug() {
-  if (window.location.href.includes('localhost')) {
+  if (window.location.href.indexOf('localhost') > 0) {
     return true;
   } else {
     return false;
