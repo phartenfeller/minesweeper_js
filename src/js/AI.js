@@ -1,5 +1,12 @@
 import { getID } from './Util.js';
 import { debugLog } from './Util.js';
+import {
+  field,
+  flagClass,
+  clicked,
+  blockClass,
+  clickedClass,
+} from './DomObjects.js';
 
 let changes = 0;
 let iterations = 0;
@@ -43,7 +50,7 @@ class AI {
    * Clicks all Blocks
    */
   clickAllBlocks() {
-    $('.field').each(function() {
+    $(field).each(function() {
       $(this).click();
     });
   }
@@ -54,7 +61,7 @@ class AI {
   randomClick() {
     const unclickedIDs = [];
 
-    $('.field').each(function() {
+    $(field).each(function() {
       unclickedIDs.push('#' + $(this).attr('id'));
     });
 
@@ -74,7 +81,7 @@ class AI {
   goThroughClicked() {
     const AI = this;
 
-    $('.clicked').each(function() {
+    $(clicked).each(function() {
       const number = parseInt($(this).data('value'));
 
       if (number > 0) {
@@ -166,7 +173,7 @@ class AI {
   checkFlag(row, col, flags) {
     const id = getID(row, col);
 
-    if ($(id).hasClass('block') && $(id).hasClass('flag')) {
+    if ($(id).hasClass(blockClass) && $(id).hasClass(flagClass)) {
       flags++;
     }
 
@@ -188,7 +195,7 @@ class AI {
    * @param {id} id
    */
   flag(id) {
-    if (!$(id).hasClass('flag')) {
+    if (!$(id).hasClass(flagClass)) {
       flagField($(id));
     }
   }
@@ -202,9 +209,9 @@ class AI {
     const id = getID(row, col);
 
     if (
-      $(id).hasClass('block') &&
-      !$(id).hasClass('clicked') &&
-      !$(id).hasClass('flag')
+      $(id).hasClass(blockClass) &&
+      !$(id).hasClass(clickedClass) &&
+      !$(id).hasClass(flagClass)
     ) {
       $(id).click();
       debugLog('click =>', id);

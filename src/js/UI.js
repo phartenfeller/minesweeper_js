@@ -1,12 +1,14 @@
+import { hiddenClass, visibleClass } from './DomObjects';
+import { changeClass } from './Util';
+
 /**
  * Adds time in results table
  * @param {string} settings
  * @param {string} time
  */
 function showTime(settings, time) {
-  if ($(scores).hasClass('hidden')) {
-    $(scores).removeClass('hidden');
-    $(scores).addClass('visible');
+  if ($(scores).hasClass(hiddenClass)) {
+    changeClass(scores, hiddenClass, visibleClass);
   }
 
   $(scores)

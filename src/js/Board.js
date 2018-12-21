@@ -6,6 +6,7 @@ import {
   topBorder,
   middleBorder,
   bottomBorder,
+  blockClass,
 } from './DomObjects';
 
 const cBlockSize = 16;
@@ -50,8 +51,8 @@ function setBoardProperties(rows, cols) {
  * Resets state of Game button from old game
  */
 function resetGameButton() {
-  $(gameButton).removeClass('btn-dead');
-  $(gameButton).removeClass('btn-cool');
+  $(gameButton).removeClass('sprite-btn-dead');
+  $(gameButton).removeClass('sprite-btn-cool');
 }
 
 /**
@@ -66,17 +67,17 @@ function setupBlocks(rows, cols) {
     const rowid = '#r' + i;
 
     // left border
-    $(rowid).append('<div class="border-vertical"></div>');
+    $(rowid).append('<div class="sprite sprite-border-vertical"></div>');
 
     // blocks loop
     for (let j = 0; j < cols; j++) {
       // block
-      const div = `<div id="${i}-${j}" class="block field"></div>`;
+      const div = `<div id="${i}-${j}" class="${blockClass} sprite sprite-blank"></div>`;
       $(rowid).append(div);
     }
 
     // right border
-    $(rowid).append('<div class="border-vertical"></div>');
+    $(rowid).append('<div class="sprite sprite-border-vertical"></div>');
   }
 }
 
@@ -87,11 +88,11 @@ function setupBlocks(rows, cols) {
  * @param {string} letter
  */
 function createBorder(cols, id, letter) {
-  $(id).append(`<div class="border-${letter}l"></div>`);
+  $(id).append(`<div class="sprite sprite-border-${letter}l"></div>`);
   for (let i = 1; i <= cols; i++) {
-    $(id).append('<div class="border-horizontal"></div>');
+    $(id).append('<div class="sprite sprite-border-horizontal"></div>');
   }
-  $(id).append(`<div class="border-${letter}r"></div>`);
+  $(id).append(`<div class="sprite sprite-border-${letter}r"></div>`);
 }
 
 /**

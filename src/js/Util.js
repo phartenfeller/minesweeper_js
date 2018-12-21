@@ -1,4 +1,5 @@
 import { debug } from '../../index.js';
+import { clickedClass } from './DomObjects.js';
 
 /**
  * Splits each digit of a number to an array
@@ -53,4 +54,20 @@ function debugLog(msg1, msg2 = '', msg3 = '', msg4 = '') {
   }
 }
 
-export { splitNumber, getID, checkDebug, debugLog };
+/**
+ * Remove and Add class to element
+ * @param {id} id
+ * @param {string} removeClass class which will get removed
+ * @param {string} addClass class which will get added
+ * @param {boolean} markClicked
+ */
+function changeClass(id, removeClass, addClass, markClicked = false) {
+  $(id).removeClass(removeClass);
+  $(id).addClass(addClass);
+
+  if (markClicked) {
+    $(id).addClass(clickedClass);
+  }
+}
+
+export { splitNumber, getID, checkDebug, debugLog, changeClass };

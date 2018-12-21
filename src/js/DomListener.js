@@ -1,12 +1,15 @@
-import { gameButton, field, block } from './DomObjects.js';
+import {
+  gameButton,
+  field,
+  btnSmileyClass,
+  btnClickClass,
+  btnWowClass,
+  block,
+} from './DomObjects.js';
 import { newGame } from '../../index.js';
-
-const btnSmiley = 'btn-smiley';
-const btnClick = 'btn-click';
-const btnWow = 'btn-wow';
+import { changeClass } from './Util.js';
 
 let Game;
-
 class DomListener {
   /**
    * Constructor
@@ -23,17 +26,14 @@ class DomListener {
    */
   initDomListener() {
     $(gameButton).mousedown(function() {
-      $(gameButton).removeClass(btnSmiley);
-      $(gameButton).addClass(btnClick);
+      changeClass(gameButton, btnSmileyClass, btnClickClass);
     });
 
     $(game).mouseup(function() {
-      if ($(gameButton).hasClass(btnWow)) {
-        $(gameButton).removeClass(btnWow);
-        $(gameButton).addClass(btnSmiley);
-      } else if ($(gameButton).hasClass(btnClick)) {
-        $(gameButton).removeClass(btnClick);
-        $(gameButton).addClass(btnSmiley);
+      if ($(gameButton).hasClass(btnWowClass)) {
+        changeClass(gameButton, btnWowClass, btnSmileyClass);
+      } else if ($(gameButton).hasClass(btnClickClass)) {
+        changeClass(gameButton, btnClickClass, btnSmileyClass);
       }
     });
 
@@ -59,8 +59,7 @@ class DomListener {
     });
 
     $(game).on('mousedown', field, function() {
-      $(gameButton).removeClass(btnSmiley);
-      $(gameButton).addClass(btnWow);
+      changeClass(gameButton, btnSmileyClass, btnWowClass);
     });
   }
 }

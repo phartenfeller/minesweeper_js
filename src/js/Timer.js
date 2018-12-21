@@ -41,9 +41,9 @@ class Timer {
 
     if (currentstate !== number) {
       for (let i = 0; i <= 9; i++) {
-        $(timerID).removeClass(`d${i}`);
+        $(timerID).removeClass(`sprite-d${i}`);
       }
-      $(timerID).addClass(`d${number}`);
+      $(timerID).addClass(`sprite-d${number}`);
     }
   }
 

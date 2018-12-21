@@ -2,8 +2,21 @@ import { Bomb } from './Bomb.js';
 import { setupBorad, clearBorad } from './Board.js';
 import { Timer } from './Timer.js';
 import { Points } from './Points.js';
-import { gameButton } from './DomObjects.js';
-import { getID, debugLog } from './Util.js';
+import {
+  gameButton,
+  flags,
+  flagClass,
+  noBombClass,
+  fieldClass,
+  bombRedClass,
+  bombClass,
+  btnSmileyClass,
+  btnDeadClass,
+  inputRows,
+  inputColumns,
+  inputBombs,
+} from './DomObjects.js';
+import { getID, debugLog, changeClass } from './Util.js';
 import { showTime } from './UI.js';
 
 const cBomb = 'b';
@@ -31,13 +44,13 @@ class Game {
   setupGame() {
     clearBorad();
 
-    const inputRows = parseInt($('#input-rows').val());
-    const inputCols = parseInt($('#input-columns').val());
-    const inputBombs = parseInt($('#input-bombs').val());
+    const iRows = parseInt($(inputRows).val());
+    const iCols = parseInt($(inputColumns).val());
+    const iBombs = parseInt($(inputBombs).val());
 
-    this.rows = inputRows < 8 ? 8 : inputRows;
-    this.columns = inputCols < 8 ? 8 : inputCols;
-    this.bombs = inputBombs < 1 ? 1 : inputBombs;
+    this.rows = iRows < 8 ? 8 : iRows;
+    this.columns = iCols < 8 ? 8 : iCols;
+    this.bombs = iBombs < 1 ? 1 : iBombs;
 
     debugLog(
       this.rows + ' rows, ',
@@ -204,7 +217,7 @@ class Game {
     }
 
     // if field was not clicked before
-    if ($(field).hasClass('field')) {
+    if ($(field).hasClass(fieldClass)) {
       // if this field is a bomb
       if (!this.checkNoBomb(row, col)) {
         this.bombClicked(row, col, field);
@@ -223,7 +236,9 @@ class Game {
   fieldClicked(row, col, field) {
     this.amountFields--;
     const number = this.boardArray[row][col];
-    $(field).toggleClass(`field f${number} clicked`);
+
+    changeClass(field, fieldClass, `sprite-${number}`, true);
+
     $(field).attr('data-value', number);
 
     // if zero bombs around reveal the fields around
@@ -244,16 +259,14 @@ class Game {
   flagField(field) {
     debugLog('Flag field =>', field);
 
-    if ($(field).hasClass('flag')) {
+    if ($(field).hasClass(flagClass)) {
       this.points.addPoint();
 
-      $(field).removeClass('flag');
-      $(field).addClass('field');
+      changeClass(field, flagClass, fieldClass);
     } else {
       this.points.removePoint();
 
-      $(field).removeClass('field');
-      $(field).addClass('flag');
+      changeClass(field, fieldClass, flagClass);
     }
   }
 
@@ -294,7 +307,7 @@ class Game {
 
         const field = getID(row, col);
 
-        if (!$(field).hasClass('flag')) {
+        if (!$(field).hasClass(flagClass)) {
           this.flagField($(field));
         }
       }
@@ -343,20 +356,19 @@ class Game {
     debugLog('bomb clicked =>', field);
 
     // mark clicked bomb red
-    $(field).toggleClass('field bomb-red clicked');
+    changeClass(field, fieldClass, bombRedClass, true);
 
     // stop timer
     this.timer.stopTimer();
 
     // dead button
-    $(gameButton).removeClass('btn-smiley');
-    $(gameButton).addClass('btn-dead');
+    changeClass(gameButton, btnSmileyClass, btnDeadClass);
 
     // show all other bombs
     for (let i = 0; i < this.bombs; i++) {
       if (this.bombsArray[i].row !== row || this.bombsArray[i].col !== col) {
         const id = getID(this.bombsArray[i].row, this.bombsArray[i].col);
-        $(id).toggleClass('field bomb');
+        changeClass(id, fieldClass, bombClass);
       }
     }
 
@@ -364,7 +376,7 @@ class Game {
     const game = this;
 
     // check if all flagged fields are really bombs
-    $('.flag').each(function() {
+    $(flags).each(function() {
       let id = $(this).attr('id');
       const row = parseInt(id.split('-')[0]);
       const col = parseInt(id.split('-')[1]);
@@ -372,15 +384,15 @@ class Game {
 
       // if no bomb
       if (game.checkNoBomb(row, col)) {
-        $(id).toggleClass('flag no-bomb');
+        changeClass(id, flagClass, noBombClass);
       }
     });
 
     // lock all fields
-    for (let r = 1; r <= this.rows; r++) {
-      for (let c = 1; c <= this.columns; c++) {
+    for (let r = 0; r < this.rows; r++) {
+      for (let c = 0; c < this.columns; c++) {
         const id = getID(r, c);
-        $(id).addClass('clicked');
+        changeClass(id, null, null, true);
       }
     }
   }

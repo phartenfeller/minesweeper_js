@@ -58,11 +58,11 @@ class Points {
 
     $(pointsID).removeClass('d-');
     for (let i = 0; i <= 9; i++) {
-      $(pointsID).removeClass(`d${i}`);
+      $(pointsID).removeClass(`sprite-d${i}`);
     }
 
     // add new class
-    $(pointsID).addClass(`d${number}`);
+    $(pointsID).addClass(`sprite-d${number}`);
   }
 }
 
