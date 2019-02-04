@@ -44,7 +44,6 @@ const block = `.${blockClass}`;
 const clicked = `.${clickedClass}`;
 
 export {
-  doc,
   game,
   newGameButton,
   gameButton,

@@ -106,4 +106,4 @@ function clearBorad() {
   $(bottomBorder).empty();
 }
 
-export { cBlock, cBomb, cFlag, setupBorad, clearBorad };
+export { setupBorad, clearBorad };
