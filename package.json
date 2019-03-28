@@ -3,26 +3,31 @@
   "version": "1.0.0",
   "description": "In this Project I am trying to rebuild the original MS Minesweeper game with JavaScript, CSS and HTML. The only libary used is JQuery.",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "jquery": "^3.3.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "babel-loader": "^8.0.5",
+    "copy-webpack-plugin": "^5.0.2",
     "eslint": "^5.13.0",
     "eslint-config-google": "^0.11.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-prettier": "^3.0.1",
+    "gh-pages": "^2.0.1",
     "prettier": "1.15.3",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.14"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode=development --output-filename ./dist/bundle.js",
+    "start": "webpack-dev-server --mode=development --output-filename ./bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
-    "build-dev": "webpack --mode=development --output-filename ./dist/bundle.js"
+    "build-dev": "webpack --mode=development --output-filename ./dist/bundle.js",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -33,5 +38,5 @@
   "bugs": {
     "url": "https://github.com/phartenfeller/minesweeper_js/issues"
   },
-  "homepage": "https://github.com/phartenfeller/minesweeper_js#readme"
+  "homepage": "https://phartenfeller.github.io/minesweeper_js/"
 }

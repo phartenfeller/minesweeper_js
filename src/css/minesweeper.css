@@ -6,10 +6,11 @@
 }
 
 .row {
-  display: inline-block;
+  display: table;
 }
 
 .block {
+  display: table-row;
   height: 16px;
   width: 16px;
   float: left;
