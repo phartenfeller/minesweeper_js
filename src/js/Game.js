@@ -313,13 +313,7 @@ class Game {
       }
 
       const settings =
-        this.rows +
-        'x' +
-        this.columns +
-        ', ' +
-        this.bombs +
-        ' Bombs ' +
-        this.seconds;
+        this.rows + 'x' + this.columns + ', ' + this.bombs + ' Bombs ';
 
       showTime(settings, time);
       this.timer.stopTimer();

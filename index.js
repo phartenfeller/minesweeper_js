@@ -2,6 +2,7 @@ import { Game } from './src/js/Game.js';
 import { DomListener } from './src/js/DomListener.js';
 import { AI } from './src/js/AI.js';
 import { checkDebug } from './src/js/Util.js';
+import { newGameButton } from './src/js/DomObjects.js';
 
 const debug = checkDebug();
 let game;
@@ -34,7 +35,7 @@ function newGame() {
   }
 }
 
-$('#newgame-btn').click(function() {
+$(newGameButton).click(function() {
   newGame();
 });
 

@@ -53,6 +53,7 @@ function setBoardProperties(rows, cols) {
 function resetGameButton() {
   $(gameButton).removeClass('sprite-btn-dead');
   $(gameButton).removeClass('sprite-btn-cool');
+  $(gameButton).addClass('sprite-btn-smiley');
 }
 
 /**
