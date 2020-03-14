@@ -1,15 +1,6 @@
 import { createBlockDiv, createBorder, createRow } from './createDomElements';
 
-let boardArray;
-
-/**
- * Initializes an array which contains html divs of the block
- * @param {number} rows
- * @param {number} cols
- */
-function initBoardArray(rows, cols) {
-  boardArray = [...Array(rows)].map(e => Array(cols));
-}
+const board = {};
 
 /**
  * generate minesweeper board in the dom
@@ -17,7 +8,6 @@ function initBoardArray(rows, cols) {
  * @param {number} cols
  */
 export default function generateBoard(rows, cols) {
-  initBoardArray(rows, cols);
   const fieldContainerElement = document.querySelector('#field-container');
   for (let i = 0; i < rows; i++) {
     // create row div
@@ -32,10 +22,15 @@ export default function generateBoard(rows, cols) {
       // block
       const div = createBlockDiv(i, j);
       rowElement.appendChild(div);
-      boardArray[i][j] = div;
+      board[`${i}-${j}`] = {
+        domElement: div,
+        value: undefined,
+        clicked: false
+      };
     }
 
     // right border
     rowElement.append(createBorder());
   }
+  console.log(board);
 }
