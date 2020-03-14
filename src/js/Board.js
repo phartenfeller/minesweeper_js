@@ -19,11 +19,7 @@ const cBorderSize = 10;
  */
 function setupBorad(rows, cols) {
   setBoardProperties(rows, cols);
-
-  createBorder(cols, topBorder, 't');
-  setupBlocks(rows, cols);
-  createBorder(cols, middleBorder, 'i');
-  createBorder(cols, bottomBorder, 'b');
+  initBorad(rows, cols);
 }
 
 /**
@@ -54,42 +50,6 @@ function resetGameButton() {
   $(gameButton).removeClass('sprite-btn-dead');
   $(gameButton).removeClass('sprite-btn-cool');
   $(gameButton).addClass('sprite-btn-smiley');
-}
-
-/**
- * Sets the blocks of the Game
- * @param {number} rows
- * @param {number} cols
- */
-function setupBlocks(rows, cols) {
-  initBorad(rows, cols);
-  /*
-  const blockDiv = document.createElement('div');
-  blockDiv.classList.values = [blockClass, 'sprite', 'sprite-blank'];
-
-  for (let i = 0; i < rows; i++) {
-
-  
-    // create row div
-    $(fieldContainer).append(`<div class="row" id="r${i}"></div>`);
-    const rowid = '#r' + i;
-
-    // left border
-    $(rowid).append('<div class="sprite sprite-border-vertical"></div>');
-
-    // blocks loop
-    for (let j = 0; j < cols; j++) {
-      // block
-
-      const div = `<div id="${i}-${j}" data-coords="${i}-${j}" class="${blockClass} sprite sprite-blank"></div>`;
-      $(rowid).append(div);
-    }
-
-    // right border
-    $(rowid).append('<div class="sprite sprite-border-vertical"></div>');
-    
-  }
-  */
 }
 
 /**

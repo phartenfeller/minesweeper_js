@@ -1,13 +1,18 @@
-import { createBlockDiv, createBorder, createRow } from './createDomElements';
+import createBorder from './createBorder';
+import {
+  createBlockDiv,
+  createRow,
+  createRowBorder
+} from './createDomElements';
 
 const board = {};
 
 /**
- * generate minesweeper board in the dom
+ * generate blocks for the board
  * @param {number} rows
  * @param {number} cols
  */
-export default function generateBoard(rows, cols) {
+function generateCentralBoard(rows, cols) {
   const fieldContainerElement = document.querySelector('#field-container');
   for (let i = 0; i < rows; i++) {
     // create row div
@@ -15,7 +20,7 @@ export default function generateBoard(rows, cols) {
     fieldContainerElement.appendChild(rowElement);
 
     // left border
-    rowElement.appendChild(createBorder());
+    rowElement.appendChild(createRowBorder());
 
     // blocks loop
     for (let j = 0; j < cols; j++) {
@@ -30,7 +35,19 @@ export default function generateBoard(rows, cols) {
     }
 
     // right border
-    rowElement.append(createBorder());
+    rowElement.append(createRowBorder());
   }
   console.log(board);
+}
+
+/**
+ * generate minesweeper board in the dom
+ * @param {number} rows
+ * @param {number} cols
+ */
+export default function generateBoard(rows, cols) {
+  createBorder(cols, 'top');
+  generateCentralBoard(rows, cols);
+  createBorder(cols, 'middle');
+  createBorder(cols, 'bottom');
 }

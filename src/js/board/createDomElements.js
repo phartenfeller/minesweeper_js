@@ -13,10 +13,10 @@ const createRow = row => {
   return rowDiv;
 };
 
-const createBorder = () => {
+const createRowBorder = () => {
   const borderDiv = document.createElement('div');
   borderDiv.classList.add('sprite', 'sprite-border-vertical');
   return borderDiv;
 };
 
-module.exports = { createBlockDiv, createRow, createBorder };
+module.exports = { createBlockDiv, createRow, createRowBorder };
