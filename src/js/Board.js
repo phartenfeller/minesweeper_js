@@ -1,12 +1,12 @@
+import initBorad from './board';
 import {
+  bottomBorder,
+  fieldContainer,
   game,
   gameBar,
-  fieldContainer,
   gameButton,
-  topBorder,
   middleBorder,
-  bottomBorder,
-  blockClass
+  topBorder
 } from './DomObjects';
 
 const cBlockSize = 16;
@@ -62,7 +62,14 @@ function resetGameButton() {
  * @param {number} cols
  */
 function setupBlocks(rows, cols) {
+  initBorad(rows, cols);
+  /*
+  const blockDiv = document.createElement('div');
+  blockDiv.classList.values = [blockClass, 'sprite', 'sprite-blank'];
+
   for (let i = 0; i < rows; i++) {
+
+  
     // create row div
     $(fieldContainer).append(`<div class="row" id="r${i}"></div>`);
     const rowid = '#r' + i;
@@ -73,13 +80,16 @@ function setupBlocks(rows, cols) {
     // blocks loop
     for (let j = 0; j < cols; j++) {
       // block
+
       const div = `<div id="${i}-${j}" data-coords="${i}-${j}" class="${blockClass} sprite sprite-blank"></div>`;
       $(rowid).append(div);
     }
 
     // right border
     $(rowid).append('<div class="sprite sprite-border-vertical"></div>');
+    
   }
+  */
 }
 
 /**

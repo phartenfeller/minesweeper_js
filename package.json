@@ -1,7 +1,7 @@
 {
   "name": "minesweeper_js",
   "version": "1.0.0",
-  "description": "In this Project I am trying to rebuild the original MS Minesweeper game with JavaScript, CSS and HTML. The only libary used is JQuery.",
+  "description": "The original Minesweeper rebuild with vanilla JavaScript, CSS and HTML",
   "private": true,
   "dependencies": {
     "jquery": "^3.3.1"
