@@ -1,23 +1,24 @@
+import generateBoard from './board';
+import emptyBorad from './board/emptyBoard';
 import { Bomb } from './Bomb.js';
-import { setupBorad, clearBorad } from './Board.js';
-import { Timer } from './Timer.js';
-import { Points } from './Points.js';
 import {
-  gameButton,
-  flags,
-  flagClass,
-  noBombClass,
-  fieldClass,
-  bombRedClass,
   bombClass,
-  btnSmileyClass,
+  bombRedClass,
   btnDeadClass,
-  inputRows,
+  btnSmileyClass,
+  fieldClass,
+  flagClass,
+  flags,
+  gameButton,
+  inputBombs,
   inputColumns,
-  inputBombs
+  inputRows,
+  noBombClass
 } from './DomObjects.js';
-import { getID, debugLog, changeClass, getSelector } from './Util.js';
+import { Points } from './Points.js';
+import { Timer } from './Timer.js';
 import { showTime } from './UI.js';
+import { changeClass, debugLog, getID, getSelector } from './Util.js';
 
 const cBomb = 'b';
 class Game {
@@ -42,7 +43,7 @@ class Game {
    * Setups the game
    */
   setupGame() {
-    clearBorad();
+    emptyBorad();
 
     const iRows = parseInt($(inputRows).val());
     const iCols = parseInt($(inputColumns).val());
@@ -63,7 +64,7 @@ class Game {
     this.boardArray = this.createBoardArray();
     this.gameWon = false;
 
-    setupBorad(this.rows, this.columns);
+    generateBoard(this.rows, this.columns);
 
     this.points = new Points(this.bombs);
     this.timer = new Timer();

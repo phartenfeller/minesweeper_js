@@ -81,5 +81,24 @@ function changeClass(selector, removeClass, addClass, markClicked = false) {
     classList.add(clickedClass);
   }
 }
+/**
+ * Removes all children of an element
+ * @param {domElement} domElement
+ */
+function removeChildElements(domElement) {
+  let child = domElement.lastElementChild;
+  while (child) {
+    domElement.removeChild(child);
+    child = domElement.lastElementChild;
+  }
+}
 
-export { splitNumber, getID, checkDebug, debugLog, changeClass, getSelector };
+export {
+  splitNumber,
+  getID,
+  checkDebug,
+  debugLog,
+  changeClass,
+  getSelector,
+  removeChildElements
+};
