@@ -6,7 +6,7 @@ import {
   topBorder,
   middleBorder,
   bottomBorder,
-  blockClass,
+  blockClass
 } from './DomObjects';
 
 const cBlockSize = 16;
@@ -73,7 +73,7 @@ function setupBlocks(rows, cols) {
     // blocks loop
     for (let j = 0; j < cols; j++) {
       // block
-      const div = `<div id="${i}-${j}" class="${blockClass} sprite sprite-blank"></div>`;
+      const div = `<div id="${i}-${j}" data-coords="${i}-${j}" class="${blockClass} sprite sprite-blank"></div>`;
       $(rowid).append(div);
     }
 

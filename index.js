@@ -29,7 +29,7 @@ function newGame() {
     /* AI Specific Code */
     const ai = new AI(game);
 
-    $('#AI').click(function() {
+    document.querySelector('#AI').addEventListener('click', () => {
       ai.startAI();
     });
   }

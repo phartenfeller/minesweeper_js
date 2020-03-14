@@ -14,9 +14,9 @@ import {
   btnDeadClass,
   inputRows,
   inputColumns,
-  inputBombs,
+  inputBombs
 } from './DomObjects.js';
-import { getID, debugLog, changeClass } from './Util.js';
+import { getID, debugLog, changeClass, getSelector } from './Util.js';
 import { showTime } from './UI.js';
 
 const cBomb = 'b';
@@ -207,6 +207,7 @@ class Game {
    * @param {id}     field
    */
   blockClicked(row, col, field = '') {
+    const selector = getSelector(row, col);
     field === '' ? (field = getID(row, col)) : field;
 
     debugLog('block clicked =>', field);
@@ -220,9 +221,9 @@ class Game {
     if ($(field).hasClass(fieldClass)) {
       // if this field is a bomb
       if (!this.checkNoBomb(row, col)) {
-        this.bombClicked(row, col, field);
+        this.bombClicked(row, col, selector);
       } else {
-        this.fieldClicked(row, col, field);
+        this.fieldClicked(row, col, field, selector);
       }
     }
   }
@@ -232,12 +233,13 @@ class Game {
    * @param {number} row
    * @param {number} col
    * @param {id}     field
+   * @param {string} selector
    */
-  fieldClicked(row, col, field) {
+  fieldClicked(row, col, field, selector) {
     this.amountFields--;
     const number = this.boardArray[row][col];
 
-    changeClass(field, fieldClass, `sprite-${number}`, true);
+    changeClass(selector, fieldClass, `sprite-${number}`, true);
 
     $(field).attr('data-value', number);
 
@@ -344,13 +346,13 @@ class Game {
    * process that runs if the player clicks on a bomb
    * @param {number} row
    * @param {number} col
-   * @param {field} field
+   * @param {string} selector
    */
-  bombClicked(row, col, field) {
-    debugLog('bomb clicked =>', field);
+  bombClicked(row, col, selector) {
+    debugLog('bomb clicked =>', selector);
 
     // mark clicked bomb red
-    changeClass(field, fieldClass, bombRedClass, true);
+    changeClass(selector, fieldClass, bombRedClass, true);
 
     // stop timer
     this.timer.stopTimer();
@@ -361,8 +363,11 @@ class Game {
     // show all other bombs
     for (let i = 0; i < this.bombs; i++) {
       if (this.bombsArray[i].row !== row || this.bombsArray[i].col !== col) {
-        const id = getID(this.bombsArray[i].row, this.bombsArray[i].col);
-        changeClass(id, fieldClass, bombClass);
+        const selector = getSelector(
+          this.bombsArray[i].row,
+          this.bombsArray[i].col
+        );
+        changeClass(selector, fieldClass, bombClass);
       }
     }
 

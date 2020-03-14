@@ -30,6 +30,16 @@ function getID(row, col) {
 }
 
 /**
+ * returns the selector corresponding to row and col
+ * @param  {number} row
+ * @param  {number} col
+ * @return {string}
+ */
+function getSelector(row, col) {
+  return `div[data-coords="${row}-${col}"]`;
+}
+
+/**
  * Returns true if you play locallay
  * @return {boolean}
  */
@@ -56,18 +66,20 @@ function debugLog(msg1, msg2 = '', msg3 = '', msg4 = '') {
 
 /**
  * Remove and Add class to element
- * @param {id} id
+ * @param {string} selector
  * @param {string} removeClass class which will get removed
  * @param {string} addClass class which will get added
  * @param {boolean} markClicked
  */
-function changeClass(id, removeClass, addClass, markClicked = false) {
-  $(id).removeClass(removeClass);
-  $(id).addClass(addClass);
+function changeClass(selector, removeClass, addClass, markClicked = false) {
+  const classList = document.querySelector(selector).classList;
+  console.log('classList', classList);
+  classList.remove(removeClass);
+  classList.add(addClass);
 
   if (markClicked) {
-    $(id).addClass(clickedClass);
+    classList.add(clickedClass);
   }
 }
 
-export { splitNumber, getID, checkDebug, debugLog, changeClass };
+export { splitNumber, getID, checkDebug, debugLog, changeClass, getSelector };
