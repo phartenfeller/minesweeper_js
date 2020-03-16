@@ -6,19 +6,18 @@ const borders = {
 
 /**
  * Creates top middle or bottom borderline
- * @param {number} cols
  * @param {string} border
+ * @param {Board} board
  */
-export default function createBorder(cols, border) {
-  const letter = borders[border].letter;
-  console.log('letter');
+export default function createBorder(border, board) {
+  const { letter } = borders[border];
   const rootElement = document.querySelector(borders[border].rootElementId);
 
   const borderDivLeft = document.createElement('div');
   borderDivLeft.classList.add('sprite', `sprite-border-${letter}l`);
   rootElement.appendChild(borderDivLeft);
 
-  for (let i = 1; i <= cols; i++) {
+  for (let i = 1; i <= board.cols; i += 1) {
     const borderDivMiddle = document.createElement('div');
     borderDivMiddle.classList.add('sprite', 'sprite-border-horizontal');
     rootElement.appendChild(borderDivMiddle);

@@ -1,6 +1,5 @@
-import generateBoard from './board';
-import emptyBorad from './board/emptyBoard';
-import { Bomb } from './Bomb.js';
+import Board from './board';
+import emptyBoard from './board/util/emtyBoard';
 import {
   bombClass,
   bombRedClass,
@@ -43,7 +42,9 @@ class Game {
    * Setups the game
    */
   setupGame() {
-    emptyBorad();
+    if (this.board) {
+      emptyBoard();
+    }
 
     const iRows = parseInt($(inputRows).val());
     const iCols = parseInt($(inputColumns).val());
@@ -54,126 +55,22 @@ class Game {
     this.bombs = iBombs < 1 ? 1 : iBombs;
 
     debugLog(
-      this.rows + ' rows, ',
-      this.columns + ' cols, ',
-      this.bombs + ' bombs'
+      `${this.rows} rows, `,
+      `${this.columns} cols, `,
+      `${this.bombs} bombs`
     );
 
     this.amountFields = this.rows * this.columns - this.bombs;
-    this.bombsArray = this.createBombs();
-    this.boardArray = this.createBoardArray();
+    this.board = new Board({
+      rows: this.rows,
+      cols: this.columns,
+      bombs: this.bombs
+    });
+    // this.board.fillBoardValues();
     this.gameWon = false;
-
-    generateBoard(this.rows, this.columns);
 
     this.points = new Points(this.bombs);
     this.timer = new Timer();
-  }
-
-  /**
-   * Randomly creates the Bombs
-   * @return {array} Bomb Objects.
-   */
-  createBombs() {
-    const bombsArray = [];
-
-    for (let i = 1; i <= this.bombs; i++) {
-      let uniqueBomb = false;
-      let randRow;
-      let randCol;
-      // Generate random Bombs and check if they are unique
-      while (!uniqueBomb) {
-        randRow = Math.floor(Math.random() * this.rows);
-        randCol = Math.floor(Math.random() * this.columns);
-
-        if (
-          !bombsArray.some(bomb => bomb.row === randRow && bomb.col === randCol)
-        ) {
-          uniqueBomb = true;
-        }
-      }
-      // Add Bomb to the bombsArray
-      bombsArray.push(new Bomb(randRow, randCol));
-      // Debug
-      if (this.showBombs) {
-        const block = `#${randRow}-${randCol}`;
-        $(block).toggleClass('field bomb');
-      }
-    }
-
-    debugLog('bombsArray =>', bombsArray);
-
-    return bombsArray;
-  }
-
-  /**
-   * Creates a two dimensional array of the board
-   * @return {array}  board array
-   */
-  createBoardArray() {
-    let boardArray = [];
-
-    for (let r = 0; r < this.rows; r++) {
-      boardArray[r] = [];
-      for (let c = 0; c < this.columns; c++) {
-        boardArray[r][c] = 0;
-      }
-    }
-
-    for (let i = 0; i < this.bombsArray.length; i++) {
-      const row = this.bombsArray[i].row;
-      const col = this.bombsArray[i].col;
-      boardArray[row][col] = cBomb;
-      boardArray = this.counterUpAround(row, col, boardArray);
-    }
-
-    debugLog('boardArray =>', boardArray);
-
-    return boardArray;
-  }
-
-  /**
-   * Calls to count up all fields around a block
-   * @param  {number} row
-   * @param  {number} col
-   * @param  {array}  boardArray
-   * @return {array}  boardArray
-   */
-  counterUpAround(row, col, boardArray) {
-    boardArray = this.counterUp(row + 1, col - 1, boardArray);
-    boardArray = this.counterUp(row + 1, col, boardArray);
-    boardArray = this.counterUp(row + 1, col + 1, boardArray);
-
-    boardArray = this.counterUp(row, col - 1, boardArray);
-    boardArray = this.counterUp(row, col + 1, boardArray);
-
-    boardArray = this.counterUp(row - 1, col - 1, boardArray);
-    boardArray = this.counterUp(row - 1, col, boardArray);
-    boardArray = this.counterUp(row - 1, col + 1, boardArray);
-
-    return boardArray;
-  }
-
-  /**
-   * Counts up a value in the bomb Array
-   * @param  {number} row
-   * @param  {number} col
-   * @param  {array}  boardArray
-   * @param  {object} boardConfig
-   * @return {array}  boardArray
-   */
-  counterUp(row, col, boardArray) {
-    if (
-      row >= 0 &&
-      row < this.rows &&
-      col >= 0 &&
-      col < this.columns &&
-      typeof boardArray[row][col] === 'number'
-    ) {
-      boardArray[row][col] = boardArray[row][col] + 1;
-    }
-
-    return boardArray;
   }
 
   /**
@@ -196,9 +93,8 @@ class Game {
 
     if (this.boardArray[row][col] === cBomb) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
   /**
@@ -305,8 +201,8 @@ class Game {
 
       // show not flagged bombs as flagged
       for (let i = 0; i < this.bombs; i++) {
-        const row = this.bombsArray[i].row;
-        const col = this.bombsArray[i].col;
+        const { row } = this.bombsArray[i];
+        const { col } = this.bombsArray[i];
 
         const field = getID(row, col);
 
@@ -315,8 +211,7 @@ class Game {
         }
       }
 
-      const settings =
-        this.rows + 'x' + this.columns + ', ' + this.bombs + ' Bombs ';
+      const settings = `${this.rows}x${this.columns}, ${this.bombs} Bombs `;
 
       showTime(settings, time);
       this.timer.stopTimer();
@@ -380,7 +275,7 @@ class Game {
       let id = $(this).attr('id');
       const row = parseInt(id.split('-')[0]);
       const col = parseInt(id.split('-')[1]);
-      id = '#' + id;
+      id = `#${id}`;
 
       // if no bomb
       if (game.checkNoBomb(row, col)) {

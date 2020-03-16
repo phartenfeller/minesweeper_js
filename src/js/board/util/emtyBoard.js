@@ -1,4 +1,4 @@
-import { removeChildElements } from '../Util';
+import { removeChildElements } from '../../Util';
 
 /**
  * Removes all relevant elements from the board to start a new game

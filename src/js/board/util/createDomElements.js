@@ -1,15 +1,15 @@
-const createBlockDiv = (row, col) => {
+const createBlockDiv = board => {
   const blockDiv = document.createElement('div');
   blockDiv.classList.add('block', 'sprite', 'sprite-blank');
-  blockDiv.dataset.row = row;
-  blockDiv.dataset.col = col;
+  blockDiv.dataset.row = board.row;
+  blockDiv.dataset.col = board.col;
   return blockDiv;
 };
 
-const createRow = row => {
+const createRow = board => {
   const rowDiv = document.createElement('div');
   rowDiv.classList.add('row');
-  rowDiv.id = `r${row}`;
+  rowDiv.id = `r${board.row}`;
   return rowDiv;
 };
 
