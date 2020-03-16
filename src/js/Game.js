@@ -9,9 +9,6 @@ import {
   flagClass,
   flags,
   gameButton,
-  inputBombs,
-  inputColumns,
-  inputRows,
   noBombClass
 } from './DomObjects.js';
 import { Points } from './Points.js';
@@ -31,9 +28,9 @@ class Game {
     this.debug = debug;
     this.showBombs = debug;
 
-    this.rows;
-    this.columns;
-    this.bombs;
+    this.rows = undefined;
+    this.columns = undefined;
+    this.bombs = undefined;
 
     this.setupGame();
   }
@@ -46,10 +43,11 @@ class Game {
       emptyBoard();
     }
 
-    const iRows = parseInt($(inputRows).val());
-    const iCols = parseInt($(inputColumns).val());
-    const iBombs = parseInt($(inputBombs).val());
+    const iRows = parseInt(document.getElementById('input-rows').value);
+    const iCols = parseInt(document.getElementById('input-columns').value);
+    const iBombs = parseInt(document.getElementById('input-bombs').value);
 
+    // min 8 rows and cols and 1 bomb
     this.rows = iRows < 8 ? 8 : iRows;
     this.columns = iCols < 8 ? 8 : iCols;
     this.bombs = iBombs < 1 ? 1 : iBombs;

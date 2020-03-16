@@ -1,8 +1,8 @@
-const createBlockDiv = board => {
+const createBlockDiv = (row, col) => {
   const blockDiv = document.createElement('div');
   blockDiv.classList.add('block', 'sprite', 'sprite-blank');
-  blockDiv.dataset.row = board.row;
-  blockDiv.dataset.col = board.col;
+  blockDiv.dataset.row = row;
+  blockDiv.dataset.col = col;
   return blockDiv;
 };
 

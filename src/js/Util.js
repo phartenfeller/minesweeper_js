@@ -26,7 +26,7 @@ function splitNumber(number) {
  * @return {id}
  */
 function getID(row, col) {
-  return '#' + row + '-' + col;
+  return `#${row}-${col}`;
 }
 
 /**
@@ -46,9 +46,8 @@ function getSelector(row, col) {
 function checkDebug() {
   if (window.location.href.indexOf('localhost') > 0) {
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
 /**
@@ -71,9 +70,8 @@ function debugLog(msg1, msg2 = '', msg3 = '', msg4 = '') {
  * @param {string} addClass class which will get added
  * @param {boolean} markClicked
  */
-function changeClass(selector, removeClass, addClass, markClicked = false) {
-  const classList = document.querySelector(selector).classList;
-  console.log('classList', classList);
+function changeClass(element, removeClass, addClass, markClicked = false) {
+  const { classList } = element;
   classList.remove(removeClass);
   classList.add(addClass);
 
@@ -81,6 +79,17 @@ function changeClass(selector, removeClass, addClass, markClicked = false) {
     classList.add(clickedClass);
   }
 }
+
+/**
+ * Remove and Add class to element
+ * @param {string} selector
+ * @param {string} cssClass class which is checked
+ */
+function hasClass(element, cssClass) {
+  const { classList } = element;
+  return classList.contains(cssClass);
+}
+
 /**
  * Removes all children of an element
  * @param {domElement} domElement
@@ -100,5 +109,6 @@ export {
   debugLog,
   changeClass,
   getSelector,
-  removeChildElements
+  removeChildElements,
+  hasClass
 };

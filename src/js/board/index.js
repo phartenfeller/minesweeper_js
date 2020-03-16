@@ -69,7 +69,7 @@ export default class Board {
       // blocks loop
       for (let j = 0; j < this.cols; j += 1) {
         // block
-        const div = createBlockDiv(this);
+        const div = createBlockDiv(i, j);
         rowElement.appendChild(div);
         this.board[i][j] = {
           domElement: div,
