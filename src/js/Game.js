@@ -1,10 +1,10 @@
 import Board from './board';
 import emptyBoard from './board/util/emtyBoard';
-import { fieldClass, flagClass, gameButton } from './DomObjects.js';
+import { flagClass, gameButton } from './DomObjects.js';
 import { Points } from './Points.js';
 import { Timer } from './Timer.js';
 import { showTime } from './UI.js';
-import { changeClass, debugLog, getID } from './Util.js';
+import { debugLog, getID } from './Util.js';
 
 const cBomb = 'b';
 class Game {
@@ -86,23 +86,34 @@ class Game {
   }
 
   /**
+   * Check if block is out of reach or already clicked
+   * @param {number} row
+   * @param {number} col
+   */
+  skippableBlock(row, col) {
+    if (row < 0 || row >= this.rows || col < 0 || col >= this.columns) {
+      return true;
+    }
+    return this.board.isClicked(row, col);
+  }
+
+  /**
    * process that runs if a field is clicked
    * @param {number} row
    * @param {number} col
-   * @param {id}     field
    */
   blockClicked(row, col) {
     // skip if field is not on gamefield
-    if (row < 0 || row >= this.rows || col < 0 || col >= this.columns) {
+    if (this.skippableBlock(row, col)) {
       return;
     }
 
-    const wasBomb = this.board.clickBlock(row, col);
+    const { wasBomb, number } = this.board.clickBlock(row, col);
 
     if (wasBomb) {
       this.bombClicked();
     } else {
-      this.fieldClicked(row, col, field, selector);
+      this.fieldClicked(row, col, number);
     }
   }
 
@@ -110,14 +121,10 @@ class Game {
    * Clicked on a field
    * @param {number} row
    * @param {number} col
+   * @param {number} number
    */
-  fieldClicked(row, col) {
+  fieldClicked(row, col, number) {
     this.amountFields -= 1;
-    const number = this.boardArray[row][col];
-
-    changeClass(selector, fieldClass, `sprite-${number}`, true);
-
-    $(field).attr('data-value', number);
 
     // if zero bombs around reveal the fields around
     if (number === 0) {

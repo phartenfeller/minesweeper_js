@@ -64,6 +64,17 @@ export default class Board {
   }
 
   /**
+   * Returns if block is clicked
+   * @param {number} row
+   * @param {number} col
+   */
+  isClicked(row, col) {
+    console.log(row, col);
+    console.log(this.board);
+    return this.board[row][col].clicked;
+  }
+
+  /**
    * generate blocks for the board
    */
   generateCentralBoard() {
@@ -197,10 +208,10 @@ export default class Board {
    * @return {boolean} wasBomb
    */
   clickBlock(row, col) {
+    console.log('clickBlock', row, col, this.board);
     const { value, domElement } = this.board[row][col];
     this.board[row][col].clicked = true;
 
-    console.log(value);
     domElement.removeEventListener('click', () => {});
     domElement.removeEventListener('contextmenu', () => {});
 
@@ -209,12 +220,11 @@ export default class Board {
       this.revealBombs();
       this.checkFlags();
       killEventListeners();
-      return true;
+      return { wasBomb: true, number: null };
     }
-    if (value < 0) {
-      changeClass(domElement, fieldClass, `sprite-${value}`, true);
-    }
-    return false;
+
+    changeClass(domElement, fieldClass, `sprite-${value || 0}`, true);
+    return { wasBomb: false, number: value || 0 };
   }
 
   /**
