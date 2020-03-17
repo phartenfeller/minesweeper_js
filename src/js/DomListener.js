@@ -1,10 +1,5 @@
 import { newGame } from '../../index.js';
-import {
-  block,
-  btnClickClass,
-  btnSmileyClass,
-  btnWowClass
-} from './DomObjects.js';
+import { btnClickClass, btnSmileyClass, btnWowClass } from './DomObjects.js';
 import { changeClass, hasClass } from './Util.js';
 
 /**
@@ -39,27 +34,31 @@ export default function initDomListeners(game) {
     });
   });
 
-  // $(game).on('click', field, function() {
-  //   const id = $(this).attr('id');
-  //   const row = parseInt(id.split('-')[0]);
-  //   const col = parseInt(id.split('-')[1]);
-  //   Game.blockClicked(row, col, `#${id}`);
-  // });
-
-  $(game).on('contextmenu', block, function() {
-    const id = $(this).attr('id');
-    Game.flagField(`#${id}`);
+  const fieldContainer = document.getElementById('field-container');
+  fieldContainer.addEventListener('mousedown', () => {
+    changeClass(gameButton, btnSmileyClass, btnWowClass);
   });
 
   const blocks = gameDiv.querySelectorAll('.block');
-  blocks.forEach(blockElement => {
-    blockElement.addEventListener('mousedown', () => {
-      changeClass(gameButton, btnSmileyClass, btnWowClass);
-    });
 
-    blockElement.addEventListener('click', e => {
-      const { row, col } = e.target.dataset;
+  const handleClick = e => {
+    const row = parseInt(e.target.dataset.row);
+    const col = parseInt(e.target.dataset.col);
+    console.log({ row, col });
+    // click
+    game.blockClicked(row, col);
+    e.target.removeEventListener('click', handleClick);
+  };
+
+  blocks.forEach(blockElement => {
+    blockElement.addEventListener('click', handleClick);
+
+    blockElement.addEventListener('contextmenu', e => {
+      e.preventDefault();
+      const row = parseInt(e.target.dataset.row);
+      const col = parseInt(e.target.dataset.col);
       console.log({ row, col });
+      game.flagField(row, col);
     });
   });
 }

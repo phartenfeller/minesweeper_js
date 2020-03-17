@@ -1,9 +1,18 @@
+import {
+  bombClass,
+  bombRedClass,
+  fieldClass,
+  flagClass,
+  noBombClass
+} from '../DomObjects';
+import { changeClass } from '../Util';
 import createBorder from './util/createBorder';
 import {
   createBlockDiv,
   createRow,
   createRowBorder
 } from './util/createDomElements';
+import killEventListeners from './util/killEventListeners';
 import logBoard from './util/logBoard';
 import resetGameButton from './util/resetGameButton';
 
@@ -22,6 +31,7 @@ export default class Board {
 
     this.board = [...Array(rows)].map(() => Array(cols));
     this.bombsArray = [];
+    this.flagArray = [];
 
     this.generateBoard();
   }
@@ -74,7 +84,8 @@ export default class Board {
         this.board[i][j] = {
           domElement: div,
           value: undefined,
-          clicked: false
+          clicked: false,
+          flagged: false
         };
       }
 
@@ -177,5 +188,79 @@ export default class Board {
         this.board[row][col].value += 1;
       }
     }
+  }
+
+  /**
+   * Handle click on block
+   * @param {number} row
+   * @param {number} col
+   * @return {boolean} wasBomb
+   */
+  clickBlock(row, col) {
+    const { value, domElement } = this.board[row][col];
+    this.board[row][col].clicked = true;
+
+    console.log(value);
+    domElement.removeEventListener('click', () => {});
+    domElement.removeEventListener('contextmenu', () => {});
+
+    if (value === 'b') {
+      changeClass(domElement, fieldClass, bombRedClass, true);
+      this.revealBombs();
+      this.checkFlags();
+      killEventListeners();
+      return true;
+    }
+    if (value < 0) {
+      changeClass(domElement, fieldClass, `sprite-${value}`, true);
+    }
+    return false;
+  }
+
+  /**
+   * Reveal all bombs on the board
+   */
+  revealBombs() {
+    this.bombsArray.forEach(bomb => {
+      const { domElement } = this.board[bomb.row][bomb.col];
+      changeClass(domElement, fieldClass, bombClass);
+    });
+  }
+
+  /**
+   * Check if all flagged fields are really bombs
+   */
+  checkFlags() {
+    // check if all flagged fields are really bombs
+    this.flagArray.forEach(flag => {
+      const { value, domElement } = this.board[flag.row][flag.col];
+      if (value !== 'b') {
+        changeClass(domElement, flagClass, noBombClass);
+      }
+    });
+  }
+
+  /**
+   * Flag a block on the board
+   * @param {number} row
+   * @param {number} col
+   * @return {boolean} flaggedBefore
+   */
+  handleFlag(row, col) {
+    const { flagged, domElement } = this.board[row][col];
+    if (!flagged) {
+      this.flagArray.push({ row, col });
+      this.board[row][col].flagged = true;
+      changeClass(domElement, fieldClass, flagClass);
+      return false;
+    }
+
+    this.flagArray = this.flagArray.filter(flag => {
+      console.log(flag, row, col);
+      return !(flag.row === row && flag.col === col);
+    });
+    this.board[row][col].flagged = false;
+    changeClass(domElement, flagClass, fieldClass);
+    return true;
   }
 }
