@@ -69,8 +69,6 @@ export default class Board {
    * @param {number} col
    */
   isClicked(row, col) {
-    console.log(row, col);
-    console.log(this.board);
     return this.board[row][col].clicked;
   }
 
@@ -209,22 +207,19 @@ export default class Board {
    */
   clickBlock(row, col) {
     console.log('clickBlock', row, col, this.board);
-    const { value, domElement } = this.board[row][col];
+    const { value, domElement, flagged } = this.board[row][col];
     this.board[row][col].clicked = true;
 
-    domElement.removeEventListener('click', () => {});
-    domElement.removeEventListener('contextmenu', () => {});
-
-    if (value === 'b') {
+    if (!flagged && value === 'b') {
       changeClass(domElement, fieldClass, bombRedClass, true);
       this.revealBombs();
       this.checkFlags();
       killEventListeners();
-      return { wasBomb: true, number: null };
+      return { wasBomb: true, wasFlag: flagged, number: null };
     }
 
     changeClass(domElement, fieldClass, `sprite-${value || 0}`, true);
-    return { wasBomb: false, number: value || 0 };
+    return { wasBomb: false, wasFlag: flagged, number: value || 0 };
   }
 
   /**
@@ -272,5 +267,21 @@ export default class Board {
     this.board[row][col].flagged = false;
     changeClass(domElement, flagClass, fieldClass);
     return true;
+  }
+
+  /**
+   * change board to show that the game is won
+   */
+  winGame() {
+    // show win button
+    const gameButton = document.getElementById('game-button');
+    changeClass(gameButton, 'btn-smiley', 'btn-cool');
+
+    // show not flagged bombs as flagged
+    this.bombsArray.forEach(bomb => {
+      if (!this.board[bomb.row][bomb.col].flagged) {
+        this.handleFlag(bomb.row, bomb.col);
+      }
+    });
   }
 }

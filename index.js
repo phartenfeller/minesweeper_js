@@ -1,5 +1,4 @@
 import { AI } from './src/js/AI.js';
-import initDomListeners from './src/js/DomListener.js';
 import { Game } from './src/js/Game.js';
 import { checkDebug } from './src/js/Util.js';
 
@@ -15,7 +14,6 @@ function newGame() {
     game.setupGame();
   } else {
     game = new Game(debug);
-    initDomListeners(game);
 
     /* AI Specific Code */
     const ai = new AI(game);

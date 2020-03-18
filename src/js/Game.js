@@ -1,10 +1,10 @@
 import Board from './board';
 import emptyBoard from './board/util/emtyBoard';
-import { flagClass, gameButton } from './DomObjects.js';
+import DomListenerHandler from './DomListener';
 import { Points } from './Points.js';
 import { Timer } from './Timer.js';
 import { showTime } from './UI.js';
-import { debugLog, getID } from './Util.js';
+import { debugLog } from './Util.js';
 
 const cBomb = 'b';
 class Game {
@@ -21,6 +21,8 @@ class Game {
     this.rows = undefined;
     this.columns = undefined;
     this.bombs = undefined;
+
+    this.domListenerHandler = new DomListenerHandler(this);
 
     this.setupGame();
   }
@@ -54,35 +56,12 @@ class Game {
       cols: this.columns,
       bombs: this.bombs
     });
+    this.domListenerHandler.init();
     // this.board.fillBoardValues();
     this.gameWon = false;
 
     this.points = new Points(this.bombs);
     this.timer = new Timer();
-  }
-
-  /**
-   * Returns true if field is no bomb
-   * @param  {number}  row
-   * @param  {number}  col
-   * @return {boolean} true = no bomb, false = bomb
-   */
-  checkNoBomb(row, col) {
-    // Error handling
-    if (isNaN(row)) {
-      const error = new Error('Row is NaN');
-      throw error;
-    }
-
-    if (isNaN(col)) {
-      const error = new Error('Col is NaN');
-      throw error;
-    }
-
-    if (this.boardArray[row][col] === cBomb) {
-      return false;
-    }
-    return true;
   }
 
   /**
@@ -101,20 +80,27 @@ class Game {
    * process that runs if a field is clicked
    * @param {number} row
    * @param {number} col
+   * @return {boolaen} wasFlag
    */
   blockClicked(row, col) {
     // skip if field is not on gamefield
     if (this.skippableBlock(row, col)) {
-      return;
+      return false;
     }
 
-    const { wasBomb, number } = this.board.clickBlock(row, col);
+    const { wasBomb, wasFlag, number } = this.board.clickBlock(row, col);
 
+    console.log({ wasBomb, wasFlag, number });
+
+    if (wasFlag) {
+      return true;
+    }
     if (wasBomb) {
       this.bombClicked();
-    } else {
-      this.fieldClicked(row, col, number);
+      return false;
     }
+    this.fieldClicked(row, col, number);
+    return false;
   }
 
   /**
@@ -153,46 +139,13 @@ class Game {
   }
 
   /**
-   * calculates how many bombs are around a field
-   * @param  {number} row
-   * @param  {number} col
-   * @return {number} amount sourrounding bombs
-   */
-  checkSurroundings(row, col) {
-    let amount = 0;
-    // row
-    for (let r = -1; r <= 1; r++) {
-      for (let c = -1; c <= 1; c++) {
-        if (!this.checkNoBomb(row + r, col + c)) {
-          amount++;
-        }
-      }
-    }
-    return amount;
-  }
-
-  /**
    * procedure which sets the game to won
    */
   winGame() {
     if (!this.gameWon) {
       const time = this.timer.getFinishTime();
       console.log('time =>', time);
-
-      // show win button
-      $(gameButton).toggleClass('btn-smiley btn-cool');
-
-      // show not flagged bombs as flagged
-      for (let i = 0; i < this.bombs; i++) {
-        const { row } = this.bombsArray[i];
-        const { col } = this.bombsArray[i];
-
-        const field = getID(row, col);
-
-        if (!$(field).hasClass(flagClass)) {
-          this.flagField($(field));
-        }
-      }
+      this.board.winGame();
 
       const settings = `${this.rows}x${this.columns}, ${this.bombs} Bombs `;
 
