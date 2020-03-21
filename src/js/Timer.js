@@ -1,17 +1,5 @@
-import { splitNumber, changeClass } from './util';
+import { splitNumber } from './util';
 
-const allDigits = [
-  'sprite-d0',
-  'sprite-d1',
-  'sprite-d2',
-  'sprite-d3',
-  'sprite-d4',
-  'sprite-d5',
-  'sprite-d6',
-  'sprite-d7',
-  'sprite-d8',
-  'sprite-d9'
-];
 class Timer {
   /**
    * Constructor
@@ -57,7 +45,6 @@ class Timer {
    */
   timerClass(digit, num) {
     const number = num || 0;
-    console.log({ digit, number });
     const { domElement, value } = this.domElements[digit];
 
     if (value !== number) {

@@ -206,7 +206,6 @@ export default class Board {
    * @return {boolean} wasBomb
    */
   clickBlock(row, col) {
-    console.log('clickBlock', row, col, this.board);
     const { value, domElement, flagged } = this.board[row][col];
     this.board[row][col].clicked = true;
 

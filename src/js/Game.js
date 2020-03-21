@@ -89,8 +89,6 @@ class Game {
 
     const { wasBomb, wasFlag, number } = this.board.clickBlock(row, col);
 
-    console.log({ wasBomb, wasFlag, number });
-
     if (wasFlag) {
       return true;
     }
@@ -113,7 +111,7 @@ class Game {
 
     // if zero bombs around reveal the fields around
     if (number === 0) {
-      this.clickFieldsAround(row, col);
+      this.floodFill(row, col);
     }
 
     // win game when all fields which are not bombs are clicked
@@ -160,17 +158,21 @@ class Game {
    * @param {number} row
    * @param {number} col
    */
-  clickFieldsAround(row, col) {
-    this.blockClicked(row - 1, col - 1);
-    this.blockClicked(row - 1, col);
-    this.blockClicked(row - 1, col + 1);
+  floodFill(row, col) {
+    // timeout so the ui has time to repaint in the meantime
+    // => looks way smoother
+    setTimeout(() => {
+      this.blockClicked(row - 1, col - 1);
+      this.blockClicked(row - 1, col);
+      this.blockClicked(row - 1, col + 1);
 
-    this.blockClicked(row + 1, col - 1);
-    this.blockClicked(row + 1, col);
-    this.blockClicked(row + 1, col + 1);
+      this.blockClicked(row + 1, col - 1);
+      this.blockClicked(row + 1, col);
+      this.blockClicked(row + 1, col + 1);
 
-    this.blockClicked(row, col - 1);
-    this.blockClicked(row, col + 1);
+      this.blockClicked(row, col - 1);
+      this.blockClicked(row, col + 1);
+    }, 1);
   }
 
   /**
