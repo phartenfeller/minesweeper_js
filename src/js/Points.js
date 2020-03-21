@@ -1,4 +1,4 @@
-import { splitNumber } from './Util.js';
+import { splitNumber } from './util';
 
 class Points {
   /**

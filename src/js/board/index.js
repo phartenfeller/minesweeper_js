@@ -1,3 +1,4 @@
+import { changeClass } from 'util';
 import {
   bombClass,
   bombRedClass,
@@ -5,7 +6,6 @@ import {
   flagClass,
   noBombClass
 } from '../DomObjects';
-import { changeClass } from '../Util';
 import createBorder from './util/createBorder';
 import {
   createBlockDiv,

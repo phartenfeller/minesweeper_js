@@ -1,5 +1,5 @@
+import { changeClass } from 'util';
 import { hiddenClass, visibleClass } from './DomObjects';
-import { changeClass } from './Util';
 
 /**
  * Adds time in results table

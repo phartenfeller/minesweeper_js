@@ -1,5 +1,17 @@
-import { splitNumber } from './Util.js';
+import { splitNumber, changeClass } from './util';
 
+const allDigits = [
+  'sprite-d0',
+  'sprite-d1',
+  'sprite-d2',
+  'sprite-d3',
+  'sprite-d4',
+  'sprite-d5',
+  'sprite-d6',
+  'sprite-d7',
+  'sprite-d8',
+  'sprite-d9'
+];
 class Timer {
   /**
    * Constructor
@@ -8,8 +20,10 @@ class Timer {
     this.seconds = 0;
     this.secondsArray = [];
 
+    this.initTimerDomElements();
+
     this.interval = setInterval(() => {
-      this.seconds++;
+      this.seconds += 1;
 
       if (this.seconds === 999) {
         this.stopTimer();
@@ -26,24 +40,30 @@ class Timer {
   }
 
   /**
+   * Get Timer Dom Elements
+   */
+  initTimerDomElements() {
+    this.domElements = {};
+    for (let i = 0; i <= 2; i += 1) {
+      const domElement = document.getElementById(`timer-${i + 1}`);
+      this.domElements[i + 1] = { domElement, value: 0 };
+    }
+  }
+
+  /**
    * Sets one digit of the ingame Timer to a value
    * @param {number} digit
-   * @param {number} number
+   * @param {number} num
    */
-  timerClass(digit, number) {
-    number = number === undefined ? 0 : number;
-    const timerID = `#timer-${digit}`;
-    const currentstate = parseInt(
-      $(timerID)
-        .attr('class')
-        .split('d')[2]
-    );
+  timerClass(digit, num) {
+    const number = num || 0;
+    console.log({ digit, number });
+    const { domElement, value } = this.domElements[digit];
 
-    if (currentstate !== number) {
-      for (let i = 0; i <= 9; i++) {
-        $(timerID).removeClass(`sprite-d${i}`);
-      }
-      $(timerID).addClass(`sprite-d${number}`);
+    if (value !== number) {
+      domElement.classList.remove(`sprite-d${value}`);
+      domElement.classList.add(`sprite-d${number}`);
+      this.domElements[digit].value = number;
     }
   }
 
@@ -75,4 +95,4 @@ class Timer {
   }
 }
 
-export { Timer };
+export default Timer;

@@ -20,9 +20,6 @@
         }
       }
     ],
-    "arrow-parens": 0,
-    "linebreak-style": 0,
-    "no-invalid-this": 0,
     "max-statements": [2, 16],
     "max-depth": [2, 5],
     "complexity": [2, 8],

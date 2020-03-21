@@ -1,6 +1,6 @@
 import { AI } from './src/js/AI.js';
 import { Game } from './src/js/Game.js';
-import { checkDebug } from './src/js/Util.js';
+import { checkDebug } from './src/js/Util2.js';
 
 const debug = checkDebug();
 let game;

@@ -1,6 +1,6 @@
-import { newGame } from '../../index.js';
-import { btnClickClass, btnSmileyClass, btnWowClass } from './DomObjects.js';
-import { changeClass, hasClass } from './Util.js';
+import { changeClass, hasClass } from './util';
+import { newGame } from '../../index';
+import { btnClickClass, btnSmileyClass, btnWowClass } from './DomObjects';
 
 let wasAlreadyInitialized = false;
 
