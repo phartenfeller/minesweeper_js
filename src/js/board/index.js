@@ -1,4 +1,4 @@
-import { changeClass } from 'util';
+import { changeClass } from '../util';
 import {
   bombClass,
   bombRedClass,

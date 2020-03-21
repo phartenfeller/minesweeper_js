@@ -1,7 +1,7 @@
 import Board from './board';
 import emptyBoard from './board/util/emtyBoard';
 import DomListenerHandler from './DomListener';
-import { Points } from './Points';
+import Points from './Points';
 import Timer from './Timer';
 import { showTime } from './UI';
 import { debugLog } from './Util2';
