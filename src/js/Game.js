@@ -3,7 +3,7 @@ import emptyBoard from './board/util/emtyBoard';
 import DomListenerHandler from './DomListener';
 import Points from './Points';
 import Timer from './Timer';
-import { showTime } from './UI';
+import { showTime } from './util';
 import { debugLog } from './Util2';
 
 class Game {
@@ -61,6 +61,14 @@ class Game {
 
     this.points = new Points(this.bombs);
     this.timer = new Timer();
+  }
+
+  /**
+   * Restart game
+   */
+  newGame() {
+    this.clearGame();
+    this.setupGame();
   }
 
   /**

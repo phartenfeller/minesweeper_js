@@ -1,4 +1,3 @@
-import { newGame } from '../../index';
 import { btnClickClass, btnSmileyClass, btnWowClass } from './DomObjects';
 import { changeClass, hasClass } from './util';
 
@@ -62,7 +61,7 @@ export default class DomListenerHandler {
     });
 
     gameButton.addEventListener('click', () => {
-      newGame();
+      this.game.newGame();
     });
 
     this.gameDiv = document.getElementById('game');

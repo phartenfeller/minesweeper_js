@@ -1,4 +1,4 @@
-import { debug } from '../../index.js';
+const debug = true;
 
 /** delete
  * returns the id corresponding to row and col

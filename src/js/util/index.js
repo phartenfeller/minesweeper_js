@@ -1,6 +1,7 @@
 import changeClass from './changeClass';
-import splitNumber from './splitNumber';
-import removeChildElements from './removeChildElements';
 import hasClass from './hasClass';
+import removeChildElements from './removeChildElements';
+import showTime from './showTime';
+import splitNumber from './splitNumber';
 
-export { changeClass, splitNumber, removeChildElements, hasClass };
+export { changeClass, splitNumber, removeChildElements, hasClass, showTime };
