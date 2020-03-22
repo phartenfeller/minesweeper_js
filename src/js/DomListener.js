@@ -1,6 +1,6 @@
-import { changeClass, hasClass } from './util';
 import { newGame } from '../../index';
 import { btnClickClass, btnSmileyClass, btnWowClass } from './DomObjects';
+import { changeClass, hasClass } from './util';
 
 let wasAlreadyInitialized = false;
 

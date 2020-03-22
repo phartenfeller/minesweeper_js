@@ -1,4 +1,3 @@
-import { changeClass } from '../util';
 import {
   bombClass,
   bombRedClass,
@@ -6,6 +5,7 @@ import {
   flagClass,
   noBombClass
 } from '../DomObjects';
+import { changeClass } from '../util';
 import createBorder from './util/createBorder';
 import {
   createBlockDiv,
@@ -47,8 +47,8 @@ export default class Board {
 
     const game = document.getElementById('game');
     game.style.zoom = 3;
-    game.style.height = gameHeight;
-    game.style.width = gameWidth;
+    game.style.height = `${gameHeight}px`;
+    game.style.width = `${gameWidth}px`;
 
     const gameBar = document.getElementById('gamebar');
     gameBar.style.width = gameBarWidth;
