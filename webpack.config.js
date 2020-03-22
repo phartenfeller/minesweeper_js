@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -9,11 +8,7 @@ module.exports = {
       { from: './index.html', to: './' },
       { from: './src/css', to: './src/css' },
       { from: './sprites', to: './sprites/' }
-    ]),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
-    })
+    ])
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
