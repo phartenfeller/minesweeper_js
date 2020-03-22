@@ -27,7 +27,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
     "build-dev": "webpack --mode=development --output-filename ./dist/bundle.js",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",

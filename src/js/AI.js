@@ -1,12 +1,11 @@
-import { getID, debugLog } from './Util2.js';
-
 import {
-  field,
-  flagClass,
-  clicked,
   blockClass,
-  clickedClass
-} from './DomObjects.js';
+  clicked,
+  clickedClass,
+  field,
+  flagClass
+} from './DomObjects';
+import { debugLog, getID } from './Util2';
 
 let changes = 0;
 let iterations = 0;
