@@ -1,6 +1,4 @@
-# minesweeper_js
-
-## Minesweeper with JavaScript, CSS and HTML.
+# minesweeper_js - Minesweeper with vanilla JavaScript, CSS and HTML.
 
 In this Project I am trying to rebuild the original MS Minesweeper game with vanilla JavaScript, CSS and HTML. No Library or Framework used.
 
