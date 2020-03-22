@@ -1,12 +1,11 @@
-import { getID } from './Util.js';
-import { debugLog } from './Util.js';
 import {
-  field,
-  flagClass,
-  clicked,
   blockClass,
+  clicked,
   clickedClass,
-} from './DomObjects.js';
+  field,
+  flagClass
+} from './DomObjects';
+import { debugLog, getID } from './Util2';
 
 let changes = 0;
 let iterations = 0;
@@ -62,7 +61,7 @@ class AI {
     const unclickedIDs = [];
 
     $(field).each(function() {
-      unclickedIDs.push('#' + $(this).attr('id'));
+      unclickedIDs.push(`#${$(this).attr('id')}`);
     });
 
     const randomID = Math.floor(Math.random() * unclickedIDs.length);

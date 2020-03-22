@@ -1,21 +1,21 @@
-const game = $('#game');
+const game = '#game';
 
-const newGameButton = $('#newgame-btn');
-const gameButton = $('#game-button');
-const gameBar = $('#gamebar');
+const newGameButton = '#newgame-btn';
+const gameButton = '#game-button';
+const gameBar = '#gamebar';
 
-const topBorder = $('#top-border');
-const middleBorder = $('#middle-border');
-const bottomBorder = $('#bottom-border');
+const topBorder = '#top-border';
+const middleBorder = '#middle-border';
+const bottomBorder = '#bottom-border';
 
-const fieldContainer = $('#field-container');
-const settingsContainer = $('#settings-container');
+const fieldContainer = '#field-container';
+const settingsContainer = '#settings-container';
 
-const inputRows = $('#input-rows');
-const inputColumns = $('#input-columns');
-const inputBombs = $('#input-bombs');
+const inputRows = '#input-rows';
+const inputColumns = '#input-columns';
+const inputBombs = '#input-bombs';
 
-const scores = $('#scores');
+const scores = '#scores';
 
 /* Class selectors */
 
@@ -74,5 +74,5 @@ export {
   inputRows,
   inputColumns,
   inputBombs,
-  clicked,
+  clicked
 };

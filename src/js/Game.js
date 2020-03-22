@@ -1,25 +1,11 @@
-import { Bomb } from './Bomb.js';
-import { setupBorad, clearBorad } from './Board.js';
-import { Timer } from './Timer.js';
-import { Points } from './Points.js';
-import {
-  gameButton,
-  flags,
-  flagClass,
-  noBombClass,
-  fieldClass,
-  bombRedClass,
-  bombClass,
-  btnSmileyClass,
-  btnDeadClass,
-  inputRows,
-  inputColumns,
-  inputBombs,
-} from './DomObjects.js';
-import { getID, debugLog, changeClass } from './Util.js';
-import { showTime } from './UI.js';
+import Board from './board';
+import emptyBoard from './board/util/emtyBoard';
+import DomListenerHandler from './DomListener';
+import Points from './Points';
+import Timer from './Timer';
+import { showTime } from './util';
+import { debugLog } from './Util2';
 
-const cBomb = 'b';
 class Game {
   /**
    * Setups a Game
@@ -31,9 +17,11 @@ class Game {
     this.debug = debug;
     this.showBombs = debug;
 
-    this.rows;
-    this.columns;
-    this.bombs;
+    this.rows = undefined;
+    this.columns = undefined;
+    this.bombs = undefined;
+
+    this.domListenerHandler = new DomListenerHandler(this);
 
     this.setupGame();
   }
@@ -42,208 +30,96 @@ class Game {
    * Setups the game
    */
   setupGame() {
-    clearBorad();
+    if (this.board) {
+      emptyBoard();
+    }
 
-    const iRows = parseInt($(inputRows).val());
-    const iCols = parseInt($(inputColumns).val());
-    const iBombs = parseInt($(inputBombs).val());
+    const iRows = parseInt(document.getElementById('input-rows').value);
+    const iCols = parseInt(document.getElementById('input-columns').value);
+    const iBombs = parseInt(document.getElementById('input-bombs').value);
 
+    // min 8 rows and cols and 1 bomb
     this.rows = iRows < 8 ? 8 : iRows;
     this.columns = iCols < 8 ? 8 : iCols;
     this.bombs = iBombs < 1 ? 1 : iBombs;
 
     debugLog(
-      this.rows + ' rows, ',
-      this.columns + ' cols, ',
-      this.bombs + ' bombs'
+      `${this.rows} rows, `,
+      `${this.columns} cols, `,
+      `${this.bombs} bombs`
     );
 
     this.amountFields = this.rows * this.columns - this.bombs;
-    this.bombsArray = this.createBombs();
-    this.boardArray = this.createBoardArray();
+    this.board = new Board({
+      rows: this.rows,
+      cols: this.columns,
+      bombs: this.bombs
+    });
+    this.domListenerHandler.init();
+    // this.board.fillBoardValues();
     this.gameWon = false;
-
-    setupBorad(this.rows, this.columns);
 
     this.points = new Points(this.bombs);
     this.timer = new Timer();
   }
 
   /**
-   * Randomly creates the Bombs
-   * @return {array} Bomb Objects.
+   * Restart game
    */
-  createBombs() {
-    const bombsArray = [];
-
-    for (let i = 1; i <= this.bombs; i++) {
-      let uniqueBomb = false;
-      let randRow;
-      let randCol;
-      // Generate random Bombs and check if they are unique
-      while (!uniqueBomb) {
-        randRow = Math.floor(Math.random() * this.rows);
-        randCol = Math.floor(Math.random() * this.columns);
-
-        if (
-          !bombsArray.some(bomb => bomb.row === randRow && bomb.col === randCol)
-        ) {
-          uniqueBomb = true;
-        }
-      }
-      // Add Bomb to the bombsArray
-      bombsArray.push(new Bomb(randRow, randCol));
-      // Debug
-      if (this.showBombs) {
-        const block = `#${randRow}-${randCol}`;
-        $(block).toggleClass('field bomb');
-      }
-    }
-
-    debugLog('bombsArray =>', bombsArray);
-
-    return bombsArray;
+  newGame() {
+    this.clearGame();
+    this.setupGame();
   }
 
   /**
-   * Creates a two dimensional array of the board
-   * @return {array}  board array
+   * Check if block is out of reach or already clicked
+   * @param {number} row
+   * @param {number} col
    */
-  createBoardArray() {
-    let boardArray = [];
-
-    for (let r = 0; r < this.rows; r++) {
-      boardArray[r] = [];
-      for (let c = 0; c < this.columns; c++) {
-        boardArray[r][c] = 0;
-      }
-    }
-
-    for (let i = 0; i < this.bombsArray.length; i++) {
-      const row = this.bombsArray[i].row;
-      const col = this.bombsArray[i].col;
-      boardArray[row][col] = cBomb;
-      boardArray = this.counterUpAround(row, col, boardArray);
-    }
-
-    debugLog('boardArray =>', boardArray);
-
-    return boardArray;
-  }
-
-  /**
-   * Calls to count up all fields around a block
-   * @param  {number} row
-   * @param  {number} col
-   * @param  {array}  boardArray
-   * @return {array}  boardArray
-   */
-  counterUpAround(row, col, boardArray) {
-    boardArray = this.counterUp(row + 1, col - 1, boardArray);
-    boardArray = this.counterUp(row + 1, col, boardArray);
-    boardArray = this.counterUp(row + 1, col + 1, boardArray);
-
-    boardArray = this.counterUp(row, col - 1, boardArray);
-    boardArray = this.counterUp(row, col + 1, boardArray);
-
-    boardArray = this.counterUp(row - 1, col - 1, boardArray);
-    boardArray = this.counterUp(row - 1, col, boardArray);
-    boardArray = this.counterUp(row - 1, col + 1, boardArray);
-
-    return boardArray;
-  }
-
-  /**
-   * Counts up a value in the bomb Array
-   * @param  {number} row
-   * @param  {number} col
-   * @param  {array}  boardArray
-   * @param  {object} boardConfig
-   * @return {array}  boardArray
-   */
-  counterUp(row, col, boardArray) {
-    if (
-      row >= 0 &&
-      row < this.rows &&
-      col >= 0 &&
-      col < this.columns &&
-      typeof boardArray[row][col] === 'number'
-    ) {
-      boardArray[row][col] = boardArray[row][col] + 1;
-    }
-
-    return boardArray;
-  }
-
-  /**
-   * Returns true if field is no bomb
-   * @param  {number}  row
-   * @param  {number}  col
-   * @return {boolean} true = no bomb, false = bomb
-   */
-  checkNoBomb(row, col) {
-    // Error handling
-    if (isNaN(row)) {
-      const error = new Error('Row is NaN');
-      throw error;
-    }
-
-    if (isNaN(col)) {
-      const error = new Error('Col is NaN');
-      throw error;
-    }
-
-    if (this.boardArray[row][col] === cBomb) {
-      return false;
-    } else {
+  skippableBlock(row, col) {
+    if (row < 0 || row >= this.rows || col < 0 || col >= this.columns) {
       return true;
     }
+    return this.board.isClicked(row, col);
   }
 
   /**
    * process that runs if a field is clicked
    * @param {number} row
    * @param {number} col
-   * @param {id}     field
+   * @return {boolaen} wasFlag
    */
-  blockClicked(row, col, field = '') {
-    field === '' ? (field = getID(row, col)) : field;
-
-    debugLog('block clicked =>', field);
-
+  blockClicked(row, col) {
     // skip if field is not on gamefield
-    if (row < 0 || row >= this.rows || col < 0 || col >= this.columns) {
-      return;
+    if (this.skippableBlock(row, col)) {
+      return false;
     }
 
-    // if field was not clicked before
-    if ($(field).hasClass(fieldClass)) {
-      // if this field is a bomb
-      if (!this.checkNoBomb(row, col)) {
-        this.bombClicked(row, col, field);
-      } else {
-        this.fieldClicked(row, col, field);
-      }
+    const { wasBomb, wasFlag, number } = this.board.clickBlock(row, col);
+
+    if (wasFlag) {
+      return true;
     }
+    if (wasBomb) {
+      this.bombClicked();
+      return false;
+    }
+    this.fieldClicked(row, col, number);
+    return false;
   }
 
   /**
    * Clicked on a field
    * @param {number} row
    * @param {number} col
-   * @param {id}     field
+   * @param {number} number
    */
-  fieldClicked(row, col, field) {
-    this.amountFields--;
-    const number = this.boardArray[row][col];
-
-    changeClass(field, fieldClass, `sprite-${number}`, true);
-
-    $(field).attr('data-value', number);
+  fieldClicked(row, col, number) {
+    this.amountFields -= 1;
 
     // if zero bombs around reveal the fields around
     if (number === 0) {
-      this.clickFieldsAround(row, col);
+      this.floodFill(row, col);
     }
 
     // win game when all fields which are not bombs are clicked
@@ -254,39 +130,17 @@ class Game {
 
   /**
    * flags a field on rightclick
-   * @param {id} field
+   * @param {number} row
+   * @param {number} col
    */
-  flagField(field) {
-    debugLog('Flag field =>', field);
+  flagField(row, col) {
+    const flaggedBefore = this.board.handleFlag(row, col);
 
-    if ($(field).hasClass(flagClass)) {
+    if (flaggedBefore) {
       this.points.addPoint();
-
-      changeClass(field, flagClass, fieldClass);
     } else {
       this.points.removePoint();
-
-      changeClass(field, fieldClass, flagClass);
     }
-  }
-
-  /**
-   * calculates how many bombs are around a field
-   * @param  {number} row
-   * @param  {number} col
-   * @return {number} amount sourrounding bombs
-   */
-  checkSurroundings(row, col) {
-    let amount = 0;
-    // row
-    for (let r = -1; r <= 1; r++) {
-      for (let c = -1; c <= 1; c++) {
-        if (!this.checkNoBomb(row + r, col + c)) {
-          amount++;
-        }
-      }
-    }
-    return amount;
   }
 
   /**
@@ -296,24 +150,9 @@ class Game {
     if (!this.gameWon) {
       const time = this.timer.getFinishTime();
       console.log('time =>', time);
+      this.board.winGame();
 
-      // show win button
-      $(gameButton).toggleClass('btn-smiley btn-cool');
-
-      // show not flagged bombs as flagged
-      for (let i = 0; i < this.bombs; i++) {
-        const row = this.bombsArray[i].row;
-        const col = this.bombsArray[i].col;
-
-        const field = getID(row, col);
-
-        if (!$(field).hasClass(flagClass)) {
-          this.flagField($(field));
-        }
-      }
-
-      const settings =
-        this.rows + 'x' + this.columns + ', ' + this.bombs + ' Bombs ';
+      const settings = `${this.rows}x${this.columns}, ${this.bombs} Bombs `;
 
       showTime(settings, time);
       this.timer.stopTimer();
@@ -327,68 +166,37 @@ class Game {
    * @param {number} row
    * @param {number} col
    */
-  clickFieldsAround(row, col) {
-    this.blockClicked(row - 1, col - 1);
-    this.blockClicked(row - 1, col);
-    this.blockClicked(row - 1, col + 1);
+  floodFill(row, col) {
+    // timeout so the ui has time to repaint in the meantime
+    // => looks way smoother
+    setTimeout(() => {
+      this.blockClicked(row - 1, col - 1);
+      this.blockClicked(row - 1, col);
+      this.blockClicked(row - 1, col + 1);
 
-    this.blockClicked(row + 1, col - 1);
-    this.blockClicked(row + 1, col);
-    this.blockClicked(row + 1, col + 1);
+      this.blockClicked(row + 1, col - 1);
+      this.blockClicked(row + 1, col);
+      this.blockClicked(row + 1, col + 1);
 
-    this.blockClicked(row, col - 1);
-    this.blockClicked(row, col + 1);
+      this.blockClicked(row, col - 1);
+      this.blockClicked(row, col + 1);
+    }, 1);
   }
 
   /**
    * process that runs if the player clicks on a bomb
-   * @param {number} row
-   * @param {number} col
-   * @param {field} field
    */
-  bombClicked(row, col, field) {
-    debugLog('bomb clicked =>', field);
-
-    // mark clicked bomb red
-    changeClass(field, fieldClass, bombRedClass, true);
-
+  bombClicked() {
     // stop timer
     this.timer.stopTimer();
 
-    // dead button
-    changeClass(gameButton, btnSmileyClass, btnDeadClass);
-
-    // show all other bombs
-    for (let i = 0; i < this.bombs; i++) {
-      if (this.bombsArray[i].row !== row || this.bombsArray[i].col !== col) {
-        const id = getID(this.bombsArray[i].row, this.bombsArray[i].col);
-        changeClass(id, fieldClass, bombClass);
-      }
-    }
-
-    // set context for each function below
-    const game = this;
-
-    // check if all flagged fields are really bombs
-    $(flags).each(function() {
-      let id = $(this).attr('id');
-      const row = parseInt(id.split('-')[0]);
-      const col = parseInt(id.split('-')[1]);
-      id = '#' + id;
-
-      // if no bomb
-      if (game.checkNoBomb(row, col)) {
-        changeClass(id, flagClass, noBombClass);
-      }
-    });
-
-    // lock all fields
-    for (let r = 0; r < this.rows; r++) {
-      for (let c = 0; c < this.columns; c++) {
-        const id = getID(r, c);
-        changeClass(id, null, null, true);
-      }
-    }
+    // // lock all fields
+    // for (let r = 0; r < this.rows; r++) {
+    //   for (let c = 0; c < this.columns; c++) {
+    //     const id = getID(r, c);
+    //     changeClass(id, null, null, true);
+    //   }
+    // }
   }
 
   /**
@@ -400,4 +208,4 @@ class Game {
   }
 }
 
-export { Game };
+export default Game;

@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -8,23 +7,19 @@ module.exports = {
     new CopyPlugin([
       { from: './index.html', to: './' },
       { from: './src/css', to: './src/css' },
-      { from: './sprites', to: './sprites/' },
-    ]),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-    }),
+      { from: './sprites', to: './sprites/' }
+    ])
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-      },
-    ],
-  },
+        loader: 'babel-loader'
+      }
+    ]
+  }
 };

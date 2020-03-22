@@ -1,67 +1,127 @@
-import {
-  gameButton,
-  field,
-  btnSmileyClass,
-  btnClickClass,
-  btnWowClass,
-  block,
-} from './DomObjects.js';
-import { newGame } from '../../index.js';
-import { changeClass } from './Util.js';
+import { btnClickClass, btnSmileyClass, btnWowClass } from './DomObjects';
+import { changeClass, hasClass } from './util';
 
-let Game;
-class DomListener {
+let wasAlreadyInitialized = false;
+
+export default class DomListenerHandler {
   /**
-   * Constructor
+   * Init all listening events to the dom
    * @param {Game} game
    */
   constructor(game) {
-    Game = game;
-
-    this.initDomListener();
+    console.log('domlistener');
+    this.game = game;
+    this.rightClickCooldown = {};
   }
 
   /**
-   * Initialistion Function
+   * Called from outside
    */
-  initDomListener() {
-    $(gameButton).mousedown(function() {
+  init() {
+    if (!wasAlreadyInitialized) {
+      this.initDomListeners();
+      wasAlreadyInitialized = true;
+    } else {
+      this.initBlockListeners();
+    }
+  }
+
+  /**
+   * Remove double rightclicks cooldown
+   * @param {string} selector
+   */
+  removeCooldown(selector) {
+    this.rightClickCooldown[selector] = false;
+  }
+
+  /**
+   * Prevents to fast rightclicks
+   * @param {number} row
+   * @param {number} col
+   * @return {boolean} prevented
+   */
+  preventDoubleRightclick(row, col) {
+    const selector = `${row}-${col}`;
+    if (!this.rightClickCooldown[selector]) {
+      this.rightClickCooldown[selector] = true;
+      setTimeout(() => this.removeCooldown(selector), 200);
+      return false;
+    }
+    console.log('right click prevented');
+    return true;
+  }
+
+  /**
+   * Setup all required listeners
+   */
+  initDomListeners() {
+    const gameButton = document.getElementById('game-button');
+    gameButton.addEventListener('mousedown', () => {
       changeClass(gameButton, btnSmileyClass, btnClickClass);
     });
 
-    $(game).mouseup(function() {
-      if ($(gameButton).hasClass(btnWowClass)) {
+    gameButton.addEventListener('click', () => {
+      this.game.newGame();
+    });
+
+    this.gameDiv = document.getElementById('game');
+    this.gameDiv.addEventListener('mouseup', () => {
+      if (hasClass(gameButton, btnWowClass)) {
         changeClass(gameButton, btnWowClass, btnSmileyClass);
-      } else if ($(gameButton).hasClass(btnClickClass)) {
+      } else if (hasClass(gameButton, btnClickClass)) {
         changeClass(gameButton, btnClickClass, btnSmileyClass);
       }
     });
 
-    $(gameButton).click(function() {
-      newGame();
+    const radioGroup = document.querySelectorAll('input[type="radio"]');
+    radioGroup.forEach(node => {
+      node.addEventListener('click', e => {
+        const value = parseInt(e.target.value);
+        console.log('value', value);
+        this.gameDiv.style.zoom = value;
+      });
     });
 
-    $('input:radio').click(function() {
-      const value = parseInt($(this).val());
-      $(game).css('zoom', value);
-    });
-
-    $(game).on('click', field, function() {
-      const id = $(this).attr('id');
-      const row = parseInt(id.split('-')[0]);
-      const col = parseInt(id.split('-')[1]);
-      Game.blockClicked(row, col, `#${id}`);
-    });
-
-    $(game).on('contextmenu', block, function() {
-      const id = $(this).attr('id');
-      Game.flagField(`#${id}`);
-    });
-
-    $(game).on('mousedown', field, function() {
+    const fieldContainer = document.getElementById('field-container');
+    fieldContainer.addEventListener('mousedown', () => {
       changeClass(gameButton, btnSmileyClass, btnWowClass);
+    });
+
+    this.initBlockListeners();
+  }
+
+  /**
+   * Listeners for blocks
+   */
+  initBlockListeners() {
+    const blocks = this.gameDiv.querySelectorAll('.block');
+
+    const handleClick = e => {
+      console.log('clickhandler');
+      const row = parseInt(e.target.dataset.row);
+      const col = parseInt(e.target.dataset.col);
+      console.log({ row, col });
+      // click
+      const flag = this.game.blockClicked(row, col);
+      console.log('flag', flag);
+      if (!flag) {
+        console.log('removeEventListener');
+        e.target.removeEventListener('click', handleClick);
+      }
+    };
+
+    blocks.forEach(blockElement => {
+      blockElement.addEventListener('click', handleClick);
+
+      blockElement.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        const row = parseInt(e.target.dataset.row);
+        const col = parseInt(e.target.dataset.col);
+        console.log({ row, col });
+        if (!this.preventDoubleRightclick(row, col)) {
+          this.game.flagField(row, col);
+        }
+      });
     });
   }
 }
-
-export { DomListener };
