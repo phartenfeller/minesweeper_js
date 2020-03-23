@@ -2,7 +2,7 @@
 
 In this Project I am trying to rebuild the original MS Minesweeper game with vanilla JavaScript, CSS and HTML. No Library or Framework used.
 
-You can play this project here: https://phartenfeller.github.io/minesweeper_js/
+You can play this project here: https://minesweepergame.de/
 
 ## Browser problems
 
