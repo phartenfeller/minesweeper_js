@@ -7,7 +7,8 @@ module.exports = {
     new CopyPlugin([
       { from: './index.html', to: './' },
       { from: './src/css', to: './src/css' },
-      { from: './sprites', to: './sprites/' }
+      { from: './assets', to: './assets/' },
+      { from: './favicon.ico', to: './' }
     ])
   ],
   output: {

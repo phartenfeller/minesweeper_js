@@ -61,7 +61,7 @@
 }
 
 .sprite {
-  background-image: url(../../sprites/spritesheet.png);
+  background-image: url(../../assets/sprites/spritesheet.png);
   background-repeat: no-repeat;
   display: block;
   image-rendering: pixelated;

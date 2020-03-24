@@ -33,7 +33,8 @@
         "tabWidth": 2,
         "trailingComma": "none"
       }
-    ]
+    ],
+    "linebreak-style": 0
   },
   "plugins": ["prettier"]
 }
