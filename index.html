@@ -8,66 +8,107 @@
   <link rel="icon" type="image/png" href="assets\icons\favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="assets\icons\android-192x192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets\icons\apple-touch-icon-180x180.png" sizes="180x180">
-  <link rel="stylesheet" type="text/css" href="src\css\minesweeper.css">
-  <link rel="stylesheet" type="text/css" href="src\css\ui.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff7367" />
 </head>
 
 <body>
   <header>
-    <h1>Minesweeper</h1>
+    <div class="flex items-center justify-between h-16 shadow-md">
+      <h1 class="mx-auto px-4 text-3xl flex ml-4 text-white">Minesweeper</h1>
+      <div class="mr-4 flex">
+        <span class="inline-flex rounded-md shadow-sm">
+          <button type="button" id="btn-install" hidden
+            class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-gray-700 bg-green-400 hover:bg-green-300 focus:outline-none focus:border-green-500 focus:shadow-outline-green active:bg-green-500 transition ease-in-out duration-150">
+            <svg class="-ml-1 mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M11,9 L11,5 L9,5 L9,9 L5,9 L5,11 L9,11 L9,15 L11,15 L11,11 L15,11 L15,9 L11,9 Z M10,20 C15.5228475,20 20,15.5228475 20,10 C20,4.4771525 15.5228475,0 10,0 C4.4771525,0 0,4.4771525 0,10 C0,15.5228475 4.4771525,20 10,20 Z M10,18 C14.418278,18 18,14.418278 18,10 C18,5.581722 14.418278,2 10,2 C5.581722,2 2,5.581722 2,10 C2,14.418278 5.581722,18 10,18 Z"
+                clip-rule="evenodd" />
+            </svg>
+            <span class="text-gray-800">
+              Install
+            </span>
+          </button>
+        </span>
+      </div>
+    </div>
   </header>
-  <div id="game" class="minesweeper img" oncontextmenu="return false;">
-    <div id="top-border" class="top-border"></div>
-    <div id="gamebar" class="gamebar">
-      <div class="sprite sprite-border-vertical-32" style="float:left"></div>
-      <div id="points" class="display points">
-        <div id="points-1" class="digit sprite sprite-d0"></div>
-        <div id="points-2" class="digit sprite sprite-d0"></div>
-        <div id="points-3" class="digit sprite sprite-d0"></div>
+  </div>
+  <div class="flex">
+    <div id="settings-container" class="shadow mx-8 px-8 py-4 rounded bg-white">
+      <h2 class="font-bold text-xl text-gray-900 text-center mb-2">Settings</h2>
+      <h4 class="sub-heading">Zoom</h4>
+      <div class="zoom-div mb-4">
+        <!-- <input type="radio" name="zoom" value="1"> 100%<br>
+        <input type="radio" name="zoom" value="2"> 200%<br>
+        <input type="radio" name="zoom" value="3" checked> 300% -->
+        <div class="mt-4">
+          <div class="flex items-center">
+            <input id="zoom_1" name="form-input zoom" type="radio" value="1"
+              class="form-radio h-4 w-4 text-green-500 transition duration-150 ease-in-out" />
+            <label for="zoom_1" class="ml-3">
+              <span class="block text-sm leading-5 font-medium text-gray-700">100%</span>
+            </label>
+          </div>
+          <div class="mt-4 flex items-center">
+            <input id="zoom_2" name="form-input zoom" type="radio" value="2"
+              class="form-radio h-4 w-4 text-green-500 transition duration-150 ease-in-out" />
+            <label for="zoom_2" class="ml-3">
+              <span class="block text-sm leading-5 font-medium text-gray-700">200%</span>
+            </label>
+          </div>
+          <div class="mt-4 flex items-center">
+            <input id="zoom_3" name="form-input zoom" type="radio" value="3" checked
+              class="form-radio h-4 w-4 text-green-500 transition duration-150 ease-in-out" />
+            <label for="zoom_3" class="ml-3">
+              <span class="block text-sm leading-5 font-medium text-gray-700">300%</span>
+            </label>
+          </div>
+        </div>
       </div>
-      <div id="game-button" class="btn sprite sprite-btn-smiley"></div>
-      <div id="timer" class="display timer">
-        <div id="timer-1" class="digit sprite sprite-d0"></div>
-        <div id="timer-2" class="digit sprite sprite-d0"></div>
-        <div id="timer-3" class="digit sprite sprite-d0"></div>
+      <hr>
+      <h4 class="sub-heading">Game Settings</h4>
+      <div>
+        <div>Rows:<input id="input-rows" type="number" min="8" value="10"></div>
+        <div>Columns:<input id="input-columns" type="number" min="8" value="10"></div>
+        <div>Bombs:<input id="input-bombs" type="number" min="2" value="10"></div>
       </div>
-      <div class="sprite sprite-border-vertical-32" style="float:right"></div>
+      <hr>
+      <div style="text-align:center;">
+        <button id="AI" class="round-btn btn-white">AI</button>
+        <button id="newgame-btn" class="round-btn btn-blue">New Game</button>
+      </div>
     </div>
-    <div id="middle-border" class="middle-border" style="height:10px"></div>
-    <div id="field-container"></div>
-    <div id="bottom-border" class="bottom-border" style="height:10px"></div>
+    <div id="game" class="minesweeper img" oncontextmenu="return false;">
+      <div id="top-border" class="top-border"></div>
+      <div id="gamebar" class="gamebar">
+        <div class="sprite sprite-border-vertical-32" style="float:left"></div>
+        <div id="points" class="display points">
+          <div id="points-1" class="digit sprite sprite-d0"></div>
+          <div id="points-2" class="digit sprite sprite-d0"></div>
+          <div id="points-3" class="digit sprite sprite-d0"></div>
+        </div>
+        <div id="game-button" class="btn sprite sprite-btn-smiley"></div>
+        <div id="timer" class="display timer">
+          <div id="timer-1" class="digit sprite sprite-d0"></div>
+          <div id="timer-2" class="digit sprite sprite-d0"></div>
+          <div id="timer-3" class="digit sprite sprite-d0"></div>
+        </div>
+        <div class="sprite sprite-border-vertical-32" style="float:right"></div>
+      </div>
+      <div id="middle-border" class="middle-border" style="height:10px"></div>
+      <div id="field-container"></div>
+      <div id="bottom-border" class="bottom-border" style="height:10px"></div>
+    </div>
+    <table id="scores" class="scores hidden">
+      <tr>
+        <th>Settings</th>
+        <th>Seconds</th>
+      </tr>
+    </table>
   </div>
-  <div id="settings-container" class="settings-container">
-    <h2 class="heading">Settings</h2>
-    <hr>
-    <h4 class="sub-heading">Zoom</h4>
-    <div class="zoom-div">
-      <input type="radio" name="zoom" value="1"> 100%<br>
-      <input type="radio" name="zoom" value="2"> 200%<br>
-      <input type="radio" name="zoom" value="3" checked> 300%
-    </div>
-    <hr>
-    <h4 class="sub-heading">Game Settings</h4>
-    <div>
-      <div>Rows:<input id="input-rows" type="number" min="8" value="10"></div>
-      <div>Columns:<input id="input-columns" type="number" min="8" value="10"></div>
-      <div>Bombs:<input id="input-bombs" type="number" min="2" value="10"></div>
-    </div>
-    <hr>
-    <div style="text-align:center;">
-      <button id="AI" class="round-btn btn-white">AI</button>
-      <button id="newgame-btn" class="round-btn btn-blue">New Game</button>
-    </div>
-  </div>
-  <table id="scores" class="scores hidden">
-    <tr>
-      <th>Settings</th>
-      <th>Seconds</th>
-    </tr>
-  </table>
-  </div>
-  <script src="./bundle.js"></script>
+  <script src="/bundle.js"></script>
+  <script src="/install.js"></script>
 </body>
 
 </html>

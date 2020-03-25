@@ -6,9 +6,12 @@ module.exports = {
   plugins: [
     new CopyPlugin([
       { from: './index.html', to: './' },
-      { from: './src/css', to: './src/css' },
+      // { from: './src/css', to: './src/css' },
       { from: './assets', to: './assets/' },
-      { from: './favicon.ico', to: './' }
+      { from: './favicon.ico', to: './' },
+      { from: './manifest.json', to: './' },
+      { from: './service-worker.js', to: './' },
+      { from: './install.js', to: './' }
     ])
   ],
   output: {
@@ -20,7 +23,21 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'postcss-loader'
+        ]
       }
     ]
+  },
+  // Optional for webpack-dev-server
+  devServer: {
+    watchContentBase: true,
+    contentBase: path.resolve(__dirname, 'dist'),
+    open: true
   }
 };
