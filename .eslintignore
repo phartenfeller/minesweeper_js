@@ -1,2 +1,5 @@
 dist/*
 libraries/*
+service-worker.js
+postcss.config.js
+tailwind.config.js
