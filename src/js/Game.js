@@ -22,6 +22,8 @@ class Game {
     this.bombs = undefined;
 
     this.domListenerHandler = new DomListenerHandler(this);
+    this.zoom = 3;
+    this.applyZoom();
 
     this.setupGame();
   }
@@ -205,6 +207,17 @@ class Game {
   clearGame() {
     this.timer.stopTimer();
     this.timer.setTimerToZero();
+  }
+
+  /**
+   * Apply zoom
+   * @param {number} newZoom
+   */
+  applyZoom(newZoom = undefined) {
+    this.zoom = newZoom || this.zoom;
+
+    const game = document.getElementById('game');
+    game.style.zoom = this.zoom;
   }
 }
 

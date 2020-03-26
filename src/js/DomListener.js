@@ -82,7 +82,7 @@ export default class DomListenerHandler {
       node.addEventListener('click', e => {
         const value = parseInt(e.target.value);
         console.log('value', value);
-        this.gameDiv.style.zoom = value;
+        this.game.applyZoom(value);
       });
     });
 

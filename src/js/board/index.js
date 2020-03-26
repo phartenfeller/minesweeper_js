@@ -46,7 +46,6 @@ export default class Board {
     const margin = `${(BLOCK_SIZE * this.cols) / 2 - 13 - 49}px`;
 
     const game = document.getElementById('game');
-    game.style.zoom = 3;
     game.style.height = `${gameHeight}px`;
     game.style.width = `${gameWidth}px`;
 
