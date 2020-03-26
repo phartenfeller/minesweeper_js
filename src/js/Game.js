@@ -11,7 +11,7 @@ class Game {
    * Setups a Game
    * @param {boolean} debug
    */
-  constructor(debug = false) {
+  constructor(initialZoom, debug = false) {
     debugLog('Setting up Game...');
 
     this.debug = debug;
@@ -22,7 +22,7 @@ class Game {
     this.bombs = undefined;
 
     this.domListenerHandler = new DomListenerHandler(this);
-    this.zoom = 3;
+    this.zoom = initialZoom;
     this.applyZoom();
 
     this.setupGame();

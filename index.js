@@ -15,10 +15,31 @@ if ('serviceWorker' in navigator) {
 }
 
 /**
+ * Get initial zoom value
+ * @return {Number} zoomLevel
+ */
+const getInitialZoom = () => {
+  const width = window.innerWidth;
+  let zoom;
+  if (width > 1000) {
+    zoom = 3;
+  } else if (width > 600) {
+    zoom = 2;
+  } else {
+    zoom = 1;
+  }
+
+  document.getElementById(`zoom_${zoom}`).checked = true;
+
+  return zoom;
+};
+
+/**
  * Function to start a new Game
  */
 function newGame() {
-  const game = new Game(debug);
+  const initialZoom = getInitialZoom();
+  const game = new Game(initialZoom, debug);
 
   /* AI Specific Code */
   const ai = new AI(game);
