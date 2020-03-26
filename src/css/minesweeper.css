@@ -61,10 +61,11 @@
 }
 
 .sprite {
-  background-image: url(../../assets/sprites/spritesheet.png);
+  background-image: url(/assets/sprites/spritesheet.png);
   background-repeat: no-repeat;
   display: block;
   image-rendering: pixelated;
+  image-rendering: crisp-edges;
   float: left;
 }
 
