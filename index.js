@@ -23,7 +23,7 @@ const getInitialZoom = () => {
   let zoom;
   if (width > 1000) {
     zoom = 3;
-  } else if (width > 600) {
+  } else if (width > 374) {
     zoom = 2;
   } else {
     zoom = 1;

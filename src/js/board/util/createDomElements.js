@@ -6,10 +6,10 @@ const createBlockDiv = (row, col) => {
   return blockDiv;
 };
 
-const createRow = board => {
+const createRow = row => {
   const rowDiv = document.createElement('div');
   rowDiv.classList.add('row');
-  rowDiv.id = `r${board.row}`;
+  rowDiv.id = `r${row}`;
   return rowDiv;
 };
 

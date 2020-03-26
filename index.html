@@ -3,6 +3,8 @@
 
 <head>
   <title>Minesweeper PWA</title>
+  <meta name="description"
+    content="Classic Minesweeper Game as a responsive and installable progressive web app (PWA).">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="assets\icons\favicon-16x16.png" sizes="16x16">
   <link rel="icon" type="image/png" href="assets\icons\favicon-32x32.png" sizes="32x32">
@@ -18,7 +20,7 @@
       <h1 class="mx-auto px-4 text-xl sm:text-2xl md:text-3xl flex ml-4 text-white">Minesweeper</h1>
       <div class="mr-4 flex">
         <a href="https://github.com/phartenfeller/minesweeper_js" class="inline-flex rounded-md">
-          <button type="button" id="btn-gh" style="color: #00000070;"
+          <button type="button" id="btn-gh" style="color: #00000070;" aria-label="Code on GitHub"
             class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md bg-transparent hover:bg-red-400 focus:outline-none focus:border-red-400 focus:shadow-outline-red active:bg-red-500 transition ease-in-out duration-150">
             <svg class="-ml-1 md:mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
               <path fill-rule="evenodd" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205
@@ -38,7 +40,7 @@
       </div>
       <div class="mr-4 flex">
         <span class="inline-flex rounded-md shadow-sm">
-          <button type="button" id="btn-install" hidden style="color: #087d51;"
+          <button type="button" id="btn-install" hidden style="color: #087d51;" aria-label="Install app"
             class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md bg-green-400 hover:bg-green-300 focus:outline-none focus:border-green-500 focus:shadow-outline-green active:bg-green-500 transition ease-in-out duration-150">
             <svg class="-ml-1 mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd"

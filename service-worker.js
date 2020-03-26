@@ -4,7 +4,9 @@ const FILES_TO_CACHE = [
   '/bundle.js',
   '/assets/sprites/spritesheet.png',
   '/src/css/minesweeper.css',
-  '/src/css/ui.css'
+  '/src/css/ui.css',
+  '/install.js',
+  '/manifest.json'
 ];
 
 self.addEventListener('install', event => {

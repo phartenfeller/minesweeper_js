@@ -78,7 +78,7 @@ export default class Board {
     const fieldContainerElement = document.querySelector('#field-container');
     for (let i = 0; i < this.rows; i += 1) {
       // create row div
-      const rowElement = createRow(this);
+      const rowElement = createRow(i);
       fieldContainerElement.appendChild(rowElement);
 
       // left border
