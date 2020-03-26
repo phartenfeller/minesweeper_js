@@ -60,6 +60,10 @@ export default class DomListenerHandler {
       changeClass(gameButton, btnSmileyClass, btnClickClass);
     });
 
+    document.getElementById('newgame-btn').addEventListener('click', () => {
+      this.game.newGame();
+    });
+
     gameButton.addEventListener('click', () => {
       this.game.newGame();
     });

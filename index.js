@@ -26,10 +26,6 @@ function newGame() {
   document.getElementById('AI').addEventListener('click', () => {
     ai.startAI();
   });
-
-  document.getElementById('newgame-btn').addEventListener('click', () => {
-    newGame();
-  });
 }
 
 newGame();
