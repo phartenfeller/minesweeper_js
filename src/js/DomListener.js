@@ -91,6 +91,20 @@ export default class DomListenerHandler {
       changeClass(gameButton, btnSmileyClass, btnWowClass);
     });
 
+    let collapseHelpHidden = true;
+    const collapseHelp = document.getElementById('collapse-help');
+    const collapseHelpContainer = document.getElementById(
+      'collapse-help-container'
+    );
+    collapseHelp.addEventListener('click', () => {
+      if (collapseHelpHidden) {
+        collapseHelpContainer.classList.remove('hidden');
+      } else {
+        collapseHelpContainer.classList.add('hidden');
+      }
+      collapseHelpHidden = !collapseHelpHidden;
+    });
+
     this.initBlockListeners();
   }
 
