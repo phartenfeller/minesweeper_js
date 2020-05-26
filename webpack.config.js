@@ -10,7 +10,7 @@ module.exports = {
       { from: './assets', to: './assets/' },
       { from: './favicon.ico', to: './' },
       { from: './manifest.json', to: './' },
-      { from: './service-worker.js', to: './' },
+      { from: './pwabuilder-sw.js', to: './' },
       { from: './install.js', to: './' }
     ])
   ],

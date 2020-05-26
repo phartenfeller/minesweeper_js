@@ -1,5 +1,5 @@
 dist/*
 libraries/*
-service-worker.js
+pwabuilder-sw.js
 postcss.config.js
 tailwind.config.js
