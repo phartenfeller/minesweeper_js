@@ -17,7 +17,7 @@
 <body>
   <header>
     <div class="flex items-center justify-between h-16 shadow-md">
-      <h1 class="mx-auto px-4 text-xl sm:text-2xl md:text-3xl flex ml-4 text-white">Minesweeper</h1>
+      <h1 class="mx-auto px-4 text-xl sm:text-2xl md:text-3xl flex ml-4 text-white">Minesweeper PWA</h1>
       <div class="mr-4 flex">
         <a href="https://github.com/phartenfeller/minesweeper_js" class="inline-flex rounded-md">
           <button type="button" id="btn-gh" style="color: #00000070;" aria-label="Code on GitHub"
@@ -57,8 +57,8 @@
   </header>
   <section>
     <div class="border-b mb-3">
-      <div class="border-l-2 border-transparent pl-8 pr-8 p-3" id="collapse-help">
-        <div class="flex justify-between items-center cursor-pointer select-none">
+      <div class="border-l-2 border-transparent">
+        <div id="collapse-help" class="flex justify-between items-center cursor-pointer select-none pl-8 p-3">
           <h2 class="text-grey-darkest font-thin text-lg">
             Help & About
           </h2>
@@ -72,8 +72,10 @@
             </svg>
           </div>
         </div>
-        <div class="text-gray-600 pt-2 hidden transition-all duration-500 ease-in-out" id="collapse-help-container">
-          <div>
+        <div class="px-8 text-gray-600 pt-2 hidden transition-all duration-500 ease-in-out"
+          id="collapse-help-container">
+          <div>Minesweeper PWA v1.1</div>
+          <div class="my-2">
             The objective of Minesweeper is to clear the board and uncover all Mines. When a mine is detonated by
             clicking
             on it the game is lost. When you uncover a field which is not a mine, the sum of neighboring bombs will be
@@ -81,9 +83,15 @@
             you
             think are mines.
           </div>
-          <div>
+          <div class="my-2">
             This Minesweeper-Website is a Progressive Web App (PWA). This means you can install it by clicking on the
             install button in the top left. Then this Minesweeper PWA will also work offline.
+          </div>
+          <div class="my-2">
+            This Minesweeper game is programmed by
+            <a href="https://hartenfeller.dev"
+              class="text-purple-800 hover:text-purple-900 hover:underline active:text-purple-900">Philipp
+              Hartenfeller</a>
           </div>
         </div>
       </div>
@@ -192,6 +200,37 @@
       </tr>
     </table>
   </main>
+  <div id="stats-popup"
+    class="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center hidden">
+    <div class="fixed inset-0 transition-opacity">
+      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+    <div
+      class="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6"
+      role="dialog" aria-modal="true" aria-labelledby="Stats">
+      <div>
+        <div class="mt-3 text-center sm:mt-5">
+          <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+            Stats
+          </h3>
+          <div class="mt-2">
+            <p class="text-sm leading-5 text-gray-500">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius aliquam laudantium explicabo pariatur iste
+              dolorem animi vitae error totam. At sapiente aliquam accusamus facere veritatis.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 sm:mt-6">
+        <span class="flex w-full rounded-md shadow-sm sm:col-start-2">
+          <button type="button"
+            class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            Close
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
   <script src="/bundle.js"></script>
   <script src="/install.js"></script>
   <script type="module">
