@@ -7,14 +7,9 @@ class Points {
    */
   constructor(bombs) {
     this.points = bombs;
-
     this.initPontDomElements();
-
-    const pointsArray = splitNumber(this.points);
-
-    this.scoreClass(3, pointsArray[0]);
-    this.scoreClass(2, pointsArray[1]);
-    this.scoreClass(1, pointsArray[2]);
+    this.resetScore();
+    this.updateScore();
   }
 
   /**
@@ -24,7 +19,23 @@ class Points {
     this.domElements = {};
     for (let i = 0; i <= 2; i += 1) {
       const domElement = document.getElementById(`points-${i + 1}`);
-      this.domElements[i + 1] = { domElement, value: undefined };
+      this.domElements[i + 1] = { domElement, value: 0 };
+    }
+  }
+
+  /**
+   * Update current score display
+   */
+  updateScore() {
+    const points = splitNumber(this.points);
+
+    this.scoreClass(3, points[3]);
+    this.scoreClass(2, points[2]);
+
+    if (this.points < 0) {
+      this.scoreClass(1, '-');
+    } else {
+      this.scoreClass(1, points[1]);
     }
   }
 
@@ -33,15 +44,7 @@ class Points {
    */
   addPoint() {
     this.points += 1;
-    const pointsArray = splitNumber(this.points);
-
-    this.scoreClass(3, pointsArray[0]);
-    this.scoreClass(2, pointsArray[1]);
-    this.scoreClass(1, pointsArray[2]);
-
-    if (this.points < 0) {
-      this.scoreClass(1, '-');
-    }
+    this.updateScore();
   }
 
   /**
@@ -49,16 +52,7 @@ class Points {
    */
   removePoint() {
     this.points -= 1;
-    const pointsArray = splitNumber(this.points);
-
-    this.scoreClass(3, pointsArray[0]);
-    this.scoreClass(2, pointsArray[1]);
-
-    if (this.points < 0) {
-      this.scoreClass(1, '-');
-    } else {
-      this.scoreClass(1, pointsArray[2]);
-    }
+    this.updateScore();
   }
 
   /**
@@ -75,6 +69,19 @@ class Points {
       domElement.classList.remove(`sprite-d${value}`);
       domElement.classList.add(`sprite-d${number}`);
       this.domElements[display].value = number;
+    }
+  }
+
+  /**
+   * Set all displays to zero at the start of the game
+   */
+  resetScore() {
+    for (let i = 1; i < 4; i += 1) {
+      const { domElement } = this.domElements[i];
+      for (let j = 0; j < 10; j += 1) {
+        domElement.classList.remove(`sprite-d${j}`);
+      }
+      domElement.classList.add(`sprite-d${0}`);
     }
   }
 }

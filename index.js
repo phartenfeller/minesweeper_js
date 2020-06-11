@@ -33,7 +33,6 @@ function newGame() {
   const initialZoom = getInitialZoom();
   const game = new Game(initialZoom, debug);
 
-  /* AI Specific Code */
   const ai = new AI(game);
 
   document.getElementById('AI').addEventListener('click', () => {

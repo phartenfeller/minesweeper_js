@@ -1,17 +1,15 @@
 /**
  * Splits each digit of a number to an array
  * @param  {number} number
- * @return {array}
+ * @return {object}
  */
 export default function splitNumber(number) {
-  const numberArray = [];
+  const numberObj = {};
 
-  let unsigned = Math.abs(number);
+  const unsigned = Math.abs(number);
+  numberObj[1] = Math.floor((unsigned / 100) % 10);
+  numberObj[2] = Math.floor((unsigned / 10) % 10);
+  numberObj[3] = unsigned % 10;
 
-  while (unsigned > 0) {
-    numberArray[numberArray.length] = unsigned % 10;
-    unsigned = parseInt(unsigned / 10);
-  }
-
-  return numberArray;
+  return numberObj;
 }
