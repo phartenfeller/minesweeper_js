@@ -17,11 +17,11 @@ class Timer {
         this.stopTimer();
       }
 
-      const secondsArray = splitNumber(this.seconds);
+      const secondsObj = splitNumber(this.seconds);
 
-      this.timerClass(3, secondsArray[0]);
-      this.timerClass(2, secondsArray[1]);
-      this.timerClass(1, secondsArray[2]);
+      this.timerClass(3, secondsObj[3]);
+      this.timerClass(2, secondsObj[2]);
+      this.timerClass(1, secondsObj[1]);
     }, 1000);
 
     this.startTs = new Date();
