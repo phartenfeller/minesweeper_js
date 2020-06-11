@@ -46,8 +46,8 @@ export default class Board {
     const margin = `${(BLOCK_SIZE * this.cols) / 2 - 13 - 49}px`;
 
     const game = document.getElementById('game');
-    game.style.height = `${gameHeight}px`;
-    game.style.width = `${gameWidth}px`;
+    game.style.minHeight = `${gameHeight}px`;
+    game.style.minWidth = `${gameWidth}px`;
 
     const gameBar = document.getElementById('gamebar');
     gameBar.style.width = gameBarWidth;
@@ -107,7 +107,7 @@ export default class Board {
    */
   createBombs() {
     const isUniqueBomb = (row, col) =>
-      !this.bombsArray.some(bomb => bomb.row === row && bomb.col === col);
+      !this.bombsArray.some((bomb) => bomb.row === row && bomb.col === col);
 
     for (let i = 1; i <= this.bombs; i += 1) {
       let unique = false;
@@ -157,7 +157,7 @@ export default class Board {
    * Marks the values of thee board object, after the bombs are createt
    */
   countNumbers() {
-    this.bombsArray.forEach(bomb => {
+    this.bombsArray.forEach((bomb) => {
       this.counterUpAround(bomb.row, bomb.col);
     });
   }
@@ -224,7 +224,7 @@ export default class Board {
    * Reveal all bombs on the board
    */
   revealBombs() {
-    this.bombsArray.forEach(bomb => {
+    this.bombsArray.forEach((bomb) => {
       const { domElement } = this.board[bomb.row][bomb.col];
       changeClass(domElement, fieldClass, bombClass);
     });
@@ -235,7 +235,7 @@ export default class Board {
    */
   checkFlags() {
     // check if all flagged fields are really bombs
-    this.flagArray.forEach(flag => {
+    this.flagArray.forEach((flag) => {
       const { value, domElement } = this.board[flag.row][flag.col];
       if (value !== 'b') {
         changeClass(domElement, flagClass, noBombClass);
@@ -258,7 +258,7 @@ export default class Board {
       return false;
     }
 
-    this.flagArray = this.flagArray.filter(flag => {
+    this.flagArray = this.flagArray.filter((flag) => {
       console.log(flag, row, col);
       return !(flag.row === row && flag.col === col);
     });
@@ -276,7 +276,7 @@ export default class Board {
     changeClass(gameButton, 'btn-smiley', 'btn-cool');
 
     // show not flagged bombs as flagged
-    this.bombsArray.forEach(bomb => {
+    this.bombsArray.forEach((bomb) => {
       if (!this.board[bomb.row][bomb.col].flagged) {
         this.handleFlag(bomb.row, bomb.col);
       }
