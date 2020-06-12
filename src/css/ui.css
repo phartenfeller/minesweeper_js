@@ -128,3 +128,7 @@ hr {
   position: absolute;
   z-index: 10;
 }
+
+.r-180 {
+  transform: rotate(180deg);
+}

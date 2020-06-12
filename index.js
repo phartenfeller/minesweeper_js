@@ -1,6 +1,5 @@
 import './src/css/minesweeper.css';
 import './src/css/ui.css';
-import { AI } from './src/js/AI';
 import Game from './src/js/Game';
 import { checkDebug } from './src/js/Util2';
 
@@ -31,13 +30,14 @@ const getInitialZoom = () => {
  */
 function newGame() {
   const initialZoom = getInitialZoom();
-  const game = new Game(initialZoom, debug);
+  // eslint-disable-next-line no-new
+  new Game(initialZoom, debug);
 
-  const ai = new AI(game);
+  // const ai = new AI(game);
 
-  document.getElementById('AI').addEventListener('click', () => {
-    ai.startAI();
-  });
+  // document.getElementById('AI').addEventListener('click', () => {
+  //   ai.startAI();
+  // });
 }
 
 newGame();

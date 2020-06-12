@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import { btnClickClass, btnSmileyClass, btnWowClass } from './DomObjects';
 import { changeClass, hasClass } from './util';
 
@@ -96,13 +97,27 @@ export default class DomListenerHandler {
     const collapseHelpContainer = document.getElementById(
       'collapse-help-container'
     );
+    const chevronSvg = document.getElementById('chevron-svg');
     collapseHelp.addEventListener('click', () => {
       if (collapseHelpHidden) {
         collapseHelpContainer.classList.remove('hidden');
+        chevronSvg.classList.add('r-180');
       } else {
         collapseHelpContainer.classList.add('hidden');
+        chevronSvg.classList.remove('r-180');
       }
       collapseHelpHidden = !collapseHelpHidden;
+    });
+
+    const statsButton = document.getElementById('stats-btn');
+    const statsPopup = document.getElementById('stats-popup');
+    statsButton.addEventListener('click', () => {
+      statsPopup.classList.remove('hidden');
+    });
+
+    const statsCloseBtn = document.getElementById('stats-close-btn');
+    statsCloseBtn.addEventListener('click', () => {
+      statsPopup.classList.add('hidden');
     });
 
     this.initBlockListeners();
