@@ -1,7 +1,7 @@
-import './src/css/minesweeper.css';
-import './src/css/ui.css';
-import Game from './src/js/Game';
-import { checkDebug } from './src/js/Util2';
+import './css/minesweeper.css';
+import './css/ui.css';
+import Game from './js/Game';
+import { checkDebug } from './js/Util2';
 
 const debug = checkDebug();
 
