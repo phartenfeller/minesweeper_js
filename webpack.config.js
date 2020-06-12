@@ -11,7 +11,8 @@ module.exports = {
       { from: './favicon.ico', to: './' },
       { from: './manifest.json', to: './' },
       { from: './pwabuilder-sw.js', to: './' },
-      { from: './install.js', to: './' }
+      { from: './install.js', to: './' },
+      { from: './sitemap.xml', to: './' }
     ])
     // new HtmlWebpackPlugin({ filename: 'index.html', template: 'index.html' })
   ],
