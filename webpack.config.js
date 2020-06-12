@@ -1,18 +1,18 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   plugins: [
     new CopyPlugin([
-      { from: './index.html', to: './' },
-      // { from: './src/css', to: './src/css' },
       { from: './assets', to: './assets/' },
       { from: './favicon.ico', to: './' },
       { from: './manifest.json', to: './' },
       { from: './pwabuilder-sw.js', to: './' },
       { from: './install.js', to: './' }
-    ])
+    ]),
+    new HtmlWebpackPlugin()
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
