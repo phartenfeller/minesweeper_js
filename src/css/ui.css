@@ -71,39 +71,6 @@ header {
   background-color: #f9f5f5;
 }
 
-.visible {
-  visibility: visible;
-}
-
-.hidden {
-  visibility: hidden;
-}
-
-.scores {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  border-collapse: collapse;
-  float: left;
-  margin-left: 25px;
-}
-
-.scores td,
-.scores tr {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.scores th {
-  padding: 12px;
-  text-align: left;
-  background-color: #3b3bff;
-  color: white;
-}
-
-.scores tr:hover {
-  background-color: rgba(66, 133, 244, 0.3);
-}
-
 .heading {
   margin-top: 5px;
   margin-bottom: 10px;

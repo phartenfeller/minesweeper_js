@@ -1,4 +1,6 @@
 /* eslint-disable max-statements */
+import changeBestGame from './db/changeBestGames';
+import updateStatsData from './db/statsData';
 import { btnClickClass, btnSmileyClass, btnWowClass } from './DomObjects';
 import { changeClass, hasClass } from './util';
 
@@ -112,15 +114,21 @@ export default class DomListenerHandler {
     const statsButton = document.getElementById('stats-btn');
     const statsPopup = document.getElementById('stats-popup');
     statsButton.addEventListener('click', () => {
-      statsPopup.classList.remove('hidden');
+      updateStatsData();
+      statsPopup.classList.remove('invisible');
     });
 
     const statsCloseBtn = document.getElementById('stats-close-btn');
     statsCloseBtn.addEventListener('click', () => {
-      statsPopup.classList.add('hidden');
+      statsPopup.classList.add('invisible');
     });
 
     this.initBlockListeners();
+
+    const statsModeSelect = document.getElementById('stats-mode-select');
+    statsModeSelect.addEventListener('change', e => {
+      changeBestGame(e.target.value);
+    });
   }
 
   /**

@@ -1,22 +1,29 @@
-const scores = document.getElementById('scores');
-
 /**
  * Adds time in results table
- * @param {string} settings
- * @param {string} time
+ * @param {array} times
  */
-function showTime(settings, time) {
-  if (scores.classList.contains('hidden')) {
-    scores.classList.remove('hidden');
+function showTime(times, selector = '#scores tbody') {
+  const tableRef = document.querySelector(selector);
+  for (let i = tableRef.rows.length - 1; i > 0; i -= 1) {
+    tableRef.deleteRow(i);
   }
+  times.forEach(time => {
+    const row = tableRef.insertRow();
+    const winLose = row.insertCell(0);
+    const mode = row.insertCell(1);
+    const seconds = row.insertCell(2);
+    const date = row.insertCell(3);
 
-  const tableRef = document.querySelector('#scores tbody');
-  const row = tableRef.insertRow();
-  const settingsCell = row.insertCell(0);
-  const timeCell = row.insertCell(1);
+    row.className =
+      'px-6 py-4 whitespace-normal border-b border-gray-200 text-sm leading-5 text-gray-500';
 
-  settingsCell.appendChild(document.createTextNode(settings));
-  timeCell.appendChild(document.createTextNode(time));
+    winLose.appendChild(document.createTextNode(time.result.toUpperCase()));
+    mode.appendChild(document.createTextNode(time.mode));
+    seconds.appendChild(document.createTextNode(`${time.time}s`));
+    date.appendChild(
+      document.createTextNode(new Date(time.date).toLocaleString())
+    );
+  });
 }
 
 export default showTime;

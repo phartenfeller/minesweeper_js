@@ -1,9 +1,9 @@
 import Board from './board';
 import emptyBoard from './board/util/emtyBoard';
+import addGameResult from './db/addGameResult';
 import DomListenerHandler from './DomListener';
 import Points from './Points';
 import Timer from './Timer';
-import { showTime } from './util';
 import { debugLog } from './Util2';
 
 class Game {
@@ -153,11 +153,9 @@ class Game {
       const time = this.timer.getFinishTime();
       console.log('time =>', time);
       this.board.winGame();
-
-      const settings = `${this.rows}x${this.columns}, ${this.bombs} Bombs `;
-
-      showTime(settings, time);
       this.timer.stopTimer();
+      const settingsCode = this.getSettingsCode();
+      addGameResult({ mode: settingsCode, result: 'w', time });
     }
 
     this.gameWon = true;
@@ -189,8 +187,12 @@ class Game {
    * process that runs if the player clicks on a bomb
    */
   bombClicked() {
+    const time = this.timer.getFinishTime();
     // stop timer
     this.timer.stopTimer();
+
+    const settingsCode = this.getSettingsCode();
+    addGameResult({ mode: settingsCode, result: 'l', time });
 
     // // lock all fields
     // for (let r = 0; r < this.rows; r++) {
@@ -218,6 +220,13 @@ class Game {
 
     const game = document.getElementById('game');
     game.style.zoom = this.zoom;
+  }
+
+  /**
+   * Get settings code for db
+   */
+  getSettingsCode() {
+    return `${this.rows}x${this.columns} ${this.bombs}b`;
   }
 }
 
