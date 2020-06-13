@@ -1,17 +1,28 @@
-# minesweeper_js - Minesweeper with vanilla JavaScript, CSS and HTML.
+# Minesweeper with vanilla JavaScript, CSS and HTML.
 
-In this Project I am trying to rebuild the original MS Minesweeper game with vanilla JavaScript, CSS and HTML. No Library or Framework used.
+Original MS Minesweeper game with vanilla JavaScript, CSS and HTML. No Library or Framework used.
 
-You can play this project here: https://minesweepergame.de/
+You can play the game here: https://minesweepergame.de/
+
+## Features
+
+- Full offline support
+- Installable
+- No JavaScript Framework used for the Minesweeper part
+- Responsive UI with [TailwindCSS](https://github.com/tailwindcss/tailwindcss)
+- Statistics tracked with IndexDB and [Dexie](https://github.com/dfahlander/Dexie.js)
+- Customizable gamesettings
+
+## Todo
+
+- Save gamestate when closing / refreshing midgame
 
 ## Browser problems
 
-- ~~**IE**: Currently not supported. I'm planning to use babel in the future to add support.~~
-- **Edge and IE**: Doesn't support style `image-rendering: pixelated`. But with Edge changing the engine to Chromium this should be supported in the future. Can I use Link: [https://caniuse.com/#feat=css-crisp-edges](https://caniuse.com/#feat=css-crisp-edges)
-- **Edge and IE**: Sprites have ugly edges
+**IE** is not supported!
+
+Only the the Chromium **Edge** is supported
+
+- **Edge**: Sprites have ugly edges
 - **Firefox** doesn't support css zoom. Style `transform: scale()` could be the solution. Can I use Link: [https://caniuse.com/#feat=css-zoom](https://caniuse.com/#feat=css-zoom)
-
-## AI Concept
-
-1. When a tile has x bombs around and only x unclicked tiles => flag all.
-2. When a tile has x bombs around and x flagged => click all others
+- **Safari** has shitty PWA support, apple...
