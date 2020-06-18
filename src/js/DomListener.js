@@ -1,19 +1,21 @@
 /* eslint-disable max-statements */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["handleClick"] }] */
 import changeBestGame from './db/changeBestGames';
 import updateStatsData from './db/statsData';
 import { btnClickClass, btnSmileyClass, btnWowClass } from './DomObjects';
 import { changeClass, hasClass } from './util';
 
 let wasAlreadyInitialized = false;
+let globalGame;
 
-export default class DomListenerHandler {
+export default class DomListener {
   /**
    * Init all listening events to the dom
    * @param {Game} game
    */
   constructor(game) {
-    console.log('domlistener');
     this.game = game;
+    globalGame = game;
     this.rightClickCooldown = {};
   }
 
@@ -137,23 +139,7 @@ export default class DomListenerHandler {
   initBlockListeners() {
     const blocks = this.gameDiv.querySelectorAll('.block');
 
-    const handleClick = e => {
-      console.log('clickhandler');
-      const row = parseInt(e.target.dataset.row);
-      const col = parseInt(e.target.dataset.col);
-      console.log({ row, col });
-      // click
-      const flag = this.game.blockClicked(row, col);
-      console.log('flag', flag);
-      if (!flag) {
-        console.log('removeEventListener');
-        e.target.removeEventListener('click', handleClick);
-      }
-    };
-
     blocks.forEach(blockElement => {
-      blockElement.addEventListener('click', handleClick);
-
       blockElement.addEventListener('contextmenu', e => {
         e.preventDefault();
         const row = parseInt(e.target.dataset.row);
@@ -163,6 +149,18 @@ export default class DomListenerHandler {
           this.game.flagField(row, col);
         }
       });
+
+      blockElement.addEventListener('click', this.handleClick, { once: true });
     });
+  }
+
+  /**
+   * Handle a click on a block
+   * @param {Event} e
+   */
+  handleClick(e) {
+    const row = parseInt(e.target.dataset.row);
+    const col = parseInt(e.target.dataset.col);
+    globalGame.blockClicked(row, col);
   }
 }

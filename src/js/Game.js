@@ -1,7 +1,7 @@
 import Board from './board';
 import emptyBoard from './board/util/emtyBoard';
 import addGameResult from './db/addGameResult';
-import DomListenerHandler from './DomListener';
+import DomListener from './DomListener';
 import Points from './Points';
 import Timer from './Timer';
 import { debugLog } from './Util2';
@@ -21,7 +21,7 @@ class Game {
     this.columns = undefined;
     this.bombs = undefined;
 
-    this.domListenerHandler = new DomListenerHandler(this);
+    this.domListener = new DomListener(this);
     this.zoom = initialZoom;
     this.applyZoom();
 
@@ -55,9 +55,10 @@ class Game {
     this.board = new Board({
       rows: this.rows,
       cols: this.columns,
-      bombs: this.bombs
+      bombs: this.bombs,
+      domListener: this.domListener
     });
-    this.domListenerHandler.init();
+    this.domListener.init();
     // this.board.fillBoardValues();
     this.gameWon = false;
 
@@ -82,6 +83,7 @@ class Game {
     if (row < 0 || row >= this.rows || col < 0 || col >= this.columns) {
       return true;
     }
+    if (this.board.isFlagged(row, col)) return true;
     return this.board.isClicked(row, col);
   }
 
@@ -97,11 +99,8 @@ class Game {
       return false;
     }
 
-    const { wasBomb, wasFlag, number } = this.board.clickBlock(row, col);
+    const { wasBomb, number } = this.board.clickBlock(row, col);
 
-    if (wasFlag) {
-      return true;
-    }
     if (wasBomb) {
       this.bombClicked();
       return false;
