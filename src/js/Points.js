@@ -33,7 +33,7 @@ class Points {
     this.scoreClass(2, points[2]);
 
     if (this.points < 0) {
-      this.scoreClass(1, '-');
+      this.scoreClass(1, '-minus');
     } else {
       this.scoreClass(1, points[1]);
     }
