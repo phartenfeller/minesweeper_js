@@ -21,8 +21,7 @@ You can play the game here: https://minesweepergame.de/
 
 **IE** is not supported!
 
-Only the the Chromium **Edge** is supported
+Only Chromium **Edge** is supported
 
-- **Edge**: Sprites have ugly edges
 - **Firefox** doesn't support css zoom. Style `transform: scale()` could be the solution. Can I use Link: [https://caniuse.com/#feat=css-zoom](https://caniuse.com/#feat=css-zoom)
 - **Safari** has shitty PWA support, apple...
