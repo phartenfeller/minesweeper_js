@@ -1,4 +1,4 @@
-# Minesweeper with vanilla JavaScript, CSS and HTML.
+# Minesweeper PWA with vanilla JavaScript, CSS and HTML.
 
 Original MS Minesweeper game with vanilla JavaScript, CSS and HTML. No Library or Framework used.
 
