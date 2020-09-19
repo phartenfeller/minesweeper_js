@@ -1,13 +1,26 @@
 const installButton = document.getElementById('btn-install');
 let deferredInstallPrompt;
 
+const urlParams = new URLSearchParams(window.location.search);
+const startedParam = urlParams.get('started');
+const startedAsPwa = startedParam === 'pwa';
+
+const hideInstallButton = () => {
+  installButton.classList.add('hidden');
+};
+
+const showInstallButton = () => {
+  if (startedAsPwa) return;
+  installButton.classList.remove('hidden');
+};
+
 const installPWA = () => {
   deferredInstallPrompt.prompt();
 
   deferredInstallPrompt.userChoice.then(choice => {
     if (choice.outcome === 'accepted') {
       console.log('User accepted the A2HS prompt', choice);
-      installButton.hidden = true;
+      hideInstallButton();
     } else {
       console.log('User dismissed the A2HS prompt', choice);
     }
@@ -17,7 +30,7 @@ const installPWA = () => {
 
 const saveBeforeInstallPromptEvent = event => {
   deferredInstallPrompt = event;
-  installButton.hidden = false;
+  showInstallButton();
   installButton.addEventListener('click', () => {
     installPWA();
   });
