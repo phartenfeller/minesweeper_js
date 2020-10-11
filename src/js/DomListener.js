@@ -7,7 +7,7 @@ import { changeClass, hasClass } from './util';
 
 let wasAlreadyInitialized = false;
 let globalGame;
-let actionToggleStateActivate = true; // click action on touchscreens (flag or activate)
+let actionToggleStateClear = true; // click action on touchscreens (flag or clear)
 
 export default class DomListener {
   /**
@@ -139,8 +139,8 @@ export default class DomListener {
     const flagTranslate = 'translate-x-5';
 
     actionToggle.addEventListener('click', () => {
-      actionToggleStateActivate = !actionToggleStateActivate;
-      if (actionToggleStateActivate) {
+      actionToggleStateClear = !actionToggleStateClear;
+      if (actionToggleStateClear) {
         actionToggleThumb.classList.remove(flagTranslate);
         actionToggleThumb.classList.add(defuseTranslate);
         actionToggle.setAttribute('aria-checked', false);
@@ -180,7 +180,7 @@ export default class DomListener {
   handleClick(e) {
     const row = parseInt(e.target.dataset.row);
     const col = parseInt(e.target.dataset.col);
-    if (actionToggleStateActivate) {
+    if (actionToggleStateClear) {
       globalGame.blockClicked(row, col);
     } else {
       globalGame.flagField(row, col);

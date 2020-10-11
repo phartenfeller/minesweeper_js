@@ -100,7 +100,8 @@ hr {
   transform: rotate(180deg);
 }
 
-@media (hover: none) and (pointer: coarse), (hover: none) and (pointer: fine) {
+/* display clear and flag switcher on touch devices */
+@media (pointer: coarse), (hover: none) and (pointer: fine) {
   #click-action-toggle {
     display: block;
   }
