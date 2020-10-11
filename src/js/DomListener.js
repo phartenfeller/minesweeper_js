@@ -7,6 +7,7 @@ import { changeClass, hasClass } from './util';
 
 let wasAlreadyInitialized = false;
 let globalGame;
+let actionToggleStateActivate = true; // click action on touchscreens (flag or activate)
 
 export default class DomListener {
   /**
@@ -131,6 +132,24 @@ export default class DomListener {
     statsModeSelect.addEventListener('change', e => {
       changeBestGame(e.target.value);
     });
+
+    const actionToggle = document.getElementById('action-toggle');
+    const actionToggleThumb = document.getElementById('action-toggle-thumb');
+    const defuseTranslate = 'translate-x-0';
+    const flagTranslate = 'translate-x-5';
+
+    actionToggle.addEventListener('click', () => {
+      actionToggleStateActivate = !actionToggleStateActivate;
+      if (actionToggleStateActivate) {
+        actionToggleThumb.classList.remove(flagTranslate);
+        actionToggleThumb.classList.add(defuseTranslate);
+        actionToggle.setAttribute('aria-checked', false);
+      } else {
+        actionToggleThumb.classList.add(flagTranslate);
+        actionToggleThumb.classList.remove(defuseTranslate);
+        actionToggle.setAttribute('aria-checked', true);
+      }
+    });
   }
 
   /**
@@ -161,6 +180,10 @@ export default class DomListener {
   handleClick(e) {
     const row = parseInt(e.target.dataset.row);
     const col = parseInt(e.target.dataset.col);
-    globalGame.blockClicked(row, col);
+    if (actionToggleStateActivate) {
+      globalGame.blockClicked(row, col);
+    } else {
+      globalGame.flagField(row, col);
+    }
   }
 }

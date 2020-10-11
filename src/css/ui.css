@@ -99,3 +99,13 @@ hr {
 .r-180 {
   transform: rotate(180deg);
 }
+
+@media (hover: none) and (pointer: coarse), (hover: none) and (pointer: fine) {
+  #click-action-toggle {
+    display: block;
+  }
+
+  footer {
+    margin-bottom: 44px;
+  }
+}
