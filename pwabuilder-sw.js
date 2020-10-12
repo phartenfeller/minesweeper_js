@@ -1,7 +1,7 @@
 const CACHE = 'pwabuilder-offline';
 
 importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js'
+  'https://storage.googleapis.com/workbox-cdn/releases/5.1.4/workbox-sw.js'
 );
 
 self.addEventListener('message', event => {

@@ -1,5 +1,3 @@
-import { changeClass } from './src/js/util';
-
 const installButton = document.getElementById('btn-install');
 let deferredInstallPrompt;
 
@@ -8,12 +6,14 @@ const startedParam = urlParams.get('started');
 const startedAsPwa = startedParam === 'pwa';
 
 const hideInstallButton = () => {
-  changeClass(installButton, 'inline-flex', 'hidden');
+  installButton.classList.add('hidden');
+  installButton.classList.remove('flex');
 };
 
 const showInstallButton = () => {
   if (startedAsPwa) return;
-  changeClass(installButton, 'hidden', 'inline-flex');
+  installButton.classList.add('flex');
+  installButton.classList.remove('hidden');
 };
 
 const installPWA = () => {
