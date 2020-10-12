@@ -1,6 +1,13 @@
+import {
+  blockClass,
+  fieldClass,
+  spriteBorderVerticalClass,
+  spriteClass
+} from '../../DomObjects';
+
 const createBlockDiv = (row, col) => {
   const blockDiv = document.createElement('div');
-  blockDiv.classList.add('block', 'sprite', 'sprite-blank');
+  blockDiv.classList.add(blockClass, spriteClass, fieldClass);
   blockDiv.dataset.row = row;
   blockDiv.dataset.col = col;
   return blockDiv;
@@ -15,8 +22,8 @@ const createRow = row => {
 
 const createRowBorder = () => {
   const borderDiv = document.createElement('div');
-  borderDiv.classList.add('sprite', 'sprite-border-vertical');
+  borderDiv.classList.add(spriteClass, spriteBorderVerticalClass);
   return borderDiv;
 };
 
-module.exports = { createBlockDiv, createRow, createRowBorder };
+export { createBlockDiv, createRow, createRowBorder };

@@ -18,7 +18,7 @@ const inputBombs = '#input-bombs';
 const scores = '#scores';
 
 /* Class selectors */
-
+const spriteClass = 'sprite';
 // Buttons
 const btnSmileyClass = 'sprite-btn-smiley';
 const btnClickClass = 'sprite-btn-click';
@@ -31,7 +31,9 @@ const spriteBlankClass = 'sprite-blank';
 const noBombClass = 'sprite-no-bomb';
 const bombRedClass = 'sprite-bomb-red';
 const bombClass = 'sprite-bomb-grey';
-const blockClass = 'block';
+const blockClass = 'gameBlock';
+
+const spriteBorderVerticalClass = 'sprite-border-vertical';
 
 const clickedClass = 'clicked';
 const visibleClass = 'visible';
@@ -74,5 +76,7 @@ export {
   inputRows,
   inputColumns,
   inputBombs,
-  clicked
+  clicked,
+  spriteClass,
+  spriteBorderVerticalClass
 };

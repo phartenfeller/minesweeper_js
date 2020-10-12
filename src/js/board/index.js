@@ -1,4 +1,5 @@
 import {
+  blockClass,
   bombClass,
   bombRedClass,
   fieldClass,
@@ -276,7 +277,7 @@ export default class Board {
     this.board[row][col].flagged = false;
     changeClass(domElement, flagClass, fieldClass);
     const ele = document.querySelector(
-      `div.block[data-row="${row}"][data-col="${col}"]`
+      `div.${blockClass}[data-row="${row}"][data-col="${col}"]`
     );
     ele.addEventListener('click', this.domListener.handleClick, {
       once: true

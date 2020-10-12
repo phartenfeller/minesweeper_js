@@ -2,7 +2,12 @@
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["handleClick"] }] */
 import changeBestGame from './db/changeBestGames';
 import updateStatsData from './db/statsData';
-import { btnClickClass, btnSmileyClass, btnWowClass } from './DomObjects';
+import {
+  block,
+  btnClickClass,
+  btnSmileyClass,
+  btnWowClass
+} from './DomObjects';
 import { changeClass, hasClass } from './util';
 
 let wasAlreadyInitialized = false;
@@ -106,10 +111,10 @@ export default class DomListener {
     collapseHelp.addEventListener('click', () => {
       if (collapseHelpHidden) {
         collapseHelpContainer.classList.remove('hidden');
-        chevronSvg.classList.add('r-180');
+        chevronSvg.classList.add('rotate-180');
       } else {
         collapseHelpContainer.classList.add('hidden');
-        chevronSvg.classList.remove('r-180');
+        chevronSvg.classList.remove('rotate-180');
       }
       collapseHelpHidden = !collapseHelpHidden;
     });
@@ -154,7 +159,7 @@ export default class DomListener {
    * Listeners for blocks
    */
   initBlockListeners() {
-    const blocks = this.gameDiv.querySelectorAll('.block');
+    const blocks = this.gameDiv.querySelectorAll(block);
 
     blocks.forEach(blockElement => {
       blockElement.addEventListener('contextmenu', e => {
