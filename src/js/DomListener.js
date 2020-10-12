@@ -134,18 +134,6 @@ export default class DomListener {
       collapseHelpHidden = !collapseHelpHidden;
     });
 
-    const statsButton = document.getElementById('stats-btn');
-    const statsPopup = document.getElementById('stats-popup');
-    statsButton.addEventListener('click', () => {
-      updateStatsData();
-      statsPopup.classList.remove('invisible');
-    });
-
-    const statsCloseBtn = document.getElementById('stats-close-btn');
-    statsCloseBtn.addEventListener('click', () => {
-      statsPopup.classList.add('invisible');
-    });
-
     this.initBlockListeners();
 
     const statsModeSelect = document.getElementById('stats-mode-select');
@@ -153,6 +141,8 @@ export default class DomListener {
       changeBestGame(e.target.value);
     });
 
+    /* Touch device action toggle listeners */
+    const actionToggleRegion = document.getElementById('click-action-toggle');
     const actionToggle = document.getElementById('action-toggle');
     const actionToggleThumb = document.getElementById('action-toggle-thumb');
     const defuseTranslate = 'translate-x-0';
@@ -167,6 +157,21 @@ export default class DomListener {
         changeClass(actionToggleThumb, defuseTranslate, flagTranslate);
         actionToggle.setAttribute('aria-checked', true);
       }
+    });
+
+    /* Stats modal listeners */
+    const statsButton = document.getElementById('stats-btn');
+    const statsPopup = document.getElementById('stats-popup');
+    statsButton.addEventListener('click', () => {
+      updateStatsData();
+      statsPopup.classList.remove('invisible');
+      actionToggleRegion.classList.add('invisible');
+    });
+
+    const statsCloseBtn = document.getElementById('stats-close-btn');
+    statsCloseBtn.addEventListener('click', () => {
+      statsPopup.classList.add('invisible');
+      actionToggleRegion.classList.remove('invisible');
     });
   }
 
