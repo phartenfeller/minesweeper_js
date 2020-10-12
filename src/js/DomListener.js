@@ -14,6 +14,21 @@ let wasAlreadyInitialized = false;
 let globalGame;
 let actionToggleStateClear = true; // click action on touchscreens (flag or clear)
 
+/**
+ * Handle a click on a block
+ * @param {Event} e
+ */
+function handleClick(e) {
+  const row = parseInt(e.target.dataset.row);
+  const col = parseInt(e.target.dataset.col);
+  if (actionToggleStateClear) {
+    globalGame.blockClicked(row, col);
+  } else {
+    globalGame.flagField(row, col);
+    e.target.addEventListener('click', handleClick, { once: true });
+  }
+}
+
 export default class DomListener {
   /**
    * Init all listening events to the dom
@@ -172,21 +187,9 @@ export default class DomListener {
         }
       });
 
-      blockElement.addEventListener('click', this.handleClick, { once: true });
+      blockElement.addEventListener('click', handleClick, {
+        once: true
+      });
     });
-  }
-
-  /**
-   * Handle a click on a block
-   * @param {Event} e
-   */
-  handleClick(e) {
-    const row = parseInt(e.target.dataset.row);
-    const col = parseInt(e.target.dataset.col);
-    if (actionToggleStateClear) {
-      globalGame.blockClicked(row, col);
-    } else {
-      globalGame.flagField(row, col);
-    }
   }
 }
