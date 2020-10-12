@@ -1,4 +1,4 @@
-import { splitNumber } from './util';
+import { changeClass, splitNumber } from './util';
 
 class Points {
   /**
@@ -66,8 +66,7 @@ class Points {
     const { domElement, value } = this.domElements[display];
 
     if (value !== number) {
-      domElement.classList.remove(`sprite-d${value}`);
-      domElement.classList.add(`sprite-d${number}`);
+      changeClass(domElement, `sprite-d${value}`, `sprite-d${number}`);
       this.domElements[display].value = number;
     }
   }

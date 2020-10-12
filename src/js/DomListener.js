@@ -141,12 +141,10 @@ export default class DomListener {
     actionToggle.addEventListener('click', () => {
       actionToggleStateClear = !actionToggleStateClear;
       if (actionToggleStateClear) {
-        actionToggleThumb.classList.remove(flagTranslate);
-        actionToggleThumb.classList.add(defuseTranslate);
+        changeClass(actionToggleThumb, flagTranslate, defuseTranslate);
         actionToggle.setAttribute('aria-checked', false);
       } else {
-        actionToggleThumb.classList.add(flagTranslate);
-        actionToggleThumb.classList.remove(defuseTranslate);
+        changeClass(actionToggleThumb, defuseTranslate, flagTranslate);
         actionToggle.setAttribute('aria-checked', true);
       }
     });

@@ -1,4 +1,4 @@
-import { splitNumber } from './util';
+import { changeClass, splitNumber } from './util';
 
 class Timer {
   /**
@@ -48,8 +48,7 @@ class Timer {
     const { domElement, value } = this.domElements[digit];
 
     if (value !== number) {
-      domElement.classList.remove(`sprite-d${value}`);
-      domElement.classList.add(`sprite-d${number}`);
+      changeClass(domElement, `sprite-d${value}`, `sprite-d${number}`);
       this.domElements[digit].value = number;
     }
   }
