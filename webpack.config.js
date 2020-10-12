@@ -1,24 +1,30 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   plugins: [
     new CopyPlugin([
-      { from: './index.html', to: './' },
       { from: './assets', to: './assets/' },
       { from: './favicon.ico', to: './' },
       { from: './manifest.json', to: './' },
       { from: './pwabuilder-sw.js', to: './' },
       { from: './install.js', to: './' },
       { from: './sitemap.xml', to: './' }
-    ])
-    // new HtmlWebpackPlugin({ filename: 'index.html', template: 'index.html' })
+    ]),
+    new BundleAnalyzerPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'styles.[contenthash].css',
+      chunkFilename: 'styles.[contenthash].css'
+    }),
+    new HtmlWebpackPlugin({ filename: 'index.html', template: 'index.html' })
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.[contenthash].js'
   },
   module: {
     rules: [
@@ -29,7 +35,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           { loader: 'css-loader', options: { importLoaders: 1 } },
           'postcss-loader'
         ]
