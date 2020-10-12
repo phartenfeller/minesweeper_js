@@ -136,7 +136,7 @@ export default class DomListener {
     const actionToggle = document.getElementById('action-toggle');
     const actionToggleThumb = document.getElementById('action-toggle-thumb');
     const defuseTranslate = 'translate-x-0';
-    const flagTranslate = 'translate-x-5';
+    const flagTranslate = 'translate-x-7';
 
     actionToggle.addEventListener('click', () => {
       actionToggleStateClear = !actionToggleStateClear;
