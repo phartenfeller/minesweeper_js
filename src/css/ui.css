@@ -107,6 +107,6 @@ hr {
   }
 
   footer {
-    margin-bottom: 44px;
+    @apply mb-14;
   }
 }
