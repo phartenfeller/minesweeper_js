@@ -7,10 +7,12 @@ const startedAsPwa = startedParam === 'pwa';
 
 const hideInstallButton = () => {
   installButton.classList.add('hidden');
+  installButton.classList.remove('inline-flex');
 };
 
 const showInstallButton = () => {
   if (startedAsPwa) return;
+  installButton.classList.add('inline-flex');
   installButton.classList.remove('hidden');
 };
 
