@@ -9,7 +9,7 @@
   display: flex;
 }
 
-.block {
+.gameBlock {
   display: table-row;
   height: 16px;
   width: 16px;
@@ -70,62 +70,42 @@
 }
 
 .sprite-0 {
-  width: 16px;
-  height: 16px;
   background-position: 0 0;
 }
 
 .sprite-1 {
-  width: 16px;
-  height: 16px;
   background-position: -16px 0;
 }
 
 .sprite-2 {
-  width: 16px;
-  height: 16px;
   background-position: -32px 0;
 }
 
 .sprite-3 {
-  width: 16px;
-  height: 16px;
   background-position: -48px 0;
 }
 
 .sprite-4 {
-  width: 16px;
-  height: 16px;
   background-position: -64px 0;
 }
 
 .sprite-5 {
-  width: 16px;
-  height: 16px;
   background-position: -80px 0;
 }
 
 .sprite-6 {
-  width: 16px;
-  height: 16px;
   background-position: 0 -16px;
 }
 
 .sprite-7 {
-  width: 16px;
-  height: 16px;
   background-position: -16px -16px;
 }
 
 .sprite-8 {
-  width: 16px;
-  height: 16px;
   background-position: -32px -16px;
 }
 
 .sprite-blank {
-  width: 16px;
-  height: 16px;
   background-position: -48px -16px;
 }
 
@@ -134,14 +114,10 @@
 }
 
 .sprite-bomb-grey {
-  width: 16px;
-  height: 16px;
   background-position: -80px -16px;
 }
 
 .sprite-bomb-red {
-  width: 16px;
-  height: 16px;
   background-position: 0 -32px;
 }
 
@@ -302,13 +278,9 @@
 }
 
 .sprite-flag {
-  width: 16px;
-  height: 16px;
   background-position: -16px -108px;
 }
 
 .sprite-no-bomb {
-  width: 16px;
-  height: 16px;
   background-position: 0 -108px;
 }
