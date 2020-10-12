@@ -1,10 +1,12 @@
+import { btnCoolClass, btnDeadClass, btnSmileyClass } from '../../DomObjects';
+
 /**
  * Resets state of Game button from old game
  * @param {domElement} gameButton
  */
 function resetGameButton(gameButton) {
-  gameButton.classList.remove('sprite-btn-dead', 'sprite-btn-cool');
-  gameButton.classList.add('sprite-btn-smiley');
+  gameButton.classList.remove(btnDeadClass, btnCoolClass);
+  gameButton.classList.add(btnSmileyClass);
 }
 
-module.exports = resetGameButton;
+export default resetGameButton;

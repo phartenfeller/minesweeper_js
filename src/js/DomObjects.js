@@ -24,6 +24,7 @@ const btnSmileyClass = 'sprite-btn-smiley';
 const btnClickClass = 'sprite-btn-click';
 const btnWowClass = 'sprite-btn-wow';
 const btnDeadClass = 'sprite-btn-dead';
+const btnCoolClass = 'sprite-btn-cool';
 
 const flagClass = 'sprite-flag';
 const fieldClass = 'sprite-blank';
@@ -64,6 +65,7 @@ export {
   btnClickClass,
   btnWowClass,
   btnDeadClass,
+  btnCoolClass,
   noBombClass,
   clickedClass,
   bombRedClass,

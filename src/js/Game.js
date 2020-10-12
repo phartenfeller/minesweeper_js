@@ -190,6 +190,8 @@ class Game {
     // stop timer
     this.timer.stopTimer();
 
+    this.board.loseGame();
+
     const settingsCode = this.getSettingsCode();
     addGameResult({ mode: settingsCode, result: 'l', time });
 

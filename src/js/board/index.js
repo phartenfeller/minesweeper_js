@@ -2,6 +2,9 @@ import {
   blockClass,
   bombClass,
   bombRedClass,
+  btnCoolClass,
+  btnDeadClass,
+  btnSmileyClass,
   fieldClass,
   flagClass,
   noBombClass
@@ -35,6 +38,7 @@ export default class Board {
     this.bombsArray = [];
     this.flagArray = [];
 
+    this.gameButton = document.getElementById('game-button');
     this.generateBoard();
   }
 
@@ -57,11 +61,10 @@ export default class Board {
     const fieldContainer = document.getElementById('field-container');
     fieldContainer.style.height = BLOCK_SIZE * this.rows;
 
-    const gameButton = document.getElementById('game-button');
-    gameButton.style.marginLeft = margin;
-    gameButton.style.marginRight = margin;
+    this.gameButton.style.marginLeft = margin;
+    this.gameButton.style.marginRight = margin;
 
-    resetGameButton(gameButton);
+    resetGameButton(this.gameButton);
   }
 
   /**
@@ -291,8 +294,7 @@ export default class Board {
    */
   winGame() {
     // show win button
-    const gameButton = document.getElementById('game-button');
-    changeClass(gameButton, 'btn-smiley', 'btn-cool');
+    changeClass(this.gameButton, btnSmileyClass, btnCoolClass);
 
     // show not flagged bombs as flagged
     this.bombsArray.forEach(bomb => {
@@ -300,5 +302,12 @@ export default class Board {
         this.handleFlag(bomb.row, bomb.col);
       }
     });
+  }
+
+  /**
+   * Show lose game button
+   */
+  loseGame() {
+    changeClass(this.gameButton, btnSmileyClass, btnDeadClass);
   }
 }
