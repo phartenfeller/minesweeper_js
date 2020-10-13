@@ -1,7 +1,7 @@
 {
   "name": "Minesweeper",
   "short_name": "Minesweeper",
-  "start_url": "index.html?started=pwa",
+  "start_url": "/?started=pwa",
   "display": "standalone",
   "theme_color": "#ff7367",
   "background_color": "#fff",

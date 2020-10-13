@@ -1,3 +1,4 @@
+import '@pwabuilder/pwaupdate';
 import './css/minesweeper.css';
 import './css/ui.css';
 import Game from './js/Game';
@@ -39,5 +40,9 @@ function newGame() {
   //   ai.startAI();
   // });
 }
+
+// Web-Component to notify on updates (and loads service worker)
+const el = document.createElement('pwa-update');
+document.body.appendChild(el);
 
 newGame();

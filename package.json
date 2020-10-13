@@ -4,6 +4,7 @@
   "description": "The original Minesweeper rebuild with vanilla JavaScript, CSS and HTML",
   "private": true,
   "dependencies": {
+    "@pwabuilder/pwaupdate": "^0.2.0",
     "dexie": "^3.0.1"
   },
   "devDependencies": {
