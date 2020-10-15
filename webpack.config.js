@@ -8,7 +8,9 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = (env, argv) => {
-  console.log(`Webpack mode => ${argv.mode}`);
+  const { mode } = argv;
+  const prod = mode === 'production';
+  console.log(`Webpack mode => ${mode}, prod ${prod}`);
   return {
     entry: './src/index.js',
     plugins: [
@@ -34,7 +36,11 @@ module.exports = (env, argv) => {
       minimize: true,
       minimizer: [
         new TerserJSPlugin({
-          extractComments: env === 'production'
+          terserOptions: {
+            compress: {
+              drop_console: prod
+            }
+          }
         }),
         new OptimizeCSSAssetsPlugin({})
       ]
