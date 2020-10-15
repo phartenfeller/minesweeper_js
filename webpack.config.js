@@ -17,6 +17,7 @@ const getVersion = mode => {
   return `${version}-${mode}`;
 };
 
+// eslint-disable-next-line no-unused-vars
 module.exports = (env, argv) => {
   const mode = process.env.MODE;
   const prod = mode === 'production';
@@ -45,6 +46,13 @@ module.exports = (env, argv) => {
         {
           pattern: '@@{version}',
           replacement: getVersion(mode)
+        },
+        {
+          pattern: '@@{robots_meta}',
+          replacement: prod
+            ? null
+            : `<meta name="robots" content="noindex" />
+               <meta name="monetization" content="$ilp.uphold.com/dhUZx4rikrgf">`
         }
       ])
     ],
