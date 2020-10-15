@@ -16,6 +16,6 @@ jobs:
           method: 'POST'
           data:  >- 
             { 
-              "id": ${{ secrets.API_ID }} ,
-              "api_key": ${{ secrets.API_KEY }} 
+              "id": "${{ secrets.API_ID }}" ,
+              "api_key": "${{ secrets.API_KEY }}" 
             }
