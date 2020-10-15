@@ -48,11 +48,10 @@ module.exports = (env, argv) => {
           replacement: getVersion(mode)
         },
         {
-          pattern: '@@{robots_meta}',
+          pattern: '@@{conditional_headers}',
           replacement: prod
-            ? null
-            : `<meta name="robots" content="noindex" />
-               <meta name="monetization" content="$ilp.uphold.com/dhUZx4rikrgf">`
+            ? `<meta name="monetization" content="$ilp.uphold.com/dhUZx4rikrgf">`
+            : `<meta name="robots" content="noindex" />`
         }
       ])
     ],
