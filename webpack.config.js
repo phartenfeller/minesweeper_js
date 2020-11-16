@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -6,9 +7,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlReplaceWebpackPlugin = require('html-replace-webpack-plugin');
 
+const getVersion = mode => {
+  const { version } = require('./package.json');
+  if (mode === 'production') {
+    return version;
+  }
+  return `${version}-${mode}`;
+};
+
+// eslint-disable-next-line no-unused-vars
 module.exports = (env, argv) => {
-  const { mode } = argv;
+  const mode = process.env.MODE;
   const prod = mode === 'production';
   console.log(`Webpack mode => ${mode}, prod ${prod}`);
   return {
@@ -30,7 +41,19 @@ module.exports = (env, argv) => {
         filename: 'styles.[contenthash].css',
         chunkFilename: 'styles.[contenthash].css'
       }),
-      new HtmlWebpackPlugin({ filename: 'index.html', template: 'index.html' })
+      new HtmlWebpackPlugin({ filename: 'index.html', template: 'index.html' }),
+      new HtmlReplaceWebpackPlugin([
+        {
+          pattern: '@@{version}',
+          replacement: getVersion(mode)
+        },
+        {
+          pattern: '@@{conditional_headers}',
+          replacement: prod
+            ? `<meta name="monetization" content="$ilp.uphold.com/dhUZx4rikrgf">`
+            : `<meta name="robots" content="noindex" />`
+        }
+      ])
     ],
     optimization: {
       minimize: true,

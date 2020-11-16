@@ -10,9 +10,9 @@
   <link rel="icon" type="image/png" href="assets\icons\favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="assets\icons\android-192x192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets\icons\apple-touch-icon-180x180.png" sizes="180x180">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#ff7367" />
-  <meta name="monetization" content="$ilp.uphold.com/dhUZx4rikrgf">
+  @@{conditional_headers}
 </head>
 
 <body class="min-h-screen flex flex-col">
@@ -152,7 +152,7 @@
         </div>
       </div>
     </div>
-    <div id="game" class="m-auto md:m-0 minesweeper img" oncontextmenu="return false;">
+    <div id="game" class="m-auto md:m-0 minesweeper img select-none" oncontextmenu="return false;">
       <div id="top-border" class="top-border"></div>
       <div id="gamebar" class="gamebar">
         <div class="sprite sprite-border-vertical-32" style="float:left"></div>
@@ -181,8 +181,8 @@
         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
       </div>
       <div
-        class="bg-white bg-opacity-85 rounded-lg px-4 pt-5 pb-4 shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6"
-        role="dialog" aria-modal="true" aria-labelledby="Stats" style="backdrop-filter: blur(8px);">
+        class="bg-white bg-opacity-75 rounded-lg px-4 pt-5 pb-4 shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6 background-blur-5"
+        role="dialog" aria-modal="true" aria-labelledby="Stats">
         <div class="overflow-auto">
           <div class="text-center">
             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
@@ -248,7 +248,7 @@
             </div>
             <div
               class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-              <table id="best-scores" class="min-w-full">
+              <table id="best-scores" class="min-w-full bg-white">
                 <tr>
                   <th
                     class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -268,7 +268,7 @@
             <h4 class="text-gray-800 font-semibold text-left my-2">Last 5 games:</h4>
             <div
               class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-              <table id="scores" class="min-w-full">
+              <table id="scores" class="min-w-full  bg-white">
                 <tr>
                   <th
                     class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -308,7 +308,7 @@
     </div>
     <div class="text-center">
       <span class="hidden md:inline-block md:visible">Minesweeper PWA </span>
-      <span> v1.3.1</span>
+      <span> @@{version}</span>
     </div>
     <div class="text-right">
       <a href="https://github.com/phartenfeller/minesweeper_js" rel="noopener" target="_blank"
@@ -317,8 +317,8 @@
       </a>
     </div>
   </footer>
-  <div id="click-action-toggle" class="fixed bottom-0 inset-x-0 hidden bg-white bg-opacity-75 py-2 shadow-sm h-14"
-    style="backdrop-filter: blur(3px);">
+  <div id="click-action-toggle"
+    class="fixed bottom-0 inset-x-0 hidden bg-white bg-opacity-75 py-2 shadow-sm h-14 background-blur-3">
     <div class="flex text-gray-700 font-semibold text-lg">
       <div class="w-1/3 text-right my-auto">Clear</div>
       <div class="w-1/3 text-center">

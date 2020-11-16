@@ -1,0 +1,21 @@
+name: Update dev environment
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  call_api:
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: HTTP Request Action
+       uses: fjogeleit/http-request-action@v1.5.0
+       with:
+          url: ${{ secrets.API_URL }}
+          method: 'POST'
+          data:  >- 
+            { 
+              "id": "${{ secrets.API_ID }}" ,
+              "api_key": "${{ secrets.API_KEY }}" 
+            }
