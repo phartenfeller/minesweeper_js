@@ -1,10 +1,19 @@
 const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   darkMode: 'class',
   purge: ['./index.html', './src/**/*.js'],
   theme: {
     extend: {
+      colors: {
+        salmon: '#ff7367',
+        darkerGreen: '#087d51',
+        blueGray: colors.blueGray,
+        coolGray: colors.coolGray,
+        trueGray: colors.trueGray,
+        lightBlue: colors.lightBlue
+      },
       opacity: {
         85: '0.85',
         75: '0.75'
