@@ -37,6 +37,10 @@
   margin-left: 10px;
 }
 
+.dark .gamebar {
+  background-color: #27272a;
+}
+
 .gamebar {
   height: 32px;
   background-color: #c0c0c0;
@@ -58,6 +62,10 @@
   float: left;
   height: 23px;
   width: 13px;
+}
+
+.dark .sprite {
+  background-image: url(/assets/sprites/spritesheet-dark.png);
 }
 
 .sprite {

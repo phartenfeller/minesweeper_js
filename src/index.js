@@ -1,6 +1,7 @@
 import '@pwabuilder/pwaupdate';
 import './css/minesweeper.css';
 import './css/ui.css';
+import { initDarkMode } from './js/darkMode';
 import Game from './js/Game';
 import { checkDebug } from './js/Util2';
 
@@ -44,5 +45,5 @@ function newGame() {
 // Web-Component to notify on updates (and loads service worker)
 const el = document.createElement('pwa-update');
 document.body.appendChild(el);
-
+initDarkMode();
 newGame();
