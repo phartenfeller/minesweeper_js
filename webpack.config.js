@@ -21,6 +21,7 @@ const getVersion = mode => {
 module.exports = (env, argv) => {
   const mode = process.env.MODE;
   const prod = mode === 'production';
+  const dev = mode === 'dev';
   console.log(`Webpack mode => ${mode}, prod ${prod}`);
   return {
     entry: './src/index.js',
@@ -56,17 +57,19 @@ module.exports = (env, argv) => {
       ])
     ],
     optimization: {
-      minimize: true,
-      minimizer: [
-        new TerserJSPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: prod
-            }
-          }
-        }),
-        new OptimizeCSSAssetsPlugin({})
-      ]
+      minimize: !dev,
+      minimizer: dev
+        ? []
+        : [
+            new TerserJSPlugin({
+              terserOptions: {
+                compress: {
+                  drop_console: prod
+                }
+              }
+            }),
+            new OptimizeCSSAssetsPlugin({})
+          ]
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
