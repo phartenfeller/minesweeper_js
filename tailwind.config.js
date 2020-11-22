@@ -1,9 +1,13 @@
 const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   darkMode: 'class',
   purge: ['./index.html', './src/**/*.js'],
   theme: {
+    colors: {
+      ...colors
+    },
     extend: {
       opacity: {
         85: '0.85',
