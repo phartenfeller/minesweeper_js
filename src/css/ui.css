@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html.dark {
-  @apply bg-coolGray-800;
+  @apply bg-coal;
 }
 
 html {

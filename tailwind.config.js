@@ -9,6 +9,8 @@ module.exports = {
       colors: {
         salmon: '#ff7367',
         darkerGreen: '#087d51',
+        coal: '#2b303b',
+        darkCoal: '#23262f',
         blueGray: colors.blueGray,
         coolGray: colors.coolGray,
         trueGray: colors.trueGray,
