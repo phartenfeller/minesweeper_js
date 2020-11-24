@@ -117,6 +117,10 @@
   background-position: -48px -16px;
 }
 
+.dark .sprite-blank:hover {
+  opacity: 90%;
+}
+
 .sprite-blank:hover {
   background-position: -64px -16px;
 }
