@@ -14,8 +14,7 @@ function showTime(times, selector = '#scores tbody') {
     const seconds = row.insertCell(2);
     const date = row.insertCell(3);
 
-    row.className =
-      'px-6 py-4 whitespace-normal border-b border-gray-200 text-sm leading-5 text-gray-500';
+    row.className = 'stats-table-row';
 
     winLose.appendChild(document.createTextNode(time.result.toUpperCase()));
     mode.appendChild(document.createTextNode(time.mode));

@@ -11,6 +11,7 @@ module.exports = {
         darkerGreen: '#087d51',
         coal: '#2b303b',
         darkCoal: '#23262f',
+        darkCoalTransparent: '#23262f80',
         blueGray: colors.blueGray,
         coolGray: colors.coolGray,
         trueGray: colors.trueGray,

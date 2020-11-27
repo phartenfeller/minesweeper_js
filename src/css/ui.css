@@ -28,3 +28,31 @@ body {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
+
+.stats-table-container {
+  @apply align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200 dark:border-gray-900;
+}
+
+.stats-table {
+  @apply min-w-full bg-white dark:bg-gray-900 border-b dark:border-gray-900;
+}
+
+.stats-table-head {
+  @apply bg-gray-50 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-800;
+}
+
+.stats-table-row {
+  @apply px-6 py-4 whitespace-normal border-b border-gray-200 text-sm leading-5 text-gray-500 dark:border-gray-800 dark:text-gray-400;
+}
+
+.stats-table-header-cell {
+  @apply px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider;
+}
+
+tbody tr:nth-child(odd) {
+  @apply dark:bg-blueGray-900;
+}
+
+tbody tr:nth-child(last) {
+  @apply border-none;
+}
