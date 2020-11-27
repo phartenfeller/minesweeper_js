@@ -4,7 +4,7 @@
  */
 function showTime(times, selector = '#scores tbody') {
   const tableRef = document.querySelector(selector);
-  for (let i = tableRef.rows.length - 1; i > 0; i -= 1) {
+  for (let i = 0; i < tableRef.rows.length; i += 1) {
     tableRef.deleteRow(i);
   }
   times.forEach(time => {
