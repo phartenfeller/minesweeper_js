@@ -32,6 +32,7 @@ const initListeners = () => {
   /* Touch device theme toggle listeners */
   themeToggle = document.getElementById('theme-toggle');
   themeToggleThumb = document.getElementById('theme-toggle-thumb');
+  applySetting();
 
   themeToggle.addEventListener('click', () => {
     darkState = !darkState;
