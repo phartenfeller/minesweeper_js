@@ -8,6 +8,7 @@ html.dark {
 
 html {
   @apply bg-gray-200;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -55,4 +56,12 @@ tbody tr:nth-child(odd) {
 
 tbody tr:nth-child(last) {
   @apply border-none;
+}
+
+.settings-input {
+  @apply block w-full form-input h-8 transition duration-150 ease-in-out border border-gray-300 dark:border-transparent focus:ring focus:ring-green-200 dark:text-coolGray-400 dark:bg-coolGray-700 dark:focus:ring-blueGray-600;
+}
+
+.zoom-radio {
+  @apply form-radio h-4 w-4 text-green-500 transition duration-150 ease-in-out border border-gray-300 dark:border-transparent dark:bg-coolGray-700 focus:ring focus:ring-green-200 dark:focus:ring-blueGray-600;
 }

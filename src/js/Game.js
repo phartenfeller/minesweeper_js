@@ -178,21 +178,11 @@ class Game {
    */
   bombClicked() {
     const time = this.timer.getFinishTime();
-    // stop timer
     this.timer.stopTimer();
-
     this.board.loseGame();
 
     const settingsCode = this.getSettingsCode();
     addGameResult({ mode: settingsCode, result: 'l', time });
-
-    // // lock all fields
-    // for (let r = 0; r < this.rows; r++) {
-    //   for (let c = 0; c < this.columns; c++) {
-    //     const id = getID(r, c);
-    //     changeClass(id, null, null, true);
-    //   }
-    // }
   }
 
   /**
