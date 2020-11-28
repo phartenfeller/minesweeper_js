@@ -2,12 +2,7 @@
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["handleClick"] }] */
 import changeBestGame from './db/changeBestGames';
 import updateStatsData from './db/statsData';
-import {
-  block,
-  btnClickClass,
-  btnSmileyClass,
-  btnWowClass
-} from './DomObjects';
+import domObjects from './DomObjects';
 import { changeClass, hasClass } from './util';
 
 let wasAlreadyInitialized = false;
@@ -83,7 +78,11 @@ export default class DomListener {
   initDomListeners() {
     const gameButton = document.getElementById('game-button');
     gameButton.addEventListener('mousedown', () => {
-      changeClass(gameButton, btnSmileyClass, btnClickClass);
+      changeClass(
+        gameButton,
+        domObjects.btnSmileyClass,
+        domObjects.btnClickClass
+      );
     });
 
     document.getElementById('newgame-btn').addEventListener('click', () => {
@@ -96,10 +95,18 @@ export default class DomListener {
 
     this.gameDiv = document.getElementById('game');
     this.gameDiv.addEventListener('mouseup', () => {
-      if (hasClass(gameButton, btnWowClass)) {
-        changeClass(gameButton, btnWowClass, btnSmileyClass);
-      } else if (hasClass(gameButton, btnClickClass)) {
-        changeClass(gameButton, btnClickClass, btnSmileyClass);
+      if (hasClass(gameButton, domObjects.btnWowClass)) {
+        changeClass(
+          gameButton,
+          domObjects.btnWowClass,
+          domObjects.btnSmileyClass
+        );
+      } else if (hasClass(gameButton, domObjects.btnClickClass)) {
+        changeClass(
+          gameButton,
+          domObjects.btnClickClass,
+          domObjects.btnSmileyClass
+        );
       }
     });
 
@@ -114,7 +121,11 @@ export default class DomListener {
 
     const fieldContainer = document.getElementById('field-container');
     fieldContainer.addEventListener('mousedown', () => {
-      changeClass(gameButton, btnSmileyClass, btnWowClass);
+      changeClass(
+        gameButton,
+        domObjects.btnSmileyClass,
+        domObjects.btnWowClass
+      );
     });
 
     let collapseHelpHidden = true;
@@ -179,7 +190,7 @@ export default class DomListener {
    * Listeners for blocks
    */
   initBlockListeners() {
-    const blocks = this.gameDiv.querySelectorAll(block);
+    const blocks = this.gameDiv.querySelectorAll(`.${domObjects.block}`);
 
     blocks.forEach(blockElement => {
       blockElement.addEventListener('contextmenu', e => {

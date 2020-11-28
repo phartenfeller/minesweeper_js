@@ -1,14 +1,4 @@
-import {
-  blockClass,
-  bombClass,
-  bombRedClass,
-  btnCoolClass,
-  btnDeadClass,
-  btnSmileyClass,
-  fieldClass,
-  flagClass,
-  noBombClass
-} from '../DomObjects';
+import domObjects from '../DomObjects';
 import { changeClass } from '../util';
 import createBorder from './util/createBorder';
 import {
@@ -223,14 +213,24 @@ export default class Board {
     this.board[row][col].clicked = true;
 
     if (!flagged && value === 'b') {
-      changeClass(domElement, fieldClass, bombRedClass, true);
+      changeClass(
+        domElement,
+        domObjects.fieldClass,
+        domObjects.bombRedClass,
+        true
+      );
       this.revealBombs();
       this.checkFlags();
       killEventListeners();
       return { wasBomb: true, wasFlag: flagged, number: null };
     }
 
-    changeClass(domElement, fieldClass, `sprite-${value || 0}`, true);
+    changeClass(
+      domElement,
+      domObjects.fieldClass,
+      `sprite-${value || 0}`,
+      true
+    );
     return { wasBomb: false, number: value || 0 };
   }
 
@@ -240,7 +240,7 @@ export default class Board {
   revealBombs() {
     this.bombsArray.forEach(bomb => {
       const { domElement } = this.board[bomb.row][bomb.col];
-      changeClass(domElement, fieldClass, bombClass);
+      changeClass(domElement, domObjects.fieldClass, domObjects.bombClass);
     });
   }
 
@@ -252,7 +252,7 @@ export default class Board {
     this.flagArray.forEach(flag => {
       const { value, domElement } = this.board[flag.row][flag.col];
       if (value !== 'b') {
-        changeClass(domElement, flagClass, noBombClass);
+        changeClass(domElement, domObjects.flagClass, domObjects.noBombClass);
       }
     });
   }
@@ -268,7 +268,7 @@ export default class Board {
     if (!flagged) {
       this.flagArray.push({ row, col });
       this.board[row][col].flagged = true;
-      changeClass(domElement, fieldClass, flagClass);
+      changeClass(domElement, domObjects.fieldClass, domObjects.flagClass);
       return false;
     }
 
@@ -278,9 +278,9 @@ export default class Board {
       return !(flag.row === row && flag.col === col);
     });
     this.board[row][col].flagged = false;
-    changeClass(domElement, flagClass, fieldClass);
+    changeClass(domElement, domObjects.flagClass, domObjects.fieldClass);
     const ele = document.querySelector(
-      `div.${blockClass}[data-row="${row}"][data-col="${col}"]`
+      `div.${domObjects.blockClass}[data-row="${row}"][data-col="${col}"]`
     );
     ele.addEventListener('click', this.domListener.handleClick, {
       once: true
@@ -294,7 +294,11 @@ export default class Board {
    */
   winGame() {
     // show win button
-    changeClass(this.gameButton, btnSmileyClass, btnCoolClass);
+    changeClass(
+      this.gameButton,
+      domObjects.btnSmileyClass,
+      domObjects.btnCoolClass
+    );
 
     // show not flagged bombs as flagged
     this.bombsArray.forEach(bomb => {
@@ -308,6 +312,10 @@ export default class Board {
    * Show lose game button
    */
   loseGame() {
-    changeClass(this.gameButton, btnSmileyClass, btnDeadClass);
+    changeClass(
+      this.gameButton,
+      domObjects.btnSmileyClass,
+      domObjects.btnDeadClass
+    );
   }
 }
