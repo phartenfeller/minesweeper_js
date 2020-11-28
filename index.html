@@ -72,7 +72,7 @@
     </div>
   </section>
   <main class="flex-col-reverse md:flex-row flex flex-grow">
-    <div id="settings-container" class="shadow-lg mx-8 px-8 py-4 rounded bg-white dark:bg-coal">
+    <div id="settings-container" class="shadow mx-8 px-8 py-4 rounded bg-white dark:bg-coal">
       <h2 class="font-bold text-xl text-gray-900 dark:text-blueGray-300 text-center mb-2">Settings</h2>
       <h4 class="mt-2 font-medium dark:text-blueGray-400">Zoom</h4>
       <div class="mb-4 text-left">
@@ -83,19 +83,19 @@
           <div class="flex items-center">
             <input id="zoom_1" name="form-input zoom" type="radio" value="1" class="zoom-radio" />
             <label for="zoom_1" class="ml-3">
-              <span class="block text-sm leading-5 text-gray-500 font-light">100%</span>
+              <span class="block text-sm leading-5 text-gray-500 font-light dark:text-gray-400">100%</span>
             </label>
           </div>
           <div class="mt-4 flex items-center">
             <input id="zoom_2" name="form-input zoom" type="radio" value="2" class="zoom-radio" />
             <label for="zoom_2" class="ml-3">
-              <span class="block text-sm leading-5 text-gray-500 font-light">200%</span>
+              <span class="block text-sm leading-5 text-gray-500 font-light dark:text-gray-400">200%</span>
             </label>
           </div>
           <div class="mt-4 flex items-center">
             <input id="zoom_3" name="form-input zoom" type="radio" value="3" class="zoom-radio" />
             <label for="zoom_3" class="ml-3">
-              <span class="block text-sm leading-5 text-gray-500 font-light">300%</span>
+              <span class="block text-sm leading-5 text-gray-500 font-light dark:text-gray-400">300%</span>
             </label>
           </div>
         </div>
@@ -103,8 +103,7 @@
       <h4 class="mt-5 font-medium dark:text-blueGray-400">Game Settings</h4>
       <div class="text-gray-500 font-light">
         <div class="flex items-center my-2">
-          <label for="input-rows"
-            class="flex-initial w-1/2 inline-block text-sm leading-5 text-gray-700 dark:text-gray-500">
+          <label for="input-rows" class="settings-input-label">
             Rows
           </label>
           <div class="flex-1 w-1/2">
@@ -112,8 +111,7 @@
           </div>
         </div>
         <div class="flex items-center my-2">
-          <label for="input-columns"
-            class="flex-initial w-1/2 inline-block text-sm leading-5 text-gray-700 dark:text-gray-500">
+          <label for="input-columns" class="settings-input-label">
             Columns
           </label>
           <div class="flex-1 w-1/2">
@@ -121,8 +119,7 @@
           </div>
         </div>
         <div class="flex items-center my-2">
-          <label for="input-bombs"
-            class="flex-initial w-1/2 inline-block text-sm leading-5 text-gray-700 dark:text-gray-500">
+          <label for="input-bombs" class="settings-input-label">
             Bombs
           </label>
           <div class="flex-1 w-1/2">
@@ -131,8 +128,8 @@
         </div>
       </div>
       <h4 class="mt-5 font-medium dark:text-blueGray-400">Theme</h4>
-      <div class="flex text-gray-700 dark:text-gray-400 font-semibold text-lg mt-5">
-        <div class="w-1/3 text-right my-auto">Light</div>
+      <div class="flex text-gray-700 dark:text-gray-400 mt-5 font-light">
+        <div class="w-1/3 text-right my-auto pb-2">Light</div>
         <div class="w-1/3 text-center">
           <div role="checkbox" tabindex="0" aria-checked="false" id="theme-toggle"
             class="bg-green-400 relative inline-flex flex-shrink-0 w-15 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring focus:ring-green-200 dark:focus:ring-blueGray-600">
@@ -141,7 +138,7 @@
               class="translate-x-0 inline-block h-7 w-7 rounded-full bg-white dark:bg-coolGray-700 shadow transform transition ease-in-out duration-200"></span>
           </div>
         </div>
-        <div class="w-1/3 my-auto">Dark</div>
+        <div class="w-1/3 my-auto pb-2">Dark</div>
       </div>
       <div class="text-center mt-12">
         <span class="inline-flex rounded-md shadow-sm">
