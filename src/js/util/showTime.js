@@ -2,11 +2,13 @@
  * Adds time in results table
  * @param {array} times
  */
-function showTime(times, selector = '#scores tbody') {
+function showTime(times, selector) {
+  console.log({ times, selector });
   const tableRef = document.querySelector(selector);
-  for (let i = 0; i < tableRef.rows.length; i += 1) {
-    tableRef.deleteRow(i);
-  }
+
+  // clear all rows
+  tableRef.innerText = '';
+
   times.forEach(time => {
     const row = tableRef.insertRow();
     const winLose = row.insertCell(0);

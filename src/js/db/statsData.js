@@ -4,7 +4,7 @@ import changeBestGame from './changeBestGames';
 
 const getLast5Games = async db => {
   const data = await db.games.orderBy('date').reverse().limit(5).toArray();
-  showTime(data);
+  showTime(data, '#scores tbody');
 };
 
 const getGameStats = async db => {
