@@ -190,7 +190,7 @@ export default class DomListener {
    * Listeners for blocks
    */
   initBlockListeners() {
-    const blocks = this.gameDiv.querySelectorAll(`.${domObjects.block}`);
+    const blocks = this.gameDiv.querySelectorAll(`.${domObjects.blockClass}`);
 
     blocks.forEach(blockElement => {
       blockElement.addEventListener('contextmenu', e => {
