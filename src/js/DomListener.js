@@ -1,6 +1,5 @@
 /* eslint-disable max-statements */
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["handleClick"] }] */
-import changeBestGame from './db/changeBestGames';
 import updateStatsData from './db/statsData';
 import domObjects from './DomObjects';
 import { changeClass, hasClass } from './util';
@@ -146,11 +145,6 @@ export default class DomListener {
     });
 
     this.initBlockListeners();
-
-    const statsModeSelect = document.getElementById('stats-mode-select');
-    statsModeSelect.addEventListener('change', e => {
-      changeBestGame(e.target.value);
-    });
 
     /* Touch device action toggle listeners */
     const actionToggleRegion = document.getElementById('click-action-toggle');

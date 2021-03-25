@@ -1,3 +1,5 @@
+import changeBestGame from '../js/db/changeBestGames';
+
 /* eslint-disable require-jsdoc */
 const template = document.createElement('template');
 template.innerHTML = `
@@ -128,10 +130,20 @@ class StatsPopup extends HTMLElement {
 
   connectedCallback() {
     this.statsPopup = document.getElementById('stats-popup');
+    this.statsModeSelect = document.getElementById('stats-mode-select');
+
+    this.initListeners();
   }
 
   static get observedAttributes() {
     return ['show'];
+  }
+
+  initListeners() {
+    this.statsModeSelect.addEventListener('change', e => {
+      console.log('sl changed');
+      changeBestGame(e.target.value);
+    });
   }
 
   showPopup() {
