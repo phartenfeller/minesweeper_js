@@ -1,10 +1,11 @@
 import '@pwabuilder/pwaupdate';
 import './css/minesweeper.css';
 import './css/ui.css';
+import './customElements/StatsPopup';
+import { initDarkMode } from './js/darkMode';
 import Game from './js/Game';
-import { checkDebug } from './js/Util2';
 
-const debug = checkDebug();
+const debug = false;
 
 /**
  * Get initial zoom value
@@ -33,16 +34,10 @@ function newGame() {
   const initialZoom = getInitialZoom();
   // eslint-disable-next-line no-new
   new Game(initialZoom, debug);
-
-  // const ai = new AI(game);
-
-  // document.getElementById('AI').addEventListener('click', () => {
-  //   ai.startAI();
-  // });
 }
 
 // Web-Component to notify on updates (and loads service worker)
 const el = document.createElement('pwa-update');
 document.body.appendChild(el);
-
+initDarkMode();
 newGame();

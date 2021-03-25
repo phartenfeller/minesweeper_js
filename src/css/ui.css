@@ -2,18 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+html.dark {
+  @apply bg-darkCoal;
+}
+
 html {
   @apply bg-gray-200;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 0px;
-}
-
-header {
-  background-color: #ff7367;
 }
 
 /* display clear and flag switcher on touch devices */
@@ -27,4 +28,44 @@ header {
     @apply mb-14;
     padding-bottom: env(safe-area-inset-bottom);
   }
+}
+
+.stats-table-container {
+  @apply align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200 dark:border-gray-900;
+}
+
+.stats-table {
+  @apply min-w-full bg-white dark:bg-gray-900 border-b dark:border-gray-900;
+}
+
+.stats-table-head {
+  @apply bg-gray-50 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-800;
+}
+
+.stats-table-row {
+  @apply px-6 py-4 whitespace-normal border-b border-gray-200 text-sm leading-5 text-gray-500 dark:border-gray-800 dark:text-gray-400;
+}
+
+.stats-table-header-cell {
+  @apply px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider;
+}
+
+tbody tr:nth-child(odd) {
+  @apply dark:bg-blueGray-900;
+}
+
+tbody tr:nth-child(last) {
+  @apply border-none;
+}
+
+.settings-input {
+  @apply block w-full form-input h-8 transition duration-150 ease-in-out border border-gray-300 dark:border-transparent focus:ring focus:ring-green-200 dark:text-coolGray-400 dark:bg-coolGray-700 dark:focus:ring-blueGray-600;
+}
+
+.settings-input-label {
+  @apply flex-initial w-1/2 inline-block text-sm leading-5 text-gray-700 dark:text-gray-400;
+}
+
+.zoom-radio {
+  @apply form-radio h-4 w-4 text-green-500 transition duration-150 ease-in-out border border-gray-300 dark:border-transparent dark:bg-coolGray-700 focus:ring focus:ring-green-200 dark:focus:ring-blueGray-600;
 }
