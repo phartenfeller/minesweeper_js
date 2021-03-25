@@ -5,8 +5,6 @@ const CopyPlugin = require('copy-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlReplaceWebpackPlugin = require('html-replace-webpack-plugin');
 
@@ -20,7 +18,7 @@ const getVersion = mode => {
 
 // eslint-disable-next-line no-unused-vars
 module.exports = (env, argv) => {
-  const mode = 'production';
+  const mode = 'dev';
   console.log(`Webpack mode => ${mode}`);
   return {
     entry: './src/index.js',
@@ -49,21 +47,12 @@ module.exports = (env, argv) => {
         },
         {
           pattern: '@@{conditional_headers}',
-          replacement: `<meta name="monetization" content="$ilp.uphold.com/dhUZx4rikrgf">`
+          replacement: `<meta name="robots" content="noindex" />`
         }
       ])
     ],
     optimization: {
-      minimizer: [
-        new TerserJSPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: true
-            }
-          }
-        }),
-        new OptimizeCSSAssetsPlugin({})
-      ]
+      minimize: false
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -83,11 +72,20 @@ module.exports = (env, argv) => {
           test: /\.css$/,
           use: [
             MiniCssExtractPlugin.loader,
-            { loader: 'css-loader', options: { importLoaders: 1 } },
+            {
+              loader: 'css-loader',
+              options: { importLoaders: 1 }
+            },
             'postcss-loader'
           ]
         }
       ]
+    },
+    // Optional for webpack-dev-server
+    devServer: {
+      watchContentBase: true,
+      contentBase: path.resolve(__dirname, 'dist'),
+      open: true
     }
   };
 };

@@ -4,7 +4,6 @@ import addGameResult from './db/addGameResult';
 import DomListener from './DomListener';
 import Points from './Points';
 import Timer from './Timer';
-import { debugLog } from './Util2';
 
 class Game {
   /**
@@ -12,8 +11,6 @@ class Game {
    * @param {boolean} debug
    */
   constructor(initialZoom, debug = false) {
-    debugLog('Setting up Game...');
-
     this.debug = debug;
     this.showBombs = debug;
 
@@ -44,12 +41,6 @@ class Game {
     this.rows = iRows < 8 ? 8 : iRows;
     this.columns = iCols < 8 ? 8 : iCols;
     this.bombs = iBombs < 1 ? 1 : iBombs;
-
-    debugLog(
-      `${this.rows} rows, `,
-      `${this.columns} cols, `,
-      `${this.bombs} bombs`
-    );
 
     this.amountFields = this.rows * this.columns - this.bombs;
     this.board = new Board({
@@ -187,21 +178,11 @@ class Game {
    */
   bombClicked() {
     const time = this.timer.getFinishTime();
-    // stop timer
     this.timer.stopTimer();
-
     this.board.loseGame();
 
     const settingsCode = this.getSettingsCode();
     addGameResult({ mode: settingsCode, result: 'l', time });
-
-    // // lock all fields
-    // for (let r = 0; r < this.rows; r++) {
-    //   for (let c = 0; c < this.columns; c++) {
-    //     const id = getID(r, c);
-    //     changeClass(id, null, null, true);
-    //   }
-    // }
   }
 
   /**

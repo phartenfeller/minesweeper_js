@@ -1,4 +1,4 @@
-import { clickedClass } from '../DomObjects';
+import domObjects from '../DomObjects';
 
 /**
  * Remove and Add class to element
@@ -18,6 +18,6 @@ export default function changeClass(
   classList.add(addClass);
 
   if (markClicked) {
-    classList.add(clickedClass);
+    classList.add(domObjects.clickedClass);
   }
 }
