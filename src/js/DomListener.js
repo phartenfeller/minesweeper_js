@@ -172,16 +172,16 @@ export default class DomListener {
 
     /* Stats modal listeners */
     const statsButton = document.getElementById('stats-btn');
-    const statsPopup = document.getElementById('stats-popup');
+    const statsPopup = document.querySelector('stats-popup');
     statsButton.addEventListener('click', () => {
       updateStatsData();
-      statsPopup.classList.remove('invisible');
+      statsPopup.setAttribute('show', 'true');
       actionToggleRegion.classList.add('invisible');
     });
 
     const statsCloseBtn = document.getElementById('stats-close-btn');
     statsCloseBtn.addEventListener('click', () => {
-      statsPopup.classList.add('invisible');
+      statsPopup.removeAttribute('show');
       actionToggleRegion.classList.remove('invisible');
     });
   }
