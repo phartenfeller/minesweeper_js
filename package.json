@@ -1,6 +1,6 @@
 {
   "name": "minesweeper_js",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "The original Minesweeper rebuild with vanilla JavaScript, CSS and HTML",
   "private": true,
   "dependencies": {
