@@ -27,6 +27,7 @@ module.exports = (env, argv) => {
       new CopyPlugin({
         patterns: [
           { from: './assets', to: './assets/' },
+          { from: './src/css', to: './css/' },
           { from: './favicon.ico', to: './' },
           { from: './manifest.json', to: './' },
           { from: './pwabuilder-sw.js', to: './' },
@@ -82,10 +83,6 @@ module.exports = (env, argv) => {
       ]
     },
     // Optional for webpack-dev-server
-    devServer: {
-      watchContentBase: true,
-      contentBase: path.resolve(__dirname, 'dist'),
-      open: true
-    }
+    devServer: {}
   };
 };

@@ -20,21 +20,8 @@
         }
       }
     ],
-    "max-statements": [2, 16],
-    "max-depth": [2, 5],
-    "complexity": [2, 8],
-    "max-params": [2, 4],
     "no-console": 0,
-    "radix": 0,
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "tabWidth": 2,
-        "trailingComma": "none"
-      }
-    ],
-    "linebreak-style": 0
+    "radix": 0
   },
   "plugins": ["prettier"]
 }
