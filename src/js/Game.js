@@ -61,6 +61,11 @@ class Game {
    * Restart game
    */
   newGame() {
+    try {
+      window.plausible('newGame');
+    } catch {
+      console.log('plausible not found');
+    }
     this.clearGame();
     this.setupGame();
   }

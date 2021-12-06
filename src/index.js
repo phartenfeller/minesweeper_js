@@ -1,5 +1,4 @@
 import '@pwabuilder/pwaupdate';
-import './css/minesweeper.css';
 import './css/ui.css';
 import './customElements/StatsPopup';
 import { initDarkMode } from './js/darkMode';

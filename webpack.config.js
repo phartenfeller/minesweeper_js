@@ -29,6 +29,7 @@ module.exports = (env, argv) => {
       new CopyPlugin({
         patterns: [
           { from: './assets', to: './assets/' },
+          { from: './src/css', to: './css/' },
           { from: './favicon.ico', to: './' },
           { from: './manifest.json', to: './' },
           { from: './pwabuilder-sw.js', to: './' },
@@ -76,8 +77,12 @@ module.exports = (env, argv) => {
           loader: 'babel-loader'
         },
         {
-          test: /\.(ttf|eot|svg|png|jpg|gif|ico)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-          loader: 'file-loader'
+          test: /\.(png|jpe?g|gif)$/i,
+          use: [
+            {
+              loader: 'file-loader'
+            }
+          ]
         },
         {
           test: /\.css$/,
