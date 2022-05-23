@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@pwabuilder/pwaupdate": "^0.2.0",
-    "dexie": "^3.0.3"
+    "dexie": "^3.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
