@@ -1,6 +1,6 @@
 {
   "name": "minesweeper_js",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "The original Minesweeper rebuild with vanilla JavaScript, CSS and HTML",
   "private": true,
   "dependencies": {
@@ -11,7 +11,7 @@
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "@tailwindcss/ui": "^0.7.2",
-    "autoprefixer": "^10.4.0",
+    "autoprefixer": "^10.4.16",
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.0.0",
@@ -26,17 +26,17 @@
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.4.5",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
-    "postcss": "8.4.4",
-    "postcss-import": "^14.0.2",
+    "postcss": "8.4.31",
+    "postcss-import": "^14.1.0",
     "postcss-loader": "^6.2.1",
     "prettier": "2.5.1",
     "style-loader": "^3.3.1",
     "tailwindcss": "^2.2.19",
-    "terser-webpack-plugin": "^5.2.5",
-    "webpack": "^5.65.0",
+    "terser-webpack-plugin": "^5.3.9",
+    "webpack": "^5.88.2",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-cli": "4.9.1",
-    "webpack-dev-server": "^4.6.0"
+    "webpack-cli": "5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "scripts": {
     "start": "npx webpack-cli serve --open --mode=development --config webpack.dev.js",
