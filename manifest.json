@@ -36,5 +36,28 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "screenshots" : [
+    {
+      "src": "assets/screenshots/minesweeper-light.webp",
+      "sizes": "436x885",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Game in light mode"
+    },
+    {
+      "src": "assets/screenshots/minesweeper-dark.webp",
+      "sizes": "436x885",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Game in dark mode"
+    },
+    {
+      "src": "assets/screenshots/minesweeper-stats.webp",
+      "sizes": "436x885",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Game stats"
+    }
   ]
 }

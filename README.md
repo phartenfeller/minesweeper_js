@@ -4,7 +4,7 @@ Original MS Minesweeper game with vanilla JavaScript, CSS and HTML. No Library o
 
 You can play the game here: https://minesweepergame.de/
 
-![Desktop Screenshot](./screenshots/Desktop-Screenshot.png)
+![Desktop Screenshot](assets/screenshots/Desktop-Screenshot.png)
 
 ## Features
 
