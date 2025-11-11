@@ -123,50 +123,49 @@ class="fixed h-screen bottom-0 md:bottom-auto inset-x-0 px-4 py-6 sm:inset-0 inv
 `;
 
 class StatsPopup extends HTMLElement {
-  constructor() {
-    super();
-    this.appendChild(template.content.cloneNode(true));
-  }
+	constructor() {
+		super();
+		this.appendChild(template.content.cloneNode(true));
+	}
 
-  connectedCallback() {
-    this.statsPopup = document.getElementById('stats-popup');
-    this.statsModeSelect = document.getElementById('stats-mode-select');
+	connectedCallback() {
+		this.statsPopup = document.getElementById('stats-popup');
+		this.statsModeSelect = document.getElementById('stats-mode-select');
 
-    this.initListeners();
-  }
+		this.initListeners();
+	}
 
-  static get observedAttributes() {
-    return ['show'];
-  }
+	static get observedAttributes() {
+		return ['show'];
+	}
 
-  initListeners() {
-    this.statsModeSelect.addEventListener('change', e => {
-      console.log('sl changed');
-      changeBestGame(e.target.value);
-    });
-  }
+	initListeners() {
+		this.statsModeSelect.addEventListener('change', (e) => {
+			changeBestGame(e.target.value);
+		});
+	}
 
-  showPopup() {
-    this.statsPopup.classList.remove('invisible');
-  }
+	showPopup() {
+		this.statsPopup.classList.remove('invisible');
+	}
 
-  hidePopup() {
-    this.statsPopup.classList.add('invisible');
-  }
+	hidePopup() {
+		this.statsPopup.classList.add('invisible');
+	}
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    switch (name) {
-      case 'show':
-        if (newValue) {
-          this.showPopup();
-        } else {
-          this.hidePopup();
-        }
-        break;
-      default:
-        console.log(`Unknown attribute "${name}" in stats-popup`);
-    }
-  }
+	attributeChangedCallback(name, oldValue, newValue) {
+		switch (name) {
+			case 'show':
+				if (newValue) {
+					this.showPopup();
+				} else {
+					this.hidePopup();
+				}
+				break;
+			default:
+				console.warn(`Unknown attribute "${name}" in stats-popup`);
+		}
+	}
 }
 
 window.customElements.define('stats-popup', StatsPopup);

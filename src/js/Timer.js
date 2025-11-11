@@ -7,8 +7,33 @@ class Timer {
   constructor() {
     this.seconds = 0;
     this.secondsArray = [];
+    this.interval = null;
+    this.timerStarted = false;
 
     this.initTimerDomElements();
+  }
+
+  /**
+   * Get Timer Dom Elements
+   */
+  initTimerDomElements() {
+    this.domElements = {};
+    for (let i = 0; i <= 2; i += 1) {
+      const domElement = document.getElementById(`timer-${i + 1}`);
+      this.domElements[i + 1] = { domElement, value: 0 };
+    }
+  }
+
+  /**
+   * Start the timer on first field click
+   */
+  startTimer() {
+    if (this.timerStarted) {
+      return;
+    }
+
+    this.timerStarted = true;
+    this.startTs = new Date();
 
     this.interval = setInterval(() => {
       this.seconds += 1;
@@ -23,19 +48,6 @@ class Timer {
       this.timerClass(2, secondsObj[2]);
       this.timerClass(1, secondsObj[1]);
     }, 1000);
-
-    this.startTs = new Date();
-  }
-
-  /**
-   * Get Timer Dom Elements
-   */
-  initTimerDomElements() {
-    this.domElements = {};
-    for (let i = 0; i <= 2; i += 1) {
-      const domElement = document.getElementById(`timer-${i + 1}`);
-      this.domElements[i + 1] = { domElement, value: 0 };
-    }
   }
 
   /**
