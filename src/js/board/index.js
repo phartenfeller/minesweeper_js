@@ -38,8 +38,7 @@ export default class Board {
 		const gameHeight = BLOCK_SIZE * this.rows + 3 * BORDER_SIZE + 32;
 		const gameWidth = BLOCK_SIZE * this.cols + 2 * BORDER_SIZE;
 		const gameBarWidth = BLOCK_SIZE * this.cols + 2 * BORDER_SIZE;
-		const margin = `${(BLOCK_SIZE * this.cols) / 2 - 13 - 49}px`;
-
+		const margin = `${(BLOCK_SIZE * 5) - 62}px`;
 		const game = document.getElementById('game');
 		game.style.minHeight = `${gameHeight}px`;
 		game.style.minWidth = `${gameWidth}px`;
